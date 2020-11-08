@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+
+        <layer-list>
+
+            <item android:bottom="1px" android:left="1px" android:right="1px">
+                <shape android:shape="rectangle">
+                    <solid android:color="#08FFFFFF"/>
+                    <corners android:bottomLeftRadius="@dimen/_20sdp" android:bottomRightRadius="@dimen/_20sdp"/>
+                </shape>
+            </item>
+
+            <item android:bottom="2px" android:left="1px" android:right="1px">
+                <shape android:shape="rectangle">
+                    <solid android:color="#0DFFFFFF"/>
+                    <corners android:bottomLeftRadius="@dimen/_20sdp" android:bottomRightRadius="@dimen/_20sdp"/>
+                </shape>
+            </item>
+
+            <item android:bottom="3px" android:left="2px" android:right="2px">
+                <shape android:shape="rectangle">
+                    <solid android:color="#1AFFFFFF"/>
+                    <corners android:bottomLeftRadius="@dimen/_20sdp" android:bottomRightRadius="@dimen/_20sdp"/>
+                </shape>
+            </item>
+
+            <item android:bottom="4px" android:left="2px" android:right="2px">
+                <shape android:shape="rectangle">
+                    <solid android:color="#26FFFFFF"/>
+                    <corners android:bottomLeftRadius="@dimen/_20sdp" android:bottomRightRadius="@dimen/_20sdp"/>
+                </shape>
+            </item>
+
+            <item android:bottom="5px" android:left="3px" android:right="3px">
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/colorPrimaryDark"/>
+                    <corners android:bottomLeftRadius="@dimen/_20sdp" android:bottomRightRadius="@dimen/_20sdp"/>
+
+                </shape>
+            </item>
+
+        </layer-list>
+
+    </item>
+
+</selector>

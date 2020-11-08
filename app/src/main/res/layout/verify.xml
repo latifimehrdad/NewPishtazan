@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="verify"
+            type="ir.bppir.pishtazan.viewmodels.VM_Verify" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <pl.droidsonroids.gif.GifImageView
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:src="@drawable/key" />
+
+
+            <TextView
+                fontPath="font/iransans_web_medium.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="@string/enterVerify"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_11sdp" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/VerifyCode1"
+                    fontPath="font/iransans_web_medium.ttf"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/dw_back_edit"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:maxLines="1"
+                    android:minWidth="@dimen/_25sdp"
+                    android:minHeight="@dimen/_35sdp"
+                    android:padding="@dimen/_2sdp"
+                    android:textColor="@color/ML_Harmony"
+                    android:textSize="@dimen/_14sdp" />
+
+                <EditText
+                    android:id="@+id/VerifyCode2"
+                    fontPath="font/iransans_web_medium.ttf"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_7sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/dw_back_edit"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:maxLines="1"
+                    android:minWidth="@dimen/_25sdp"
+                    android:minHeight="@dimen/_35sdp"
+                    android:padding="@dimen/_2sdp"
+                    android:textColor="@color/ML_Harmony"
+                    android:textSize="@dimen/_14sdp" />
+
+                <EditText
+                    android:id="@+id/VerifyCode3"
+                    fontPath="font/iransans_web_medium.ttf"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_7sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/dw_back_edit"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:maxLines="1"
+                    android:minWidth="@dimen/_25sdp"
+                    android:minHeight="@dimen/_35sdp"
+                    android:padding="@dimen/_2sdp"
+                    android:textColor="@color/ML_Harmony"
+                    android:textSize="@dimen/_14sdp" />
+
+                <EditText
+                    android:id="@+id/VerifyCode4"
+                    fontPath="font/iransans_web_medium.ttf"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_7sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/dw_back_edit"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:maxLines="1"
+                    android:minWidth="@dimen/_25sdp"
+                    android:minHeight="@dimen/_35sdp"
+                    android:padding="@dimen/_2sdp"
+                    android:textColor="@color/ML_Harmony"
+                    android:textSize="@dimen/_14sdp" />
+
+                <EditText
+                    android:id="@+id/VerifyCode5"
+                    fontPath="font/iransans_web_medium.ttf"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_7sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/dw_back_edit"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:maxLines="1"
+                    android:minWidth="@dimen/_25sdp"
+                    android:minHeight="@dimen/_35sdp"
+                    android:padding="@dimen/_2sdp"
+                    android:textColor="@color/ML_Harmony"
+                    android:textSize="@dimen/_14sdp" />
+
+                <EditText
+                    android:id="@+id/VerifyCode6"
+                    fontPath="font/iransans_web_medium.ttf"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_7sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/dw_back_edit"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:maxLines="1"
+                    android:minWidth="@dimen/_25sdp"
+                    android:minHeight="@dimen/_35sdp"
+                    android:padding="@dimen/_2sdp"
+                    android:textColor="@color/ML_Harmony"
+                    android:textSize="@dimen/_14sdp" />
+
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginTop="@dimen/_10sdp">
+
+                <ProgressBar
+                    android:id="@+id/progressBarElapse"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/dw_half_circle_progress_back"
+                    android:max="100"
+                    android:progress="20"
+                    android:progressDrawable="@drawable/dw_half_circle_progress" />
+
+
+                <TextView
+                    android:id="@+id/textViewElapseMessage"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_40sdp"
+                    android:gravity="center"
+                    android:maxLines="2"
+                    android:text="@string/elapsedTimeGetSMS"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_9sdp" />
+
+
+                <ir.mlcode.latifiarchitecturelibrary.customs.ML_Button
+                    android:id="@+id/ml_ButtonReTry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:padding="@dimen/_5sdp"
+                    app:connectBack="@drawable/dw_back_bottom_normal"
+                    app:fontFamily="@font/vazir_light"
+                    app:gif_src="@drawable/loading3"
+                    app:img_height="@dimen/_20sdp"
+                    app:img_src="@drawable/ic_mobile_message"
+                    app:img_tint="@color/mlWhite"
+                    app:img_width="@dimen/_20sdp"
+                    app:textColor="@color/mlWhite"
+                    app:textValue="@string/reTryGetSMS"
+                    app:textValueSize="@dimen/_11sdp"
+                    app:waitBack="@drawable/dw_back_bottom_connect"
+                    app:waitText="@string/cancel" />
+
+                <TextView
+                    android:id="@+id/textViewElapseTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textViewElapseMessage"
+                    android:gravity="center"
+                    android:maxLines="2"
+                    android:text="1:56"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_11sdp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

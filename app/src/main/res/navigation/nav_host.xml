@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/splash">
+
+    <argument android:name="@string/ML_UpdateUrl"/>
+    <argument android:name="@string/ML_UpdateFileName"/>
+    <argument android:name="@string/ML_AppName"/>
+    <argument android:name="@string/ML_ApplicationId"/>
+    <argument android:name="@string/ML_NationalCode"/>
+    <argument android:name="@string/ML_PanelType"/>
+
+    <fragment
+        android:id="@+id/splash"
+        android:name="ir.bppir.pishtazan.views.fragment.Splash"
+        android:label="Splash"
+        tools:layout="@layout/splash">
+
+        <action
+            android:id="@+id/action_splash_to_update"
+            app:destination="@id/update"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+
+        <action
+            android:id="@+id/action_splash_to_login"
+            app:destination="@id/login"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+
+        <action
+            android:id="@+id/action_splash_to_home"
+            app:destination="@id/home"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/update"
+        android:name="ir.mlcode.latifiarchitecturelibrary.fragments.FR_LatifiUpdate"
+        android:label="Update"
+        tools:layout="@layout/fr_latifi_update"/>
+
+    <fragment
+        android:id="@+id/login"
+        android:name="ir.bppir.pishtazan.views.fragment.Login"
+        android:label="Login"
+        tools:layout="@layout/login">
+
+        <action
+            android:id="@+id/action_login_to_verify"
+            app:destination="@id/verify"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/verify"
+        android:name="ir.bppir.pishtazan.views.fragment.verify"
+        android:label="verify"
+        tools:layout="@layout/verify"/>
+
+    <fragment
+        android:id="@+id/home"
+        android:name="ir.bppir.pishtazan.views.fragment.Home"
+        android:label="Home"
+        tools:layout="@layout/home">
+
+        <action
+            android:id="@+id/action_home_to_panel"
+            app:destination="@id/panel"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/panel"
+        android:name="ir.bppir.pishtazan.views.fragment.Panel"
+        android:label="Panel"
+        tools:layout="@layout/panel"/>
+
+</navigation>

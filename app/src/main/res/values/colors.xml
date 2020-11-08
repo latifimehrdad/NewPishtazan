@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#143B81</color>
+    <color name="colorPrimaryDark">#0E2655</color>
+    <color name="colorAccent">#feca04</color>
+
+    <color name="ML_Splash">#616671</color>
+    <color name="ML_Harmony">#DC8C02</color>
+    <color name="ML_White">#FFFFFF</color>
+    <color name="ML_Dialog">#CDCDCD</color>
+    <color name="ML_RedDark">#6A0000</color>
+    <color name="ML_EditEmpty">#FFF0BA</color>
+    <color name="mlWave">#1A3AFF</color>
+    <color name="mlWave2">#5BB1FB</color>
+    <color name="mlWave3">#15DF89</color>
+    <color name="mlToastBack">#303030</color>
+
+    <color name="ML_Trans">#00000000</color>
+
+    <color name="mlDelimiter">#80FFFFFF</color>
+
+    <color name="ML_recyclerLoadingBack">#1A058AFF</color>
+    <color name="ML_recyclerLoading">#80FFFFFF</color>
+
+</resources>

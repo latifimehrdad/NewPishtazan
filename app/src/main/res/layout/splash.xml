@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="splash"
+            type="ir.bppir.pishtazan.viewmodels.VM_Splash" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/ML_White">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageViewSplash"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:src="@drawable/pishtaz_logo" />
+
+
+            <ir.mlcode.latifiarchitecturelibrary.customs.ML_Button
+                android:id="@+id/ml_ButtonRefresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:connectBack="@drawable/dw_back_edit_empty"
+                app:waitBack="@drawable/dw_back_edit"
+                app:img_height="@dimen/_20sdp"
+                app:img_src="@drawable/ic_refresh"
+                app:img_tint="@color/colorPrimary"
+                app:img_width="@dimen/_20sdp"
+                app:textColor="@color/colorPrimary"
+                app:textValue="@string/reTry"
+                app:textValueSize="@dimen/_11sdp"
+                app:waitText="@string/pleaseWaitingForConnectingToServer"
+                app:gif_src="@drawable/loading3"
+                app:fontFamily="@font/vazir_normal"/>
+
+        </LinearLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

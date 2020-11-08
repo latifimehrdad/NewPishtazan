@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">Pishtazan</string>
+
+    <string name="enterNationalCode">کد ملی خود را وارد نمایید</string>
+    <string name="getVerifyCode">دریافت کد</string>
+    <string name="cancel">بیخیال</string>
+    <string name="nationalCode">کد ملی</string>
+    <string name="internetNotAvailable">اینترنت دستگاه خود را روشن کنید</string>
+    <string name="pleaseWait">شکیبا باشید</string>
+    <string name="pleaseWaitingForConnectingToServer">در حال برقراری ارتباط با مرکز</string>
+    <string name="installApp">نصب نرم افزار</string>
+    <string name="fileDownloaded">پایان بارگیری فایل</string>
+    <string name="reTry">تلاش مجدد</string>
+    <string name="logOut">خروج از حساب</string>
+    <string name="editProfile">ویرایش پروفایل</string>
+    <string name="chargeWallet">افزایش موجودی</string>
+    <string name="newVersionIsAvailable">نسخه جدید برنامه در دسترس می باشد. تا بارگیری کامل فایل شکیبا باشید</string>
+    <string name="enterVerify">شش رقم کد فعال سازی را وارد نمایید</string>
+    <string name="elapsedTimeGetSMS">زمان باقیمانده\n برای دریافت پیامک</string>
+    <string name="reTryGetSMS">دریافت مجدد</string>
+    <string name="colleagues">همکاران</string>
+    <string name="customer">مشتری</string>
+    <string name="doubleExit">برای خروج 2 بار کلیک کنید</string>
+    <string name="tutorial">آموزش</string>
+    <string name="reports">گزارشات</string>
+    <string name="certain">قطعی</string>
+    <string name="user">کاربر</string>
+    <string name="maybe">بالقوه</string>
+    <string name="possible">بالفعل</string>
+    <string name="archived">بایگانی ها</string>
+    <string name="home">خانه</string>
+    <string name="noItemForShow">موردی برای نمایش وجود ندارد</string>
+    <string name="actions">عملیات ها</string>
+
+    //___________________________ Values For SharedPreference ______________________________________
+    <string name="ML_SharePreferences">ML_SharePreferences</string>
+    <string name="ML_FullName">ML_FullName</string>
+    <string name="ML_Id">ML_Id</string>
+
+
+
+    //___________________________________ Values For Argument ______________________________________
+    <string name="ML_NationalCode">ML_NationalCode</string>
+    <string name="ML_Verified">ML_Verified</string>
+    <string name="ML_UpdateUrl">UpdateUrl</string>
+    <string name="ML_PanelType">ML_PanelType</string>
+
+
+</resources>

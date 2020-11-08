@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="main"
+            type="ir.bppir.pishtazan.viewmodels.VM_Main" />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layoutDirection="ltr"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".views.activity.MainActivity">
+
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/dw_main_back_shadow"
+                android:paddingLeft="@dimen/_7sdp"
+                android:paddingTop="@dimen/_7sdp"
+                android:paddingRight="@dimen/_7sdp"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayoutFooter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutHeader">
+
+                <fragment
+                    android:id="@+id/nav_host_fragment"
+                    android:name="androidx.navigation.fragment.NavHostFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:defaultNavHost="true"
+                    app:navGraph="@navigation/nav_host" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayoutHeader"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@color/colorPrimary"
+                android:orientation="horizontal"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ir.mlcode.latifiarchitecturelibrary.customs.ML_EditText
+                    android:id="@+id/ml_EditTextTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/_2sdp"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_2sdp"
+                    android:paddingRight="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    app:delimiterBack="@drawable/dw_delimiter"
+                    app:delimiterWidth="@dimen/_1sdp"
+                    app:delimiter_marginBottom="@dimen/_1sdp"
+                    app:delimiter_marginLeft="@dimen/_5sdp"
+                    app:delimiter_marginRight="@dimen/_5sdp"
+                    app:delimiter_marginTop="@dimen/_1sdp"
+                    app:editTextColor="@color/colorAccent"
+                    app:editable="false"
+                    app:image_height="@dimen/_15sdp"
+                    app:image_src="@drawable/svg_video_tutorials"
+                    app:image_tint="@color/colorAccent"
+                    app:image_width="@dimen/_15sdp"
+                    app:normalBack="@drawable/dw_back_title"
+                    app:text="@string/reTry"
+                    app:textGravity="center"
+                    app:textSize="@dimen/_11sdp"
+                    app:fontFamily="@font/vazir_medium"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutFooter"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_20sdp"
+                android:background="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageViewMenu"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/dw_circle_white"
+                android:src="@drawable/ic_menu"
+                android:padding="@dimen/_4sdp"
+                android:tint="@color/ML_White"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include layout="@layout/main_drawer_layout"/>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+
+</layout>

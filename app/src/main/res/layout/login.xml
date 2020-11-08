@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="login"
+            type="ir.bppir.pishtazan.viewmodels.VM_Login" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/ML_White"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.5">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:scrollbarStyle="outsideOverlay"
+                    android:fillViewport="true"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginRight="@dimen/_20sdp"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:gravity="center_horizontal"
+                        >
+
+                        <pl.droidsonroids.gif.GifImageView
+                            android:layout_width="@dimen/_70sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:src="@drawable/enter_code" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:gravity="center"
+                            android:maxLines="2"
+                            android:text="@string/enterNationalCode"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/_11sdp" />
+
+                        <ir.mlcode.latifiarchitecturelibrary.customs.ML_EditText
+                            android:id="@+id/ml_EditTextPersonalCode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            app:editTextColor="@color/colorPrimary"
+                            app:emptyBack="@drawable/dw_back_edit_empty"
+                            app:normalBack="@drawable/dw_back_edit"
+                            app:editHint="@string/nationalCode"
+                            app:text="@={login.nationalCode}"
+                            app:textSize="@dimen/_12sdp"
+                            app:delimiterWidth="@dimen/_2sdp"
+                            app:delimiterBack="@drawable/dw_delimiter"
+                            app:delimiter_marginLeft="@dimen/_5sdp"
+                            app:delimiter_marginRight="@dimen/_5sdp"
+                            app:image_height="@dimen/_18sdp"
+                            app:image_width="@dimen/_18sdp"
+                            app:image_src="@drawable/ic_passport"
+                            app:image_tint="@color/colorPrimary"
+                            app:inputTypeEdit="number"
+                            app:textMaxLine="1"
+                            app:textMaxLength="10"
+                            app:editSplitter="false"
+                            app:validationType="national"
+                            app:editable="true"
+                            app:fontFamily="@font/vazir_normal"
+                            />
+
+                        <ir.mlcode.latifiarchitecturelibrary.customs.ML_Button
+                            android:id="@+id/ml_ButtonLogin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            app:connectBack="@drawable/dw_back_bottom_normal"
+                            app:textValue="@string/getVerifyCode"
+                            app:textValueSize="@dimen/_13sdp"
+                            app:textColor="@color/mlWhite"
+                            app:img_src="@drawable/ic_refresh"
+                            app:img_height="@dimen/_20sdp"
+                            app:img_width="@dimen/_20sdp"
+                            app:img_tint="@color/mlWhite"
+                            app:gif_src="@drawable/loading3"
+                            app:waitBack="@drawable/dw_back_bottom_connect"
+                            app:waitText="@string/cancel"
+                            app:fontFamily="@font/vazir_normal"
+                            />
+
+
+                    </LinearLayout>
+
+                </ScrollView>
+
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
