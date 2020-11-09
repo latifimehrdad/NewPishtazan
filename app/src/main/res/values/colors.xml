@@ -9,6 +9,7 @@
     <color name="ML_White">#FFFFFF</color>
     <color name="ML_Dialog">#CDCDCD</color>
     <color name="ML_RedDark">#6A0000</color>
+    <color name="ML_Red">#FF0F0F</color>
     <color name="ML_EditEmpty">#FFF0BA</color>
     <color name="mlWave">#1A3AFF</color>
     <color name="mlWave2">#5BB1FB</color>

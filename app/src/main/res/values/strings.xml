@@ -27,7 +27,8 @@
     <string name="user">کاربر</string>
     <string name="maybe">بالقوه</string>
     <string name="possible">بالفعل</string>
-    <string name="archived">بایگانی ها</string>
+    <string name="Archives">بایگانی ها</string>
+    <string name="Archive">بایگانی</string>
     <string name="home">خانه</string>
     <string name="noItemForShow">موردی برای نمایش وجود ندارد</string>
     <string name="actions">عملیات ها</string>

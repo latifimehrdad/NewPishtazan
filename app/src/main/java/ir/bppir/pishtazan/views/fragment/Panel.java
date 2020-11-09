@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
@@ -24,6 +25,7 @@ import ir.bppir.pishtazan.utility.PanelType;
 import ir.bppir.pishtazan.utility.PersonType;
 import ir.bppir.pishtazan.viewmodels.VM_Panel;
 import ir.bppir.pishtazan.views.activity.MainActivity;
+import ir.bppir.pishtazan.views.adapterts.AP_Person;
 import ir.mlcode.latifiarchitecturelibrary.customs.ML_Button;
 
 
@@ -248,7 +250,10 @@ public class Panel extends Primary implements Primary.fragmentActions {
     private void setAdapter() {
         stopLoadingRecycler();
         if (vm_panel.getMd_personList().size() > 0){
-
+            AP_Person adapter = new AP_Person(vm_panel.getMd_personList());
+            RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+            recyclerViewPanel.setLayoutManager(manager);
+            recyclerViewPanel.setAdapter(adapter);
         } else {
             textViewNoItemForShow.setVisibility(View.VISIBLE);
             recyclerViewPanel.setVisibility(View.GONE);
