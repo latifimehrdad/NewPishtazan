@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,7 +30,8 @@ import ir.bppir.pishtazan.views.adapterts.AP_Person;
 import ir.mlcode.latifiarchitecturelibrary.customs.ML_Button;
 
 
-public class Panel extends Primary implements Primary.fragmentActions {
+public class Panel extends Primary implements Primary.fragmentActions,
+        AP_Person.itemClick {
 
     private VM_Panel vm_panel;
     private Byte panelType;
@@ -57,6 +59,9 @@ public class Panel extends Primary implements Primary.fragmentActions {
 
     @BindView(R.id.textViewNoItemForShow)
     TextView textViewNoItemForShow;
+
+    @BindView(R.id.constraintLayoutAction)
+    ConstraintLayout constraintLayoutAction;
 
 
     //______________________________________________________________________________________________ onCreateView
@@ -94,7 +99,7 @@ public class Panel extends Primary implements Primary.fragmentActions {
     @Override
     public void getActionFromObservable(Byte action) {
 
-        if (action.equals(ObservableActions.getPersonList)){
+        if (action.equals(ObservableActions.getPersonList)) {
             setAdapter();
         }
     }
@@ -154,6 +159,8 @@ public class Panel extends Primary implements Primary.fragmentActions {
             public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
+                closeLayoutAction();
+
                 if (personType.equals(PersonType.maybe)) {
                     if (dy >= 2)
                         hiddenAddButton();
@@ -183,7 +190,6 @@ public class Panel extends Primary implements Primary.fragmentActions {
     //______________________________________________________________________________________________ setTitle
 
 
-
     //______________________________________________________________________________________________ firstLoad
     private void firstLoad() {
         personType = PersonType.maybe;
@@ -194,7 +200,6 @@ public class Panel extends Primary implements Primary.fragmentActions {
         getPersonList();
     }
     //______________________________________________________________________________________________ firstLoad
-
 
 
     //______________________________________________________________________________________________ resetBackButtonPersonType
@@ -213,7 +218,6 @@ public class Panel extends Primary implements Primary.fragmentActions {
     //______________________________________________________________________________________________ resetBackButtonPersonType
 
 
-
     //______________________________________________________________________________________________ showAddButton
     private void showAddButton() {
         if (ml_ButtonNew.getVisibility() != View.VISIBLE) {
@@ -222,7 +226,6 @@ public class Panel extends Primary implements Primary.fragmentActions {
         }
     }
     //______________________________________________________________________________________________ showAddButton
-
 
 
     //______________________________________________________________________________________________ hiddenAddButton
@@ -245,12 +248,11 @@ public class Panel extends Primary implements Primary.fragmentActions {
     //______________________________________________________________________________________________ getPersonList
 
 
-
     //______________________________________________________________________________________________ setAdapter
     private void setAdapter() {
         stopLoadingRecycler();
-        if (vm_panel.getMd_personList().size() > 0){
-            AP_Person adapter = new AP_Person(vm_panel.getMd_personList());
+        if (vm_panel.getMd_personList().size() > 0) {
+            AP_Person adapter = new AP_Person(vm_panel.getMd_personList(), Panel.this);
             RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
             recyclerViewPanel.setLayoutManager(manager);
             recyclerViewPanel.setAdapter(adapter);
@@ -260,5 +262,59 @@ public class Panel extends Primary implements Primary.fragmentActions {
         }
     }
     //______________________________________________________________________________________________ setAdapter
+
+
+    //______________________________________________________________________________________________ closeLayoutAction
+    private void closeLayoutAction() {
+        if (constraintLayoutAction.getVisibility() != View.GONE) {
+            constraintLayoutAction.setAnimation(null);
+            constraintLayoutAction.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_out_bottom));
+            constraintLayoutAction.setVisibility(View.GONE);
+        }
+    }
+    //______________________________________________________________________________________________ closeLayoutAction
+
+
+    //______________________________________________________________________________________________ openLayoutAction
+    private void openLayoutAction() {
+        constraintLayoutAction.setAnimation(null);
+        constraintLayoutAction.setVisibility(View.GONE);
+        constraintLayoutAction.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_bottom));
+        constraintLayoutAction.setVisibility(View.VISIBLE);
+//            gotoFragment(R.id.action_home_to_workVacation, null);
+    }
+    //______________________________________________________________________________________________ openLayoutAction
+
+
+
+    //______________________________________________________________________________________________ actionButtonClick
+    @Override
+    public void actionButtonClick(Integer position) {
+        openLayoutAction();
+    }
+    //______________________________________________________________________________________________ actionButtonClick
+
+
+
+
+    //______________________________________________________________________________________________ createHomeActionMenu
+    private void createHomeActionMenu() {
+        List<MD_HomeActionMenu> menus = new ArrayList<>();
+        menus.add(new MD_HomeActionMenu(getResources().getString(R.string.workVacations),getResources().getDrawable(R.drawable.ic_camping),R.id.action_home_to_workVacation, null));
+        menus.add(new MD_HomeActionMenu(getResources().getString(R.string.missions),getResources().getDrawable(R.drawable.ic_businessman),R.id.action_home_to_mission, null));
+        Bundle bundle = new Bundle();
+        bundle.putByte(getResources().getString(R.string.ML_EditTime), AttendanceType.ArrivalAndDeparture);
+        menus.add(new MD_HomeActionMenu(getResources().getString(R.string.changeAttendanceTime),getResources().getDrawable(R.drawable.ic_edit_time),R.id.action_home_to_editTime, bundle));
+        menus.add(new MD_HomeActionMenu(getResources().getString(R.string.legalReceipt),getResources().getDrawable(R.drawable.ic_salary),R.id.action_home_to_workVacation, null));
+        menus.add(new MD_HomeActionMenu(getResources().getString(R.string.reports),getResources().getDrawable(R.drawable.ic_user_report),R.id.action_home_to_reports, null));
+
+        AP_HomeActionMenu ap_homeActionMenu = new AP_HomeActionMenu(menus, Home.this);
+        recyclerViewMenu.setAdapter(ap_homeActionMenu);
+        recyclerViewMenu.setLayoutManager(new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL));
+
+    }
+    //______________________________________________________________________________________________ createHomeActionMenu
+
+
 
 }

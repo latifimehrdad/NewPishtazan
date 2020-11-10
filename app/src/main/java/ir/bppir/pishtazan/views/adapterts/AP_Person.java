@@ -19,6 +19,7 @@ import ir.bppir.pishtazan.R;
 import ir.bppir.pishtazan.databinding.AdapterPersonBinding;
 import ir.bppir.pishtazan.moderls.MD_Person;
 import ir.bppir.pishtazan.views.application.PishtazanApp;
+import ir.mlcode.latifiarchitecturelibrary.customs.ML_Button;
 
 public class AP_Person extends RecyclerView.Adapter<AP_Person.customHolder> {
 
@@ -26,13 +27,24 @@ public class AP_Person extends RecyclerView.Adapter<AP_Person.customHolder> {
     private LayoutInflater layoutInflater;
     private List<MD_Person> md_personList;
     private Context context;
+    private itemClick click;
 
 
     //______________________________________________________________________________________________ AP_Person
-    public AP_Person(List<MD_Person> md_personList) {
+    public AP_Person(List<MD_Person> md_personList, itemClick click) {
         this.md_personList = md_personList;
+        this.click = click;
     }
     //______________________________________________________________________________________________ AP_Person
+
+
+
+    //______________________________________________________________________________________________ itemClick
+    public interface itemClick {
+
+        void actionButtonClick(Integer position);
+    }
+    //______________________________________________________________________________________________ itemClick
 
 
     //______________________________________________________________________________________________ AP_Person
@@ -72,6 +84,9 @@ public class AP_Person extends RecyclerView.Adapter<AP_Person.customHolder> {
         AdapterPersonBinding binding;
         View view;
 
+        @BindView(R.id.ml_ButtonAction)
+        ML_Button ml_ButtonAction;
+
         public customHolder(AdapterPersonBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
@@ -81,6 +96,7 @@ public class AP_Person extends RecyclerView.Adapter<AP_Person.customHolder> {
 
         public void bind(MD_Person item, final int position) {
             binding.setItem(item);
+            ml_ButtonAction.setOnClickListener(v -> click.actionButtonClick(position));
             binding.executePendingBindings();
         }
 
