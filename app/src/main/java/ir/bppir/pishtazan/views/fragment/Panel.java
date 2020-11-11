@@ -1,5 +1,6 @@
 package ir.bppir.pishtazan.views.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,24 +15,30 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.bppir.pishtazan.R;
 import ir.bppir.pishtazan.databinding.PanelBinding;
+import ir.bppir.pishtazan.moderls.MD_PanelActionMenu;
 import ir.bppir.pishtazan.utility.ObservableActions;
 import ir.bppir.pishtazan.utility.PanelType;
 import ir.bppir.pishtazan.utility.PersonType;
 import ir.bppir.pishtazan.viewmodels.VM_Panel;
 import ir.bppir.pishtazan.views.activity.MainActivity;
+import ir.bppir.pishtazan.views.adapterts.AP_PanelActionMenu;
 import ir.bppir.pishtazan.views.adapterts.AP_Person;
 import ir.mlcode.latifiarchitecturelibrary.customs.ML_Button;
 
 
 public class Panel extends Primary implements Primary.fragmentActions,
-        AP_Person.itemClick {
+        AP_Person.itemClick, AP_PanelActionMenu.menuActionClick {
 
     private VM_Panel vm_panel;
     private Byte panelType;
@@ -62,6 +69,9 @@ public class Panel extends Primary implements Primary.fragmentActions,
 
     @BindView(R.id.constraintLayoutAction)
     ConstraintLayout constraintLayoutAction;
+
+    @BindView(R.id.recyclerViewMenu)
+    RecyclerView recyclerViewMenu;
 
 
     //______________________________________________________________________________________________ onCreateView
@@ -298,17 +308,21 @@ public class Panel extends Primary implements Primary.fragmentActions,
 
 
     //______________________________________________________________________________________________ createHomeActionMenu
+    @SuppressLint("UseCompatLoadingForDrawables")
     private void createHomeActionMenu() {
-        List<MD_HomeActionMenu> menus = new ArrayList<>();
-        menus.add(new MD_HomeActionMenu(getResources().getString(R.string.workVacations),getResources().getDrawable(R.drawable.ic_camping),R.id.action_home_to_workVacation, null));
-        menus.add(new MD_HomeActionMenu(getResources().getString(R.string.missions),getResources().getDrawable(R.drawable.ic_businessman),R.id.action_home_to_mission, null));
-        Bundle bundle = new Bundle();
-        bundle.putByte(getResources().getString(R.string.ML_EditTime), AttendanceType.ArrivalAndDeparture);
-        menus.add(new MD_HomeActionMenu(getResources().getString(R.string.changeAttendanceTime),getResources().getDrawable(R.drawable.ic_edit_time),R.id.action_home_to_editTime, bundle));
-        menus.add(new MD_HomeActionMenu(getResources().getString(R.string.legalReceipt),getResources().getDrawable(R.drawable.ic_salary),R.id.action_home_to_workVacation, null));
-        menus.add(new MD_HomeActionMenu(getResources().getString(R.string.reports),getResources().getDrawable(R.drawable.ic_user_report),R.id.action_home_to_reports, null));
+        List<MD_PanelActionMenu> menus = new ArrayList<>();
+        menus.add(new MD_PanelActionMenu(getResources().getString(R.string.completeInformation),getResources().getDrawable(R.drawable.ic_delivery_complete),0, null));
+        menus.add(new MD_PanelActionMenu(getResources().getString(R.string.setCallReminder),getResources().getDrawable(R.drawable.ic_call_reminder),0, null));
+        menus.add(new MD_PanelActionMenu(getResources().getString(R.string.setMeetingReminder),getResources().getDrawable(R.drawable.ic_meeting_reminder),0, null));
+        menus.add(new MD_PanelActionMenu(getResources().getString(R.string.policiesList),getResources().getDrawable(R.drawable.ic_policies),0, null));
+        menus.add(new MD_PanelActionMenu(getResources().getString(R.string.insuranceList),getResources().getDrawable(R.drawable.ic_life_insurance),0, null));
+        menus.add(new MD_PanelActionMenu(getResources().getString(R.string.backToList),getResources().getDrawable(R.drawable.ic_resource_return),0, null));
+        menus.add(new MD_PanelActionMenu(getResources().getString(R.string.completeInformation),getResources().getDrawable(R.drawable.ic_delivery_complete),0, null));
+        menus.add(new MD_PanelActionMenu(getResources().getString(R.string.completeInformation),getResources().getDrawable(R.drawable.ic_delivery_complete),0, null));
+        menus.add(new MD_PanelActionMenu(getResources().getString(R.string.completeInformation),getResources().getDrawable(R.drawable.ic_delivery_complete),0, null));
 
-        AP_HomeActionMenu ap_homeActionMenu = new AP_HomeActionMenu(menus, Home.this);
+
+        AP_PanelActionMenu ap_homeActionMenu = new AP_PanelActionMenu(menus, Panel.this);
         recyclerViewMenu.setAdapter(ap_homeActionMenu);
         recyclerViewMenu.setLayoutManager(new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL));
 
@@ -316,5 +330,12 @@ public class Panel extends Primary implements Primary.fragmentActions,
     //______________________________________________________________________________________________ createHomeActionMenu
 
 
+
+    //______________________________________________________________________________________________ itemClick
+    @Override
+    public void itemClick(int action, Bundle bundle) {
+
+    }
+    //______________________________________________________________________________________________ itemClick
 
 }
