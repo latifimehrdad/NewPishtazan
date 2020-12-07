@@ -37,15 +37,13 @@ public class VM_Verify extends VM_Primary {
         getPrimaryCall().enqueue(new Callback<MR_Primary>() {
             @Override
             public void onResponse(Call<MR_Primary> call, Response<MR_Primary> response) {
-                setResponseMessage(checkResponse(response, false));
-                if (getResponseMessage() == null) {
+                if (responseIsOk(response)) {
                     setResponseMessage(getResponseMessages(response.body()));
                     if (response.body().getStatue() == 1)
                         getPublishSubject().onNext(ObservableActions.gotoVerify);
                     else
                         getPublishSubject().onNext(StaticValues.ML_ResponseError);
-                } else
-                    getPublishSubject().onNext(StaticValues.ML_ResponseError);
+                }
             }
 
             @Override
@@ -68,8 +66,7 @@ public class VM_Verify extends VM_Primary {
         getPrimaryCall().enqueue(new Callback<MR_VerifyCode>() {
             @Override
             public void onResponse(Call<MR_VerifyCode> call, Response<MR_VerifyCode> response) {
-                setResponseMessage(checkResponse(response, false));
-                if (getResponseMessage() == null) {
+                if (responseIsOk(response)) {
                     setResponseMessage(getResponseMessages(response.body()));
                     if (response.body().getStatue() == 1) {
                         saveUserInfo(response.body().getUserInfo());

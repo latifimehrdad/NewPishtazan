@@ -9,7 +9,7 @@ android {
         minSdkVersion 18
         targetSdkVersion 30
         versionCode 1
-        versionName "1.6"
+        versionName "2.05"
         multiDexEnabled true
         testInstrumentationRunner "androidx.pishtazan.runner.AndroidJUnitRunner"
     }

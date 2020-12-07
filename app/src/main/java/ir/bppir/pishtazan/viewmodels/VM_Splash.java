@@ -28,6 +28,7 @@ public class VM_Splash extends VM_Primary {
     //______________________________________________________________________________________________ getRecourse
     public void getUpdate() {
 
+
         setPrimaryCall(PishtazanApp
                 .getApplication(getContext())
                 .getRetrofitApiInterface()
@@ -36,16 +37,15 @@ public class VM_Splash extends VM_Primary {
         if (getPrimaryCall() == null)
             return;
 
+
         getPrimaryCall().enqueue(new Callback<MD_Update>() {
             @Override
             public void onResponse(Call<MD_Update> call, Response<MD_Update> response) {
-                setResponseMessage(checkResponse(response, false));
-                if (getResponseMessage() == null) {
+                if (responseIsOk(response)) {
                     setResponseMessage("");
                     md_update = response.body();
                     checkUpdate();
-                } else
-                    sendActionToObservable(StaticValues.ML_ResponseError);
+                }
             }
 
             @Override

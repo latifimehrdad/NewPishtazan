@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:fresco="http://schemas.android.com/tools">
+    xmlns:fresco="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="item"
@@ -22,7 +22,10 @@
             android:layout_height="@dimen/_60sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:setPersonImage="@{item.image}"
+            fresco:placeholderImage="@drawable/logo_pishtazan"
+            app:placeholderImageScaleType="fitCenter"/>
 
 
         <TextView
@@ -30,7 +33,7 @@
             fontPath="font/iransans_web_medium.ttf"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/noItemForShow"
+            android:text="@{item.fullName}"
             android:textColor="@color/ML_Splash"
             android:textSize="@dimen/_12sdp"
             android:layout_margin="@dimen/_10sdp"

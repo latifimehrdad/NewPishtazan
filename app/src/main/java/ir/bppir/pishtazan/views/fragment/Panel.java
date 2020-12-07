@@ -1,16 +1,19 @@
 package ir.bppir.pishtazan.views.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
@@ -24,22 +27,25 @@ import ir.bppir.pishtazan.utility.PanelType;
 import ir.bppir.pishtazan.utility.PersonType;
 import ir.bppir.pishtazan.viewmodels.VM_Panel;
 import ir.bppir.pishtazan.views.activity.MainActivity;
+import ir.bppir.pishtazan.views.adapterts.AP_Person;
 import ir.mlcode.latifiarchitecturelibrary.customs.ML_Button;
 
 
 public class Panel extends Primary implements Primary.fragmentActions {
 
     private VM_Panel vm_panel;
-    private Byte panelType;
-    private Byte personType;
+    public static Byte panelType;
+    public static Byte personType;
     private boolean isDeleted = false;
+
+    @BindView(R.id.constraintLayout)
+    ConstraintLayout constraintLayout;
 
     @BindView(R.id.recyclerViewPanel)
     RecyclerView recyclerViewPanel;
 
     @BindView(R.id.ml_ButtonNew)
     ML_Button ml_ButtonNew;
-
 
     @BindView(R.id.ml_ButtonUser)
     ML_Button ml_ButtonUser;
@@ -68,10 +74,8 @@ public class Panel extends Primary implements Primary.fragmentActions {
             binding.setPanel(vm_panel);
             setView(binding.getRoot());
             ButterKnife.bind(this, getView());
-            panelType = getArguments().getByte(getResources().getString(R.string.ML_PanelType), PanelType.customer);
             setOnClicksAndListener();
-            firstLoad();
-
+            clickOnMaybe();
         }
         return getView();
     }
@@ -86,6 +90,7 @@ public class Panel extends Primary implements Primary.fragmentActions {
         setTitle();
     }
     //______________________________________________________________________________________________ onCreateView
+
 
 
     //______________________________________________________________________________________________ getActionFromObservable
@@ -119,33 +124,13 @@ public class Panel extends Primary implements Primary.fragmentActions {
     private void setOnClicksAndListener() {
 
 
-        ml_ButtonMaybe.setOnClickListener(v -> {
-            firstLoad();
-        });
+        ml_ButtonMaybe.setOnClickListener(v -> clickOnMaybe());
 
-        ml_ButtonUser.setOnClickListener(v -> {
-            resetBackButtonPersonType();
-            ml_ButtonUser.stopLoading();
-            ml_ButtonUser.setTextAndTintDefaultColor();
-            personType = PersonType.user;
-            getPersonList();
-        });
+        ml_ButtonUser.setOnClickListener(v -> clickOnUser());
 
-        ml_ButtonPossible.setOnClickListener(v -> {
-            resetBackButtonPersonType();
-            ml_ButtonPossible.stopLoading();
-            ml_ButtonPossible.setTextAndTintDefaultColor();
-            personType = PersonType.possible;
-            getPersonList();
-        });
+        ml_ButtonPossible.setOnClickListener(v -> clickOnPossible());
 
-        ml_ButtonCertain.setOnClickListener(v -> {
-            resetBackButtonPersonType();
-            ml_ButtonCertain.stopLoading();
-            ml_ButtonCertain.setTextAndTintDefaultColor();
-            personType = PersonType.certain;
-            getPersonList();
-        });
+        ml_ButtonCertain.setOnClickListener(v -> clickOnCertain());
 
         recyclerViewPanel.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -164,6 +149,35 @@ public class Panel extends Primary implements Primary.fragmentActions {
 
         });
 
+
+        View.OnTouchListener onTouchListener = new View.OnTouchListener() {
+            int downX, upX;
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    downX = (int) event.getX();
+                    return true;
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    upX = (int) event.getX();
+                    if (upX - downX > 100) {
+                        swipeListRight();
+                        // swipe right
+                    } else if (downX - upX > -100) {
+                        swipeListLeft();
+                        // swipe left
+                    }
+                    return true;
+
+                }
+                return false;
+            }
+        };
+
+
+        recyclerViewPanel.setOnTouchListener(onTouchListener);
+        constraintLayout.setOnTouchListener(onTouchListener);
+
     }
     //______________________________________________________________________________________________ setOnClicksAndListener
 
@@ -179,19 +193,6 @@ public class Panel extends Primary implements Primary.fragmentActions {
         }
     }
     //______________________________________________________________________________________________ setTitle
-
-
-
-    //______________________________________________________________________________________________ firstLoad
-    private void firstLoad() {
-        personType = PersonType.maybe;
-        resetBackButtonPersonType();
-        ml_ButtonMaybe.stopLoading();
-        ml_ButtonMaybe.setTextAndTintDefaultColor();
-        showAddButton();
-        getPersonList();
-    }
-    //______________________________________________________________________________________________ firstLoad
 
 
 
@@ -248,12 +249,90 @@ public class Panel extends Primary implements Primary.fragmentActions {
     private void setAdapter() {
         stopLoadingRecycler();
         if (vm_panel.getMd_personList().size() > 0){
-
+            AP_Person ap_person = new AP_Person(vm_panel.getMd_personList());
+            RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+            recyclerViewPanel.setLayoutManager(manager);
+            recyclerViewPanel.setAdapter(ap_person);
         } else {
             textViewNoItemForShow.setVisibility(View.VISIBLE);
             recyclerViewPanel.setVisibility(View.GONE);
         }
     }
     //______________________________________________________________________________________________ setAdapter
+
+
+
+    //______________________________________________________________________________________________ swipeListLeft
+    private void swipeListLeft() {
+        if (personType.equals(PersonType.user))
+            clickOnCertain();
+        else if (personType.equals(PersonType.certain))
+            clickOnPossible();
+        else if (personType.equals(PersonType.possible))
+            clickOnMaybe();
+    }
+    //______________________________________________________________________________________________ swipeListLeft
+
+
+    //______________________________________________________________________________________________ swipeListRight
+    private void swipeListRight() {
+
+        if (personType.equals(PersonType.maybe))
+            clickOnPossible();
+        else if (personType.equals(PersonType.possible))
+            clickOnCertain();
+        else if (personType.equals(PersonType.certain))
+            if (panelType.equals(PanelType.colleagues))
+                clickOnUser();
+
+    }
+    //______________________________________________________________________________________________ swipeListRight
+
+
+    //______________________________________________________________________________________________ clickOnUser
+    private void clickOnUser() {
+        resetBackButtonPersonType();
+        ml_ButtonUser.stopLoading();
+        ml_ButtonUser.setTextAndTintDefaultColor();
+        personType = PersonType.user;
+        getPersonList();
+    }
+    //______________________________________________________________________________________________ clickOnUser
+
+
+
+    //______________________________________________________________________________________________ clickOnPossible
+    private void clickOnPossible() {
+        resetBackButtonPersonType();
+        ml_ButtonPossible.stopLoading();
+        ml_ButtonPossible.setTextAndTintDefaultColor();
+        personType = PersonType.possible;
+        getPersonList();
+    }
+    //______________________________________________________________________________________________ clickOnPossible
+
+
+    //______________________________________________________________________________________________ clickOnCertain
+    private void clickOnCertain() {
+        resetBackButtonPersonType();
+        ml_ButtonCertain.stopLoading();
+        ml_ButtonCertain.setTextAndTintDefaultColor();
+        personType = PersonType.certain;
+        getPersonList();
+    }
+    //______________________________________________________________________________________________ clickOnCertain
+
+
+
+    //______________________________________________________________________________________________ clickOnMaybe
+    private void clickOnMaybe() {
+        personType = PersonType.maybe;
+        resetBackButtonPersonType();
+        ml_ButtonMaybe.stopLoading();
+        ml_ButtonMaybe.setTextAndTintDefaultColor();
+        showAddButton();
+        getPersonList();
+    }
+    //______________________________________________________________________________________________ clickOnMaybe
 
 }

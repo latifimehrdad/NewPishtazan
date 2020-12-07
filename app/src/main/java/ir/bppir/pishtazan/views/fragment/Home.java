@@ -116,15 +116,13 @@ public class Home extends Primary implements Primary.fragmentActions {
     private void setOnClicks() {
 
         linearLayoutCustomer.setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putByte(getResources().getString(R.string.ML_PanelType), PanelType.customer);
-            getNavController().navigate(R.id.action_home_to_panel, bundle);
+            Panel.panelType = PanelType.customer;
+            getNavController().navigate(R.id.action_home_to_panel);
         });
 
         linearLayoutColleagues.setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putByte(getResources().getString(R.string.ML_PanelType), PanelType.colleagues);
-            getNavController().navigate(R.id.action_home_to_panel, bundle);
+            Panel.panelType = PanelType.colleagues;
+            getNavController().navigate(R.id.action_home_to_panel);
         });
 
         linearLayoutTutorial.setOnClickListener(v -> {

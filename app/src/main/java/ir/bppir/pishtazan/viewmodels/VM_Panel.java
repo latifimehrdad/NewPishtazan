@@ -52,13 +52,12 @@ public class VM_Panel extends VM_Primary {
         setPrimaryCall(PishtazanApp
                 .getApplication(getContext())
                 .getRetrofitApiInterface()
-                .getAllCustomers(userInfoId, personType, isDeleted));
+                .getAllCustomers(userInfoId, personType, isDeleted,"",false));
 
         getPrimaryCall().enqueue(new Callback<MR_Person>() {
             @Override
             public void onResponse(Call<MR_Person> call, Response<MR_Person> response) {
-                setResponseMessage(checkResponse(response, false));
-                if (getResponseMessage() == null) {
+                if (responseIsOk(response)) {
                     if (response.body().getStatue() == 1) {
                         md_personList = response.body().getCustomers();
                         if (md_personList.size() > 0)
@@ -95,15 +94,14 @@ public class VM_Panel extends VM_Primary {
         setPrimaryCall(PishtazanApp
                 .getApplication(getContext())
                 .getRetrofitApiInterface()
-                .getAllColleagues(userInfoId, PersonType, isDeleted));
+                .getAllColleagues(userInfoId, PersonType, isDeleted,"",false));
 
         getPrimaryCall().enqueue(new Callback<MR_Person>() {
             @Override
             public void onResponse(Call<MR_Person> call, Response<MR_Person> response) {
-                setResponseMessage(checkResponse(response, false));
-                if (getResponseMessage() == null) {
+                if (responseIsOk(response)) {
                     if (response.body().getStatue() == 1) {
-                        md_personList = response.body().getCustomers();
+                        md_personList = response.body().getColleagues();
                         if (md_personList.size() > 0)
                             setResponseMessage("");
                         else

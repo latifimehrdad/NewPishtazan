@@ -18,11 +18,14 @@
     <string name="enterVerify">شش رقم کد فعال سازی را وارد نمایید</string>
     <string name="elapsedTimeGetSMS">زمان باقیمانده\n برای دریافت پیامک</string>
     <string name="reTryGetSMS">دریافت مجدد</string>
+    <string name="colleague">همکار</string>
     <string name="colleagues">همکاران</string>
     <string name="customer">مشتری</string>
+    <string name="customers">مشتریان</string>
     <string name="doubleExit">برای خروج 2 بار کلیک کنید</string>
     <string name="tutorial">آموزش</string>
     <string name="reports">گزارشات</string>
+    <string name="alarms">اعلانات</string>
     <string name="certain">قطعی</string>
     <string name="user">کاربر</string>
     <string name="maybe">بالقوه</string>
@@ -43,7 +46,6 @@
     <string name="ML_NationalCode">ML_NationalCode</string>
     <string name="ML_Verified">ML_Verified</string>
     <string name="ML_UpdateUrl">UpdateUrl</string>
-    <string name="ML_PanelType">ML_PanelType</string>
 
 
 </resources>

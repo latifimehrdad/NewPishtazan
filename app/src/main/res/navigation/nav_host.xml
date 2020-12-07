@@ -9,7 +9,6 @@
     <argument android:name="@string/ML_AppName"/>
     <argument android:name="@string/ML_ApplicationId"/>
     <argument android:name="@string/ML_NationalCode"/>
-    <argument android:name="@string/ML_PanelType"/>
 
     <fragment
         android:id="@+id/splash"

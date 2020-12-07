@@ -14,7 +14,7 @@ import ir.mlcode.latifiarchitecturelibrary.application.APP_Latifi;
 public class PishtazanApp extends APP_Latifi {
 
     private Context context;
-    private String host = "https://pishtazan.bppir.com";
+    public static String host = "https://pishtazan.bppir.com";
     private RetrofitApiInterface retrofitApiInterface;
 
 
