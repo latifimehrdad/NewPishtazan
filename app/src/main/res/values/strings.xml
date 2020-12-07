@@ -30,10 +30,18 @@
     <string name="user">کاربر</string>
     <string name="maybe">بالقوه</string>
     <string name="possible">بالفعل</string>
-    <string name="archived">بایگانی ها</string>
+    <string name="Archives">بایگانی ها</string>
+    <string name="Archive">بایگانی</string>
     <string name="home">خانه</string>
     <string name="noItemForShow">موردی برای نمایش وجود ندارد</string>
     <string name="actions">عملیات ها</string>
+
+    <string name="completeInformation">تکمیل اطلاعات</string>
+    <string name="setCallReminder">ثبت یادآوری تماس</string>
+    <string name="setMeetingReminder">ثبت یادآوری جلسه</string>
+    <string name="policiesList">لیست پیشنویس ها</string>
+    <string name="insuranceList">لیست بیمه نامه ها</string>
+    <string name="backToList">بازگشت به لیست</string>
 
     //___________________________ Values For SharedPreference ______________________________________
     <string name="ML_SharePreferences">ML_SharePreferences</string>
