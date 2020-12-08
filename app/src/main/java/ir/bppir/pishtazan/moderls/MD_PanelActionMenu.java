@@ -13,11 +13,17 @@ public class MD_PanelActionMenu {
 
     private Bundle bundle;
 
-    public MD_PanelActionMenu(String title, Drawable icon, int action, Bundle bundle) {
+    private Drawable background;
+
+    private int tint;
+
+    public MD_PanelActionMenu(String title, Drawable icon, Drawable background, int tint, int action, Bundle bundle) {
         this.title = title;
         this.icon = icon;
         this.action = action;
         this.bundle = bundle;
+        this.background = background;
+        this.tint = tint;
     }
 
     public String getTitle() {
@@ -50,5 +56,21 @@ public class MD_PanelActionMenu {
 
     public void setBundle(Bundle bundle) {
         this.bundle = bundle;
+    }
+
+    public Drawable getBackground() {
+        return background;
+    }
+
+    public void setBackground(Drawable background) {
+        this.background = background;
+    }
+
+    public int getTint() {
+        return tint;
+    }
+
+    public void setTint(int tint) {
+        this.tint = tint;
     }
 }

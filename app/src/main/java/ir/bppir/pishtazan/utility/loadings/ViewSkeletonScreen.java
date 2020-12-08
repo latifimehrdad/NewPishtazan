@@ -34,7 +34,7 @@ public class ViewSkeletonScreen implements SkeletonScreen {
     }
 
     private ShimmerLayout generateShimmerContainerLayout(ViewGroup parentView) {
-        final ShimmerLayout shimmerLayout = (ShimmerLayout) LayoutInflater.from(mActualView.getContext()).inflate(R.layout.adapter_default_loading, parentView, false);
+        final ShimmerLayout shimmerLayout = (ShimmerLayout) LayoutInflater.from(mActualView.getContext()).inflate(R.layout.adapter_loading_default, parentView, false);
         shimmerLayout.setShimmerColor(mShimmerColor);
         shimmerLayout.setShimmerAngle(mShimmerAngle);
         shimmerLayout.setShimmerAnimationDuration(mShimmerDuration);

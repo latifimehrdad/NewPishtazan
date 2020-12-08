@@ -30,11 +30,12 @@
     <string name="user">کاربر</string>
     <string name="maybe">بالقوه</string>
     <string name="possible">بالفعل</string>
-    <string name="Archives">بایگانی ها</string>
-    <string name="Archive">بایگانی</string>
+    <string name="archives">بایگانی ها</string>
+    <string name="archive">بایگانی</string>
     <string name="home">خانه</string>
     <string name="noItemForShow">موردی برای نمایش وجود ندارد</string>
     <string name="actions">عملیات ها</string>
+    <string name="close">بستن</string>
 
     <string name="completeInformation">تکمیل اطلاعات</string>
     <string name="setCallReminder">ثبت یادآوری تماس</string>

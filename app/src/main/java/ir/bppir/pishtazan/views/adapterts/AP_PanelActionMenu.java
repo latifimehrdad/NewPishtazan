@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.bppir.pishtazan.R;
 import ir.bppir.pishtazan.databinding.AdapterPanelActionMenuBinding;
@@ -74,6 +76,9 @@ public class AP_PanelActionMenu extends RecyclerView.Adapter<AP_PanelActionMenu.
         AdapterPanelActionMenuBinding binding;
         View view;
 
+        @BindView(R.id.constraintLayout)
+        ConstraintLayout constraintLayout;
+
         public customHolder(AdapterPanelActionMenuBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
@@ -83,6 +88,7 @@ public class AP_PanelActionMenu extends RecyclerView.Adapter<AP_PanelActionMenu.
 
         public void bind(MD_PanelActionMenu item, int position) {
             binding.setMenu(item);
+            constraintLayout.setBackground(item.getBackground());
             view.setOnClickListener(v -> actionClick.itemClick(item.getAction(), item.getBundle()));
             binding.executePendingBindings();
         }

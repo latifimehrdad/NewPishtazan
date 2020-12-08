@@ -1,7 +1,7 @@
 package ir.bppir.pishtazan.views.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,23 +15,30 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.bppir.pishtazan.R;
 import ir.bppir.pishtazan.databinding.PanelBinding;
+import ir.bppir.pishtazan.moderls.MD_PanelActionMenu;
 import ir.bppir.pishtazan.utility.ObservableActions;
 import ir.bppir.pishtazan.utility.PanelType;
 import ir.bppir.pishtazan.utility.PersonType;
 import ir.bppir.pishtazan.viewmodels.VM_Panel;
 import ir.bppir.pishtazan.views.activity.MainActivity;
+import ir.bppir.pishtazan.views.adapterts.AP_PanelActionMenu;
 import ir.bppir.pishtazan.views.adapterts.AP_Person;
 import ir.mlcode.latifiarchitecturelibrary.customs.ML_Button;
 
 
-public class Panel extends Primary implements Primary.fragmentActions {
+public class Panel extends Primary implements Primary.fragmentActions, AP_Person.itemActionClick,
+AP_PanelActionMenu.menuActionClick{
 
     private VM_Panel vm_panel;
     public static Byte panelType;
@@ -61,6 +68,15 @@ public class Panel extends Primary implements Primary.fragmentActions {
 
     @BindView(R.id.textViewNoItemForShow)
     TextView textViewNoItemForShow;
+
+    @BindView(R.id.constraintLayoutAction)
+    ConstraintLayout constraintLayoutAction;
+
+    @BindView(R.id.recyclerViewActions)
+    RecyclerView recyclerViewActions;
+
+    @BindView(R.id.ml_ButtonClose)
+    ML_Button ml_ButtonClose;
 
 
     //______________________________________________________________________________________________ onCreateView
@@ -92,12 +108,11 @@ public class Panel extends Primary implements Primary.fragmentActions {
     //______________________________________________________________________________________________ onCreateView
 
 
-
     //______________________________________________________________________________________________ getActionFromObservable
     @Override
     public void getActionFromObservable(Byte action) {
 
-        if (action.equals(ObservableActions.getPersonList)){
+        if (action.equals(ObservableActions.getPersonList)) {
             setAdapter();
         }
     }
@@ -123,6 +138,7 @@ public class Panel extends Primary implements Primary.fragmentActions {
     //______________________________________________________________________________________________ setOnClicksAndListener
     private void setOnClicksAndListener() {
 
+        ml_ButtonClose.setOnClickListener(v -> closeLayoutAction());
 
         ml_ButtonMaybe.setOnClickListener(v -> clickOnMaybe());
 
@@ -137,13 +153,13 @@ public class Panel extends Primary implements Primary.fragmentActions {
             public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                if (personType.equals(PersonType.maybe)) {
-                    if (dy >= 2)
+                if (dy >= 2) {
+                    closeLayoutAction();
+                    if (personType.equals(PersonType.maybe))
                         hiddenAddButton();
-                        // Scrolling up
-                    else if (dy <= -2)
+                } else if (dy <= -2) {
+                    if (personType.equals(PersonType.maybe))
                         showAddButton();
-                    // Scrolling down
                 }
             }
 
@@ -152,6 +168,7 @@ public class Panel extends Primary implements Primary.fragmentActions {
 
         View.OnTouchListener onTouchListener = new View.OnTouchListener() {
             int downX, upX;
+
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
@@ -195,7 +212,6 @@ public class Panel extends Primary implements Primary.fragmentActions {
     //______________________________________________________________________________________________ setTitle
 
 
-
     //______________________________________________________________________________________________ resetBackButtonPersonType
     private void resetBackButtonPersonType() {
         ml_ButtonMaybe.setBackground(null);
@@ -212,7 +228,6 @@ public class Panel extends Primary implements Primary.fragmentActions {
     //______________________________________________________________________________________________ resetBackButtonPersonType
 
 
-
     //______________________________________________________________________________________________ showAddButton
     private void showAddButton() {
         if (ml_ButtonNew.getVisibility() != View.VISIBLE) {
@@ -221,7 +236,6 @@ public class Panel extends Primary implements Primary.fragmentActions {
         }
     }
     //______________________________________________________________________________________________ showAddButton
-
 
 
     //______________________________________________________________________________________________ hiddenAddButton
@@ -238,18 +252,18 @@ public class Panel extends Primary implements Primary.fragmentActions {
     private void getPersonList() {
         textViewNoItemForShow.setVisibility(View.GONE);
         recyclerViewPanel.setVisibility(View.VISIBLE);
-        setRecyclerLoading(recyclerViewPanel, R.layout.adapter_default_loading);
+        closeLayoutAction();
+        setRecyclerLoading(recyclerViewPanel, R.layout.adapter_loading_person);
         vm_panel.getPerson(panelType, personType, isDeleted);
     }
     //______________________________________________________________________________________________ getPersonList
 
 
-
     //______________________________________________________________________________________________ setAdapter
     private void setAdapter() {
         stopLoadingRecycler();
-        if (vm_panel.getMd_personList().size() > 0){
-            AP_Person ap_person = new AP_Person(vm_panel.getMd_personList());
+        if (vm_panel.getMd_personList().size() > 0) {
+            AP_Person ap_person = new AP_Person(vm_panel.getMd_personList(), Panel.this);
             RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
             recyclerViewPanel.setLayoutManager(manager);
             recyclerViewPanel.setAdapter(ap_person);
@@ -259,7 +273,6 @@ public class Panel extends Primary implements Primary.fragmentActions {
         }
     }
     //______________________________________________________________________________________________ setAdapter
-
 
 
     //______________________________________________________________________________________________ swipeListLeft
@@ -300,7 +313,6 @@ public class Panel extends Primary implements Primary.fragmentActions {
     //______________________________________________________________________________________________ clickOnUser
 
 
-
     //______________________________________________________________________________________________ clickOnPossible
     private void clickOnPossible() {
         resetBackButtonPersonType();
@@ -323,7 +335,6 @@ public class Panel extends Primary implements Primary.fragmentActions {
     //______________________________________________________________________________________________ clickOnCertain
 
 
-
     //______________________________________________________________________________________________ clickOnMaybe
     private void clickOnMaybe() {
         personType = PersonType.maybe;
@@ -334,5 +345,81 @@ public class Panel extends Primary implements Primary.fragmentActions {
         getPersonList();
     }
     //______________________________________________________________________________________________ clickOnMaybe
+
+
+    //______________________________________________________________________________________________ actionClick
+    @Override
+    public void actionClick(Integer position) {
+
+        List<MD_PanelActionMenu> menus = new ArrayList<>();
+        menus.add(new MD_PanelActionMenu(
+                getResources().getString(R.string.archive),
+                getResources().getDrawable(R.drawable.ic_archive_user),
+                getResources().getDrawable(R.drawable.dw_back_panel_menu),
+                getResources().getColor(R.color.colorPrimary),
+                R.id.action_home_to_panel,
+                null));
+
+        menus.add(new MD_PanelActionMenu(
+                getResources().getString(R.string.archive),
+                getResources().getDrawable(R.drawable.ic_archive_user),
+                getResources().getDrawable(R.drawable.dw_back_bottom_connect),
+                getResources().getColor(R.color.ML_White),
+                R.id.action_home_to_panel,
+                null));
+
+        createHomeActionMenu(menus);
+    }
+    //______________________________________________________________________________________________ actionClick
+
+
+
+
+    //______________________________________________________________________________________________ createHomeActionMenu
+    private void createHomeActionMenu(List<MD_PanelActionMenu> menus) {
+        AP_PanelActionMenu ap_homeActionMenu = new AP_PanelActionMenu(menus, Panel.this);
+        recyclerViewActions.setAdapter(ap_homeActionMenu);
+        recyclerViewActions.setLayoutManager(new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL));
+        openLayoutAction();
+    }
+    //______________________________________________________________________________________________ createHomeActionMenu
+
+
+
+    //______________________________________________________________________________________________ closeLayoutAction
+    private void closeLayoutAction() {
+        if (constraintLayoutAction.getVisibility() != View.GONE) {
+            constraintLayoutAction.setAnimation(null);
+            constraintLayoutAction.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_out_bottom));
+            constraintLayoutAction.setVisibility(View.GONE);
+        }
+    }
+    //______________________________________________________________________________________________ closeLayoutAction
+
+
+    //______________________________________________________________________________________________ openLayoutAction
+    private void openLayoutAction() {
+
+        if (constraintLayoutAction.getVisibility() == View.GONE) {
+            constraintLayoutAction.setAnimation(null);
+            constraintLayoutAction.setVisibility(View.GONE);
+            constraintLayoutAction.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_bottom));
+            constraintLayoutAction.setVisibility(View.VISIBLE);
+        } else {
+            closeLayoutAction();
+            Handler handler = new Handler();
+            handler.postDelayed(() -> openLayoutAction(), 300);
+        }
+//            gotoFragment(R.id.action_home_to_workVacation, null);
+    }
+    //______________________________________________________________________________________________ openLayoutAction
+
+
+    //______________________________________________________________________________________________ itemClick
+    @Override
+    public void itemClick(int action, Bundle bundle) {
+
+    }
+    //______________________________________________________________________________________________ itemClick
 
 }

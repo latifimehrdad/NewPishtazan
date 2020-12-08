@@ -1,16 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/_5sdp"
     android:background="@drawable/dw_back_panel_action">
 
+    <ir.mlcode.latifiarchitecturelibrary.customs.ML_Button
+        android:id="@+id/ml_ButtonClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:paddingTop="@dimen/_7sdp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:paddingLeft="@dimen/_10sdp"
+        android:paddingRight="@dimen/_10sdp"
+        app:connectBack="@drawable/dw_back_title"
+        app:img_height="@dimen/_15sdp"
+        app:img_src="@drawable/ic_two_arrows_down"
+        app:img_tint="@color/ML_White"
+        app:img_width="@dimen/_15sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+ />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewMenu"
+        android:id="@+id/recyclerViewActions"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/_5sdp"/>
+        android:layout_height="0dp"
+        android:padding="@dimen/_7sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ml_ButtonClose" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

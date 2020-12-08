@@ -9,9 +9,9 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/dw_back_panel_menu"
         android:padding="@dimen/_5sdp"
         android:layout_margin="@dimen/_5sdp">
 
@@ -22,7 +22,7 @@
             android:layout_height="@dimen/_35sdp"
             android:padding="@dimen/_3sdp"
             android:src="@{menu.icon}"
-            android:tint="@color/colorPrimary"
+            android:tint="@{menu.tint}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@{menu.title}"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@{menu.tint}"
             android:textSize="@dimen/_9sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

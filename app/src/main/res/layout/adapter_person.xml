@@ -47,12 +47,12 @@
             android:textSize="@dimen/_12sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/simpleDraweeViewProfile"
-            app:layout_constraintStart_toEndOf="@+id/ML_Button"
+            app:layout_constraintStart_toEndOf="@+id/ml_ButtonAction"
             app:layout_constraintTop_toTopOf="@+id/simpleDraweeViewProfile" />
 
 
         <ir.mlcode.latifiarchitecturelibrary.customs.ML_Button
-            android:id="@+id/ML_Button"
+            android:id="@+id/ml_ButtonAction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_5sdp"
