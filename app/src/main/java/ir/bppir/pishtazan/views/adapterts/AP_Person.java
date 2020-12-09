@@ -1,6 +1,8 @@
 package ir.bppir.pishtazan.views.adapterts;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -93,7 +95,6 @@ public class AP_Person extends RecyclerView.Adapter<AP_Person.customHolder> {
         }
     }
     //______________________________________________________________________________________________ customHolder
-
 
 
 }

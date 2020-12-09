@@ -27,6 +27,7 @@ import butterknife.ButterKnife;
 import ir.bppir.pishtazan.R;
 import ir.bppir.pishtazan.databinding.PanelBinding;
 import ir.bppir.pishtazan.moderls.MD_PanelActionMenu;
+import ir.bppir.pishtazan.moderls.MD_Person;
 import ir.bppir.pishtazan.utility.ObservableActions;
 import ir.bppir.pishtazan.utility.PanelType;
 import ir.bppir.pishtazan.utility.PersonType;
@@ -38,7 +39,7 @@ import ir.mlcode.latifiarchitecturelibrary.customs.ML_Button;
 
 
 public class Panel extends Primary implements Primary.fragmentActions, AP_Person.itemActionClick,
-AP_PanelActionMenu.menuActionClick{
+        AP_PanelActionMenu.menuActionClick {
 
     private VM_Panel vm_panel;
     public static Byte panelType;
@@ -138,6 +139,10 @@ AP_PanelActionMenu.menuActionClick{
     //______________________________________________________________________________________________ setOnClicksAndListener
     private void setOnClicksAndListener() {
 
+        constraintLayoutAction.setOnClickListener(v -> closeLayoutAction());
+
+        recyclerViewActions.setOnClickListener(v -> closeLayoutAction());
+
         ml_ButtonClose.setOnClickListener(v -> closeLayoutAction());
 
         ml_ButtonMaybe.setOnClickListener(v -> clickOnMaybe());
@@ -176,7 +181,14 @@ AP_PanelActionMenu.menuActionClick{
                     downX = (int) event.getX();
                     return true;
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    closeLayoutAction();
                     upX = (int) event.getX();
+                    if (upX == downX)
+                        return true;
+
+                    if (Math.abs(upX - downX) < 10)
+                        return true;
+
                     if (upX - downX > 100) {
                         swipeListRight();
                         // swipe right
@@ -302,6 +314,7 @@ AP_PanelActionMenu.menuActionClick{
     //______________________________________________________________________________________________ swipeListRight
 
 
+
     //______________________________________________________________________________________________ clickOnUser
     private void clickOnUser() {
         resetBackButtonPersonType();
@@ -350,40 +363,218 @@ AP_PanelActionMenu.menuActionClick{
     //______________________________________________________________________________________________ actionClick
     @Override
     public void actionClick(Integer position) {
-
-        List<MD_PanelActionMenu> menus = new ArrayList<>();
-        menus.add(new MD_PanelActionMenu(
-                getResources().getString(R.string.archive),
-                getResources().getDrawable(R.drawable.ic_archive_user),
-                getResources().getDrawable(R.drawable.dw_back_panel_menu),
-                getResources().getColor(R.color.colorPrimary),
-                R.id.action_home_to_panel,
-                null));
-
-        menus.add(new MD_PanelActionMenu(
-                getResources().getString(R.string.archive),
-                getResources().getDrawable(R.drawable.ic_archive_user),
-                getResources().getDrawable(R.drawable.dw_back_bottom_connect),
-                getResources().getColor(R.color.ML_White),
-                R.id.action_home_to_panel,
-                null));
-
-        createHomeActionMenu(menus);
+        if (panelType.equals(PanelType.customer))
+            customerAction(vm_panel.getMd_personList().get(position));
+        else if (panelType.equals(PanelType.colleagues))
+            colleaguesAction(vm_panel.getMd_personList().get(position));
     }
     //______________________________________________________________________________________________ actionClick
 
 
+    //______________________________________________________________________________________________ customerAction
+    private void customerAction(MD_Person person) {
+
+        if (personType.equals(PersonType.maybe))
+            createHomeActionMenu(customerActionMaybe(person));
+        else if (personType.equals(PersonType.possible))
+            createHomeActionMenu(customerActionPossible(person));
+        else if (personType.equals(PersonType.certain))
+            createHomeActionMenu(customerActionCertain(person));
+    }
+    //______________________________________________________________________________________________ customerAction
+
+
+    //______________________________________________________________________________________________ colleaguesAction
+    private void colleaguesAction(MD_Person person) {
+
+        if (personType.equals(PersonType.maybe))
+            createHomeActionMenu(colleaguesActionMaybe(person));
+        else if (personType.equals(PersonType.possible))
+            createHomeActionMenu(colleaguesActionPossible(person));
+        else if (personType.equals(PersonType.certain))
+            createHomeActionMenu(colleaguesActionCertain(person));
+        else if (personType.equals(PersonType.user))
+            createHomeActionMenu(colleaguesActionUser(person));
+    }
+    //______________________________________________________________________________________________ colleaguesAction
+
+
+    //______________________________________________________________________________________________ customerActionMaybe
+    private List<MD_PanelActionMenu> customerActionMaybe(MD_Person person) {
+
+        List<MD_PanelActionMenu> menus = new ArrayList<>();
+        menus.add(actionMoveToPossible(person));
+        menus.add(actionDeletePerson(person));
+
+        return menus;
+
+    }
+    //______________________________________________________________________________________________ customerActionMaybe
+
+
+    //______________________________________________________________________________________________ customerActionPossible
+    private List<MD_PanelActionMenu> customerActionPossible(MD_Person person) {
+
+        List<MD_PanelActionMenu> menus = new ArrayList<>();
+
+        menus.add(actionCompleteInformation(person));
+        menus.add(actionCallsReminder(person));
+        menus.add(actionMeetingsReminder(person));
+        menus.add(actionMoveToCustomerCertain(person));
+        menus.add(actionDeletePerson(person));
+
+        return menus;
+    }
+    //______________________________________________________________________________________________ customerActionPossible
+
+
+    //______________________________________________________________________________________________ customerActionCertain
+    private List<MD_PanelActionMenu> customerActionCertain(MD_Person person) {
+
+        List<MD_PanelActionMenu> menus = new ArrayList<>();
+        menus.add(actionDeletePerson(person));
+
+        return menus;
+    }
+    //______________________________________________________________________________________________ customerActionCertain
+
+
+    //______________________________________________________________________________________________ colleaguesActionMaybe
+    private List<MD_PanelActionMenu> colleaguesActionMaybe(MD_Person person) {
+
+        List<MD_PanelActionMenu> menus = new ArrayList<>();
+        menus.add(actionMoveToPossible(person));
+        menus.add(actionDeletePerson(person));
+
+        return menus;
+
+    }
+    //______________________________________________________________________________________________ colleaguesActionMaybe
+
+
+    //______________________________________________________________________________________________ colleaguesActionPossible
+    private List<MD_PanelActionMenu> colleaguesActionPossible(MD_Person person) {
+        List<MD_PanelActionMenu> menus = new ArrayList<>();
+        menus.add(actionDeletePerson(person));
+
+        return menus;
+    }
+    //______________________________________________________________________________________________ colleaguesActionPossible
+
+
+    //______________________________________________________________________________________________ colleaguesActionCertain
+    private List<MD_PanelActionMenu> colleaguesActionCertain(MD_Person person) {
+        List<MD_PanelActionMenu> menus = new ArrayList<>();
+        menus.add(actionDeletePerson(person));
+
+        return menus;
+    }
+    //______________________________________________________________________________________________ colleaguesActionCertain
+
+
+    //______________________________________________________________________________________________ colleaguesActionUser
+    private List<MD_PanelActionMenu> colleaguesActionUser(MD_Person person) {
+        List<MD_PanelActionMenu> menus = new ArrayList<>();
+        menus.add(actionDeletePerson(person));
+
+        return menus;
+    }
+    //______________________________________________________________________________________________ colleaguesActionUser
+
+
+    //______________________________________________________________________________________________ actionDeletePerson
+    private MD_PanelActionMenu actionDeletePerson(MD_Person person) {
+
+        return new MD_PanelActionMenu(
+                getResources().getString(R.string.archive),
+                getResources().getDrawable(R.drawable.ic_archive_user),
+                getResources().getDrawable(R.drawable.dw_back_panel_menu_delete),
+                getResources().getColor(R.color.ML_White),
+                R.id.action_home_to_panel,
+                null);
+    }
+    //______________________________________________________________________________________________ actionDeletePerson
+
+
+    //______________________________________________________________________________________________ actionMoveToPossible
+    private MD_PanelActionMenu actionMoveToPossible(MD_Person person) {
+
+        return new MD_PanelActionMenu(
+                getResources().getString(R.string.actionMoveToPossible),
+                getResources().getDrawable(R.drawable.ic_resource_switch),
+                getResources().getDrawable(R.drawable.dw_back_panel_menu_move),
+                getResources().getColor(R.color.ML_White),
+                R.id.action_home_to_panel,
+                null);
+    }
+    //______________________________________________________________________________________________ actionMoveToPossible
+
+
+    //______________________________________________________________________________________________ actionCompleteInformation
+    private MD_PanelActionMenu actionCompleteInformation(MD_Person person) {
+
+        return new MD_PanelActionMenu(
+                getResources().getString(R.string.actionCompleteInformation),
+                getResources().getDrawable(R.drawable.ic_contact_information),
+                getResources().getDrawable(R.drawable.dw_back_panel_menu),
+                getResources().getColor(R.color.colorPrimary),
+                R.id.action_home_to_panel,
+                null);
+    }
+    //______________________________________________________________________________________________ actionCompleteInformation
+
+
+    //______________________________________________________________________________________________ actionCallsReminder
+    private MD_PanelActionMenu actionCallsReminder(MD_Person person) {
+
+        return new MD_PanelActionMenu(
+                getResources().getString(R.string.actionCallsReminder),
+                getResources().getDrawable(R.drawable.ic_call_reminder),
+                getResources().getDrawable(R.drawable.dw_back_panel_menu),
+                getResources().getColor(R.color.colorPrimary),
+                R.id.action_home_to_panel,
+                null);
+    }
+    //______________________________________________________________________________________________ actionCallsReminder
+
+
+    //______________________________________________________________________________________________ actionMeetingsReminder
+    private MD_PanelActionMenu actionMeetingsReminder(MD_Person person) {
+
+        return new MD_PanelActionMenu(
+                getResources().getString(R.string.actionMeetingsReminder),
+                getResources().getDrawable(R.drawable.ic_meeting_reminder),
+                getResources().getDrawable(R.drawable.dw_back_panel_menu),
+                getResources().getColor(R.color.colorPrimary),
+                R.id.action_home_to_panel,
+                null);
+    }
+    //______________________________________________________________________________________________ actionMeetingsReminder
+
+
+    //______________________________________________________________________________________________ actionMoveToCustomerCertain
+    private MD_PanelActionMenu actionMoveToCustomerCertain(MD_Person person) {
+
+        return new MD_PanelActionMenu(
+                getResources().getString(R.string.actionMoveToCustomerCertain),
+                getResources().getDrawable(R.drawable.ic_resource_switch),
+                getResources().getDrawable(R.drawable.dw_back_panel_menu_move),
+                getResources().getColor(R.color.ML_White),
+                R.id.action_home_to_panel,
+                null);
+    }
+    //______________________________________________________________________________________________ actionMoveToCustomerCertain
 
 
     //______________________________________________________________________________________________ createHomeActionMenu
     private void createHomeActionMenu(List<MD_PanelActionMenu> menus) {
         AP_PanelActionMenu ap_homeActionMenu = new AP_PanelActionMenu(menus, Panel.this);
         recyclerViewActions.setAdapter(ap_homeActionMenu);
-        recyclerViewActions.setLayoutManager(new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL));
+        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+        recyclerViewActions.setLayoutManager(manager);
         openLayoutAction();
     }
     //______________________________________________________________________________________________ createHomeActionMenu
-
 
 
     //______________________________________________________________________________________________ closeLayoutAction

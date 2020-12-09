@@ -37,6 +37,12 @@
     <string name="actions">عملیات ها</string>
     <string name="close">بستن</string>
 
+    <string name="actionMoveToPossible">انتقال به بالفعل</string>
+    <string name="actionCompleteInformation">تکمیل اطلاعات</string>
+    <string name="actionCallsReminder">یادآوری تماس ها</string>
+    <string name="actionMeetingsReminder">یادآوری جلسه ها</string>
+    <string name="actionMoveToCustomerCertain">انتقال به قطعی</string>
+
     <string name="completeInformation">تکمیل اطلاعات</string>
     <string name="setCallReminder">ثبت یادآوری تماس</string>
     <string name="setMeetingReminder">ثبت یادآوری جلسه</string>
