@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/_10sdp">
+
+    <ir.mlcode.latifiarchitecturelibrary.customs.ML_Button
+        android:id="@+id/ml_ButtonSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_7sdp"
+        app:connectBack="@drawable/dw_back_panel_menu_type_selected"
+        app:img_height="@dimen/_20sdp"
+        app:img_src="@drawable/ic_searching"
+        app:img_tint="@color/colorPrimary"
+        app:img_width="@dimen/_20sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ir.mlcode.latifiarchitecturelibrary.customs.ML_EditText
+        android:id="@+id/ml_EditTextPersonalCode"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="@dimen/_5sdp"
+        app:delimiterBack="@drawable/dw_delimiter"
+        app:delimiterWidth="@dimen/_2sdp"
+        app:delimiter_marginLeft="@dimen/_5sdp"
+        app:delimiter_marginRight="@dimen/_5sdp"
+        app:editHint="@string/searchName"
+        app:editSplitter="false"
+        app:editTextColor="@color/colorPrimary"
+        app:editable="true"
+        app:emptyBack="@drawable/dw_back_edit_empty"
+        app:image_height="@dimen/_20sdp"
+        app:image_src="@drawable/ic_full_name"
+        app:image_tint="@color/colorPrimary"
+        app:image_width="@dimen/_20sdp"
+        app:inputTypeEdit="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/ml_ButtonSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ml_ButtonSearch"
+        app:layout_constraintTop_toTopOf="@+id/ml_ButtonSearch"
+        android:layout_marginLeft="@dimen/_10sdp"
+        app:normalBack="@drawable/dw_back_edit"
+        app:textMaxLength="30"
+        app:textMaxLine="1"
+        app:textSize="@dimen/_12sdp"
+        app:validationType="text"
+        app:textGravity="right|center_vertical"
+        app:fontFamily="@font/vazir_normal"/>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/dw_delimiter"
+        app:layout_constraintEnd_toEndOf="@+id/ml_EditTextPersonalCode"
+        app:layout_constraintStart_toStartOf="@+id/ml_ButtonSearch"
+        app:layout_constraintTop_toBottomOf="@+id/ml_EditTextPersonalCode"
+        android:orientation="vertical" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switchMaterialArchive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/archives"
+        android:textColor="@color/ML_White"
+        app:layout_constraintEnd_toEndOf="@+id/ml_EditTextPersonalCode"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        android:layout_marginTop="@dimen/_10sdp"
+        />
+
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/sortByDegree"
+        android:textColor="@color/ML_White"
+        app:layout_constraintEnd_toEndOf="@+id/switchMaterialArchive"
+        app:layout_constraintTop_toBottomOf="@+id/switchMaterialArchive" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

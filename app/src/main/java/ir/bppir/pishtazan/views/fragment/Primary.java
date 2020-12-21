@@ -3,7 +3,10 @@ package ir.bppir.pishtazan.views.fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jetbrains.annotations.NotNull;
+
 import ir.bppir.pishtazan.R;
+import ir.bppir.pishtazan.utility.PersonType;
 import ir.bppir.pishtazan.utility.loadings.RecyclerViewSkeletonScreen;
 import ir.bppir.pishtazan.utility.loadings.Skeleton;
 import ir.bppir.pishtazan.views.activity.MainActivity;
@@ -24,6 +27,8 @@ public class Primary extends FR_Latifi {
     }
     //______________________________________________________________________________________________ onCreateView
 
+
+    
 
 
     //______________________________________________________________________________________________ setRecyclerLoading
@@ -57,6 +62,7 @@ public class Primary extends FR_Latifi {
             ap_loading = null;
     }
     //______________________________________________________________________________________________ stopLoadingRecycler
+
 
 
 }

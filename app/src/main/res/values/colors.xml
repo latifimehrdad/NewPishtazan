@@ -20,7 +20,7 @@
 
     <color name="ML_Trans">#00000000</color>
 
-    <color name="mlDelimiter">#80FFFFFF</color>
+    <color name="mlDelimiter">#EDEDED</color>
 
     <color name="ML_recyclerLoadingBack">#1A058AFF</color>
     <color name="ML_recyclerLoading">#80FFFFFF</color>

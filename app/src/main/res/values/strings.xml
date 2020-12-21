@@ -30,18 +30,24 @@
     <string name="user">کاربر</string>
     <string name="maybe">بالقوه</string>
     <string name="possible">بالفعل</string>
-    <string name="archives">بایگانی ها</string>
+    <string name="archives">بایگانی شده ها</string>
     <string name="archive">بایگانی</string>
     <string name="home">خانه</string>
     <string name="noItemForShow">موردی برای نمایش وجود ندارد</string>
     <string name="actions">عملیات ها</string>
     <string name="close">بستن</string>
+    <string name="fullName">نام و نام خانوادگی</string>
+    <string name="sortByDegree">مرتب سازی بر اساس درجه</string>
+    <string name="searchName">جستجوی نام</string>
 
     <string name="actionMoveToPossible">انتقال به بالفعل</string>
     <string name="actionCompleteInformation">تکمیل اطلاعات</string>
     <string name="actionCallsReminder">یادآوری تماس ها</string>
     <string name="actionMeetingsReminder">یادآوری جلسه ها</string>
     <string name="actionMoveToCustomerCertain">انتقال به قطعی</string>
+    <string name="actionDrafts">لیست پیشنویس ها</string>
+    <string name="actionInsurances">لیست بیمه نامه ها</string>
+    <string name="actionMoveToColleagueCertain">انتقال به قطعی</string>
 
     <string name="completeInformation">تکمیل اطلاعات</string>
     <string name="setCallReminder">ثبت یادآوری تماس</string>

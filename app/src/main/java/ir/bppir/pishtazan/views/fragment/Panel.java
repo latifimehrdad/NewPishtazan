@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import net.cachapa.expandablelayout.ExpandableLayout;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -79,6 +81,12 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     @BindView(R.id.ml_ButtonClose)
     ML_Button ml_ButtonClose;
 
+    @BindView(R.id.expandableLayoutSearch)
+    ExpandableLayout expandableLayoutSearch;
+
+    @BindView(R.id.ml_ButtonShowSearch)
+    ML_Button ml_ButtonShowSearch;
+
 
     //______________________________________________________________________________________________ onCreateView
     @Nullable
@@ -91,8 +99,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
             binding.setPanel(vm_panel);
             setView(binding.getRoot());
             ButterKnife.bind(this, getView());
-            setOnClicksAndListener();
-            clickOnMaybe();
+            init();
         }
         return getView();
     }
@@ -136,6 +143,17 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     //______________________________________________________________________________________________ OnBackPress
 
 
+    //______________________________________________________________________________________________ init
+    @Override
+    public void init() {
+
+        setOnClicksAndListener();
+        clickOnMaybe();
+
+    }
+    //______________________________________________________________________________________________ init
+
+
     //______________________________________________________________________________________________ setOnClicksAndListener
     private void setOnClicksAndListener() {
 
@@ -153,7 +171,71 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
 
         ml_ButtonCertain.setOnClickListener(v -> clickOnCertain());
 
-        recyclerViewPanel.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        recyclerViewPanel.addOnScrollListener(onScrollListenerUpDown());
+
+        ml_ButtonShowSearch.setOnClickListener(v -> showSearchLayout());
+
+
+        recyclerViewPanel.setOnTouchListener(onTouchListenerSwipe());
+        constraintLayout.setOnTouchListener(onTouchListenerSwipe());
+
+    }
+    //______________________________________________________________________________________________ setOnClicksAndListener
+
+
+    //______________________________________________________________________________________________ onTouchListenerSwipe
+    private View.OnTouchListener onTouchListenerSwipe() {
+
+        View.OnTouchListener onTouchListener = new View.OnTouchListener() {
+
+            int downX, upX;
+            int downY, upY;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    downX = (int) event.getX();
+                    downY = (int) event.getY();
+                    return true;
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    upX = (int) event.getX();
+                    upY = (int) event.getY();
+
+                    if (Math.abs(downY - upY) > 90)
+                        return false;
+
+
+                    if (upX == downX)
+                        return false;
+
+                    if (Math.abs(upX - downX) < 120)
+                        return false;
+
+                    if (upX - downX > 130) {
+                        swipeListRight();
+                        // swipe right
+                    } else if (downX - upX > -130) {
+                        swipeListLeft();
+                        // swipe left
+                    }
+                    return true;
+
+                }
+                return false;
+            }
+        };
+
+        return onTouchListener;
+
+    }
+    //______________________________________________________________________________________________ onTouchListenerSwipe
+
+
+    //______________________________________________________________________________________________ onScrollListenerUpDown
+    private RecyclerView.OnScrollListener onScrollListenerUpDown() {
+
+        return new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -168,47 +250,9 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
                 }
             }
 
-        });
-
-
-        View.OnTouchListener onTouchListener = new View.OnTouchListener() {
-            int downX, upX;
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    downX = (int) event.getX();
-                    return true;
-                } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    closeLayoutAction();
-                    upX = (int) event.getX();
-                    if (upX == downX)
-                        return true;
-
-                    if (Math.abs(upX - downX) < 10)
-                        return true;
-
-                    if (upX - downX > 100) {
-                        swipeListRight();
-                        // swipe right
-                    } else if (downX - upX > -100) {
-                        swipeListLeft();
-                        // swipe left
-                    }
-                    return true;
-
-                }
-                return false;
-            }
         };
-
-
-        recyclerViewPanel.setOnTouchListener(onTouchListener);
-        constraintLayout.setOnTouchListener(onTouchListener);
-
     }
-    //______________________________________________________________________________________________ setOnClicksAndListener
+    //______________________________________________________________________________________________ onScrollListenerUpDown
 
 
     //______________________________________________________________________________________________ setTitle
@@ -258,6 +302,16 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
         }
     }
     //______________________________________________________________________________________________ hiddenAddButton
+
+
+    //______________________________________________________________________________________________ showSearchLayout
+    private void showSearchLayout() {
+        if (expandableLayoutSearch.isExpanded())
+            expandableLayoutSearch.collapse();
+        else
+            expandableLayoutSearch.expand();
+    }
+    //______________________________________________________________________________________________ showSearchLayout
 
 
     //______________________________________________________________________________________________ getPersonList
@@ -312,7 +366,6 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
 
     }
     //______________________________________________________________________________________________ swipeListRight
-
 
 
     //______________________________________________________________________________________________ clickOnUser
@@ -432,6 +485,12 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     private List<MD_PanelActionMenu> customerActionCertain(MD_Person person) {
 
         List<MD_PanelActionMenu> menus = new ArrayList<>();
+
+        menus.add(actionCompleteInformation(person));
+        menus.add(actionCallsReminder(person));
+        menus.add(actionMeetingsReminder(person));
+        menus.add(actionDrafts(person));
+        menus.add(actionInsurances(person));
         menus.add(actionDeletePerson(person));
 
         return menus;
@@ -455,6 +514,10 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     //______________________________________________________________________________________________ colleaguesActionPossible
     private List<MD_PanelActionMenu> colleaguesActionPossible(MD_Person person) {
         List<MD_PanelActionMenu> menus = new ArrayList<>();
+        menus.add(actionCompleteInformation(person));
+        menus.add(actionCallsReminder(person));
+        menus.add(actionMeetingsReminder(person));
+        menus.add(actionMoveToColleagueCertain(person));
         menus.add(actionDeletePerson(person));
 
         return menus;
@@ -465,6 +528,11 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     //______________________________________________________________________________________________ colleaguesActionCertain
     private List<MD_PanelActionMenu> colleaguesActionCertain(MD_Person person) {
         List<MD_PanelActionMenu> menus = new ArrayList<>();
+        menus.add(actionCompleteInformation(person));
+        menus.add(actionCallsReminder(person));
+        menus.add(actionMeetingsReminder(person));
+        menus.add(actionDrafts(person));
+        menus.add(actionInsurances(person));
         menus.add(actionDeletePerson(person));
 
         return menus;
@@ -475,6 +543,8 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     //______________________________________________________________________________________________ colleaguesActionUser
     private List<MD_PanelActionMenu> colleaguesActionUser(MD_Person person) {
         List<MD_PanelActionMenu> menus = new ArrayList<>();
+        menus.add(actionCallsReminder(person));
+        menus.add(actionMeetingsReminder(person));
         menus.add(actionDeletePerson(person));
 
         return menus;
@@ -566,6 +636,48 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     //______________________________________________________________________________________________ actionMoveToCustomerCertain
 
 
+    //______________________________________________________________________________________________ actionMoveToCustomerCertain
+    private MD_PanelActionMenu actionMoveToColleagueCertain(MD_Person person) {
+
+        return new MD_PanelActionMenu(
+                getResources().getString(R.string.actionMoveToColleagueCertain),
+                getResources().getDrawable(R.drawable.ic_resource_switch),
+                getResources().getDrawable(R.drawable.dw_back_panel_menu_move),
+                getResources().getColor(R.color.ML_White),
+                R.id.action_home_to_panel,
+                null);
+    }
+    //______________________________________________________________________________________________ actionMoveToCustomerCertain
+
+
+    //______________________________________________________________________________________________ actionDrafts
+    private MD_PanelActionMenu actionDrafts(MD_Person person) {
+
+        return new MD_PanelActionMenu(
+                getResources().getString(R.string.actionDrafts),
+                getResources().getDrawable(R.drawable.ic_draft),
+                getResources().getDrawable(R.drawable.dw_back_panel_menu),
+                getResources().getColor(R.color.colorPrimary),
+                R.id.action_home_to_panel,
+                null);
+    }
+    //______________________________________________________________________________________________ actionDrafts
+
+
+    //______________________________________________________________________________________________ actionInsurances
+    private MD_PanelActionMenu actionInsurances(MD_Person person) {
+
+        return new MD_PanelActionMenu(
+                getResources().getString(R.string.actionInsurances),
+                getResources().getDrawable(R.drawable.ic_family),
+                getResources().getDrawable(R.drawable.dw_back_panel_menu),
+                getResources().getColor(R.color.colorPrimary),
+                R.id.action_home_to_panel,
+                null);
+    }
+    //______________________________________________________________________________________________ actionInsurances
+
+
     //______________________________________________________________________________________________ createHomeActionMenu
     private void createHomeActionMenu(List<MD_PanelActionMenu> menus) {
         AP_PanelActionMenu ap_homeActionMenu = new AP_PanelActionMenu(menus, Panel.this);
@@ -579,6 +691,9 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
 
     //______________________________________________________________________________________________ closeLayoutAction
     private void closeLayoutAction() {
+
+        expandableLayoutSearch.collapse();
+
         if (constraintLayoutAction.getVisibility() != View.GONE) {
             constraintLayoutAction.setAnimation(null);
             constraintLayoutAction.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_out_bottom));
@@ -590,6 +705,8 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
 
     //______________________________________________________________________________________________ openLayoutAction
     private void openLayoutAction() {
+
+        expandableLayoutSearch.collapse();
 
         if (constraintLayoutAction.getVisibility() == View.GONE) {
             constraintLayoutAction.setAnimation(null);

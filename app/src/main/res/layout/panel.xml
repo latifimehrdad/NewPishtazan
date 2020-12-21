@@ -14,15 +14,6 @@
         android:layout_height="match_parent">
 
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/SwitchMaterialArchived"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/archives"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:visibility="gone"/>
-
         <LinearLayout
             android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
@@ -36,7 +27,7 @@
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SwitchMaterialArchived">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ir.mlcode.latifiarchitecturelibrary.customs.ML_Button
                 android:id="@+id/ml_ButtonUser"
@@ -104,15 +95,17 @@
             android:id="@+id/recyclerViewPanel"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/_3sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginRight="@dimen/_3sdp"
-            android:layout_marginLeft="@dimen/_3sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/_15sdp"
+            app:layout_constraintBottom_toTopOf="@+id/expandableLayoutSearch"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
             app:layout_constraintVertical_bias="0.0" />
+
 
         <TextView
             android:id="@+id/textViewNoItemForShow"
@@ -142,6 +135,44 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginRight="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_5sdp" />
+
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/expandableLayoutSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:background="@drawable/dw_back_panel_action"
+            android:padding="@dimen/_5sdp"
+            app:el_duration="700"
+            app:el_expanded="false"
+            app:el_parallax="0.5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout4"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout4">
+
+            <include layout="@layout/panel_search" />
+
+
+        </net.cachapa.expandablelayout.ExpandableLayout>
+
+
+        <ir.mlcode.latifiarchitecturelibrary.customs.ML_Button
+            android:id="@+id/ml_ButtonShowSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/_12sdp"
+            android:paddingTop="@dimen/_7sdp"
+            android:paddingRight="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_2sdp"
+            app:connectBack="@drawable/dw_home_circle_top"
+            app:img_height="@dimen/_25sdp"
+            app:img_src="@drawable/ic_searching"
+            app:img_tint="@color/colorAccent"
+            app:img_width="@dimen/_25sdp"
+            app:layout_constraintBottom_toTopOf="@+id/expandableLayoutSearch"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
         <include
