@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ir.mlcode.latifiarchitecturelibrary.customs.ML_EditText
-        android:id="@+id/ml_EditTextPersonalCode"
+        android:id="@+id/ml_EditTextName"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="@dimen/_5sdp"
@@ -58,9 +58,9 @@
         android:layout_height="@dimen/_1sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/dw_delimiter"
-        app:layout_constraintEnd_toEndOf="@+id/ml_EditTextPersonalCode"
+        app:layout_constraintEnd_toEndOf="@+id/ml_EditTextName"
         app:layout_constraintStart_toStartOf="@+id/ml_ButtonSearch"
-        app:layout_constraintTop_toBottomOf="@+id/ml_EditTextPersonalCode"
+        app:layout_constraintTop_toBottomOf="@+id/ml_EditTextName"
         android:orientation="vertical" />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
@@ -69,13 +69,14 @@
         android:layout_height="wrap_content"
         android:text="@string/archives"
         android:textColor="@color/ML_White"
-        app:layout_constraintEnd_toEndOf="@+id/ml_EditTextPersonalCode"
+        app:layout_constraintEnd_toEndOf="@+id/ml_EditTextName"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         android:layout_marginTop="@dimen/_10sdp"
         />
 
 
     <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switchMaterialSort"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"

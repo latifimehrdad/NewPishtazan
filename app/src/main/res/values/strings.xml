@@ -32,6 +32,7 @@
     <string name="possible">بالفعل</string>
     <string name="archives">بایگانی شده ها</string>
     <string name="archive">بایگانی</string>
+    <string name="deleteFromArchive">بازگشت به لیست</string>
     <string name="home">خانه</string>
     <string name="noItemForShow">موردی برای نمایش وجود ندارد</string>
     <string name="actions">عملیات ها</string>
@@ -39,6 +40,9 @@
     <string name="fullName">نام و نام خانوادگی</string>
     <string name="sortByDegree">مرتب سازی بر اساس درجه</string>
     <string name="searchName">جستجوی نام</string>
+    <string name="beDone">انجام شود</string>
+
+
 
     <string name="actionMoveToPossible">انتقال به بالفعل</string>
     <string name="actionCompleteInformation">تکمیل اطلاعات</string>
@@ -55,10 +59,16 @@
     <string name="policiesList">لیست پیشنویس ها</string>
     <string name="insuranceList">لیست بیمه نامه ها</string>
     <string name="backToList">بازگشت به لیست</string>
+    
+    <string name="titleDialogDeletePerson">آیا برای بایگانی کردن</string>
+    <string name="titleDialogDeletePersonOFArchive">آیا برای بازگردانی</string>
+    <string name="titleDialogMovePerson">آیا برای انتقال</string>
+    <string name="titleDialogAreYouShore">مطمئن هستید؟</string>
 
     //___________________________ Values For SharedPreference ______________________________________
     <string name="ML_SharePreferences">ML_SharePreferences</string>
     <string name="ML_FullName">ML_FullName</string>
+    <string name="ML_PersonId">ML_PersonId</string>
     <string name="ML_Id">ML_Id</string>
 
 

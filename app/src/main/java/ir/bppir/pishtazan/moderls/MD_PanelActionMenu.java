@@ -9,21 +9,25 @@ public class MD_PanelActionMenu {
 
     private Drawable icon;
 
-    private int action;
-
-    private Bundle bundle;
-
     private Drawable background;
 
     private int tint;
 
-    public MD_PanelActionMenu(String title, Drawable icon, Drawable background, int tint, int action, Bundle bundle) {
+    private int action;
+
+    private Bundle bundle;
+
+    private boolean goFragment;
+
+
+    public MD_PanelActionMenu(String title, Drawable icon, Drawable background, int tint, int action, Bundle bundle, boolean goFragment) {
         this.title = title;
         this.icon = icon;
-        this.action = action;
-        this.bundle = bundle;
         this.background = background;
         this.tint = tint;
+        this.action = action;
+        this.bundle = bundle;
+        this.goFragment = goFragment;
     }
 
     public String getTitle() {
@@ -73,4 +77,13 @@ public class MD_PanelActionMenu {
     public void setTint(int tint) {
         this.tint = tint;
     }
+
+    public boolean isGoFragment() {
+        return goFragment;
+    }
+
+    public void setGoFragment(boolean goFragment) {
+        this.goFragment = goFragment;
+    }
+
 }

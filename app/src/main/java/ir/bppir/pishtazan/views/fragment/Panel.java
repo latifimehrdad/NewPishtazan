@@ -1,5 +1,6 @@
 package ir.bppir.pishtazan.views.fragment;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -7,6 +8,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +19,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
@@ -31,6 +36,7 @@ import ir.bppir.pishtazan.databinding.PanelBinding;
 import ir.bppir.pishtazan.moderls.MD_PanelActionMenu;
 import ir.bppir.pishtazan.moderls.MD_Person;
 import ir.bppir.pishtazan.utility.ObservableActions;
+import ir.bppir.pishtazan.utility.PanelAction;
 import ir.bppir.pishtazan.utility.PanelType;
 import ir.bppir.pishtazan.utility.PersonType;
 import ir.bppir.pishtazan.viewmodels.VM_Panel;
@@ -38,6 +44,7 @@ import ir.bppir.pishtazan.views.activity.MainActivity;
 import ir.bppir.pishtazan.views.adapterts.AP_PanelActionMenu;
 import ir.bppir.pishtazan.views.adapterts.AP_Person;
 import ir.mlcode.latifiarchitecturelibrary.customs.ML_Button;
+import ir.mlcode.latifiarchitecturelibrary.customs.ML_EditText;
 
 
 public class Panel extends Primary implements Primary.fragmentActions, AP_Person.itemActionClick,
@@ -46,7 +53,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     private VM_Panel vm_panel;
     public static Byte panelType;
     public static Byte personType;
-    private boolean isDeleted = false;
+    private Dialog dialog;
 
     @BindView(R.id.constraintLayout)
     ConstraintLayout constraintLayout;
@@ -87,6 +94,18 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     @BindView(R.id.ml_ButtonShowSearch)
     ML_Button ml_ButtonShowSearch;
 
+    @BindView(R.id.ml_EditTextName)
+    ML_EditText ml_EditTextName;
+
+    @BindView(R.id.switchMaterialArchive)
+    SwitchMaterial switchMaterialArchive;
+
+    @BindView(R.id.switchMaterialSort)
+    SwitchMaterial switchMaterialSort;
+
+    @BindView(R.id.ml_ButtonSearch)
+    ML_Button ml_ButtonSearch;
+
 
     //______________________________________________________________________________________________ onCreateView
     @Nullable
@@ -120,8 +139,15 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     @Override
     public void getActionFromObservable(Byte action) {
 
+        dismissDialog();
         if (action.equals(ObservableActions.getPersonList)) {
             setAdapter();
+            return;
+        }
+
+        if (action.equals(ObservableActions.archivePerson)) {
+            getPersonList();
+            return;
         }
     }
     //______________________________________________________________________________________________ getActionFromObservable
@@ -131,6 +157,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     @Override
     public void actionWhenFailureRequest() {
 
+        dismissDialog();
     }
     //______________________________________________________________________________________________ actionWhenFailureRequest
 
@@ -175,9 +202,15 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
 
         ml_ButtonShowSearch.setOnClickListener(v -> showSearchLayout());
 
-
         recyclerViewPanel.setOnTouchListener(onTouchListenerSwipe());
+
         constraintLayout.setOnTouchListener(onTouchListenerSwipe());
+
+        switchMaterialArchive.setOnClickListener(v -> getPersonList());
+
+        switchMaterialSort.setOnClickListener(v -> getPersonList());
+
+        ml_ButtonSearch.setOnClickListener(v -> getPersonList());
 
     }
     //______________________________________________________________________________________________ setOnClicksAndListener
@@ -270,11 +303,14 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
 
     //______________________________________________________________________________________________ resetBackButtonPersonType
     private void resetBackButtonPersonType() {
+
+        dismissDialog();
         ml_ButtonMaybe.setBackground(null);
         ml_ButtonPossible.setBackground(null);
         ml_ButtonCertain.setBackground(null);
         ml_ButtonUser.setBackground(null);
         hiddenAddButton();
+        resetSearchPerson();
 
         ml_ButtonUser.setTextAndTintColor(getResources().getColor(R.color.colorAccent));
         ml_ButtonMaybe.setTextAndTintColor(getResources().getColor(R.color.colorAccent));
@@ -292,6 +328,17 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
         }
     }
     //______________________________________________________________________________________________ showAddButton
+
+
+
+    //______________________________________________________________________________________________ resetSearchPerson
+    private void resetSearchPerson() {
+        switchMaterialArchive.setChecked(false);
+        switchMaterialSort.setChecked(false);
+        ml_EditTextName.setText(null);
+    }
+    //______________________________________________________________________________________________ resetSearchPerson
+
 
 
     //______________________________________________________________________________________________ hiddenAddButton
@@ -320,7 +367,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
         recyclerViewPanel.setVisibility(View.VISIBLE);
         closeLayoutAction();
         setRecyclerLoading(recyclerViewPanel, R.layout.adapter_loading_person);
-        vm_panel.getPerson(panelType, personType, isDeleted);
+        vm_panel.getPerson(switchMaterialArchive.isChecked(), ml_EditTextName.getText().toString(), switchMaterialSort.isChecked());
     }
     //______________________________________________________________________________________________ getPersonList
 
@@ -456,8 +503,12 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     private List<MD_PanelActionMenu> customerActionMaybe(MD_Person person) {
 
         List<MD_PanelActionMenu> menus = new ArrayList<>();
-        menus.add(actionMoveToPossible(person));
-        menus.add(actionDeletePerson(person));
+        if (switchMaterialArchive.isChecked()) {
+            menus.add(actionDeleteFromArchivePerson(person));
+        } else {
+            menus.add(actionMoveToPossible(person));
+            menus.add(actionDeletePerson(person));
+        }
 
         return menus;
 
@@ -469,13 +520,15 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     private List<MD_PanelActionMenu> customerActionPossible(MD_Person person) {
 
         List<MD_PanelActionMenu> menus = new ArrayList<>();
-
-        menus.add(actionCompleteInformation(person));
-        menus.add(actionCallsReminder(person));
-        menus.add(actionMeetingsReminder(person));
-        menus.add(actionMoveToCustomerCertain(person));
-        menus.add(actionDeletePerson(person));
-
+        if (switchMaterialArchive.isChecked()) {
+            menus.add(actionDeleteFromArchivePerson(person));
+        } else {
+            menus.add(actionCompleteInformation(person));
+            menus.add(actionCallsReminder(person));
+            menus.add(actionMeetingsReminder(person));
+            menus.add(actionMoveToCustomerCertain(person));
+            menus.add(actionDeletePerson(person));
+        }
         return menus;
     }
     //______________________________________________________________________________________________ customerActionPossible
@@ -485,14 +538,15 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     private List<MD_PanelActionMenu> customerActionCertain(MD_Person person) {
 
         List<MD_PanelActionMenu> menus = new ArrayList<>();
-
-        menus.add(actionCompleteInformation(person));
-        menus.add(actionCallsReminder(person));
-        menus.add(actionMeetingsReminder(person));
-        menus.add(actionDrafts(person));
-        menus.add(actionInsurances(person));
-        menus.add(actionDeletePerson(person));
-
+        if (switchMaterialArchive.isChecked()) {
+            menus.add(actionDeleteFromArchivePerson(person));
+        } else {
+            menus.add(actionCompleteInformation(person));
+            menus.add(actionCallsReminder(person));
+            menus.add(actionMeetingsReminder(person));
+            menus.add(actionDrafts(person));
+            menus.add(actionInsurances(person));
+        }
         return menus;
     }
     //______________________________________________________________________________________________ customerActionCertain
@@ -502,9 +556,12 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     private List<MD_PanelActionMenu> colleaguesActionMaybe(MD_Person person) {
 
         List<MD_PanelActionMenu> menus = new ArrayList<>();
-        menus.add(actionMoveToPossible(person));
-        menus.add(actionDeletePerson(person));
-
+        if (switchMaterialArchive.isChecked()) {
+            menus.add(actionDeleteFromArchivePerson(person));
+        } else {
+            menus.add(actionMoveToPossible(person));
+            menus.add(actionDeletePerson(person));
+        }
         return menus;
 
     }
@@ -513,13 +570,17 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
 
     //______________________________________________________________________________________________ colleaguesActionPossible
     private List<MD_PanelActionMenu> colleaguesActionPossible(MD_Person person) {
-        List<MD_PanelActionMenu> menus = new ArrayList<>();
-        menus.add(actionCompleteInformation(person));
-        menus.add(actionCallsReminder(person));
-        menus.add(actionMeetingsReminder(person));
-        menus.add(actionMoveToColleagueCertain(person));
-        menus.add(actionDeletePerson(person));
 
+        List<MD_PanelActionMenu> menus = new ArrayList<>();
+        if (switchMaterialArchive.isChecked()) {
+            menus.add(actionDeleteFromArchivePerson(person));
+        } else {
+            menus.add(actionCompleteInformation(person));
+            menus.add(actionCallsReminder(person));
+            menus.add(actionMeetingsReminder(person));
+            menus.add(actionMoveToColleagueCertain(person));
+            menus.add(actionDeletePerson(person));
+        }
         return menus;
     }
     //______________________________________________________________________________________________ colleaguesActionPossible
@@ -527,14 +588,17 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
 
     //______________________________________________________________________________________________ colleaguesActionCertain
     private List<MD_PanelActionMenu> colleaguesActionCertain(MD_Person person) {
-        List<MD_PanelActionMenu> menus = new ArrayList<>();
-        menus.add(actionCompleteInformation(person));
-        menus.add(actionCallsReminder(person));
-        menus.add(actionMeetingsReminder(person));
-        menus.add(actionDrafts(person));
-        menus.add(actionInsurances(person));
-        menus.add(actionDeletePerson(person));
 
+        List<MD_PanelActionMenu> menus = new ArrayList<>();
+        if (switchMaterialArchive.isChecked()) {
+            menus.add(actionDeleteFromArchivePerson(person));
+        } else {
+            menus.add(actionCompleteInformation(person));
+            menus.add(actionCallsReminder(person));
+            menus.add(actionMeetingsReminder(person));
+            menus.add(actionDrafts(person));
+            menus.add(actionInsurances(person));
+        }
         return menus;
     }
     //______________________________________________________________________________________________ colleaguesActionCertain
@@ -542,11 +606,14 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
 
     //______________________________________________________________________________________________ colleaguesActionUser
     private List<MD_PanelActionMenu> colleaguesActionUser(MD_Person person) {
-        List<MD_PanelActionMenu> menus = new ArrayList<>();
-        menus.add(actionCallsReminder(person));
-        menus.add(actionMeetingsReminder(person));
-        menus.add(actionDeletePerson(person));
 
+        List<MD_PanelActionMenu> menus = new ArrayList<>();
+        if (switchMaterialArchive.isChecked()) {
+            menus.add(actionDeleteFromArchivePerson(person));
+        } else {
+            menus.add(actionCallsReminder(person));
+            menus.add(actionMeetingsReminder(person));
+        }
         return menus;
     }
     //______________________________________________________________________________________________ colleaguesActionUser
@@ -555,15 +622,36 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     //______________________________________________________________________________________________ actionDeletePerson
     private MD_PanelActionMenu actionDeletePerson(MD_Person person) {
 
+        Bundle bundle = new Bundle();
+        bundle.putString(getContext().getString(R.string.ML_FullName), person.getFullName());
+        bundle.putInt(getContext().getString(R.string.ML_PersonId), person.getId());
+
         return new MD_PanelActionMenu(
                 getResources().getString(R.string.archive),
                 getResources().getDrawable(R.drawable.ic_archive_user),
                 getResources().getDrawable(R.drawable.dw_back_panel_menu_delete),
                 getResources().getColor(R.color.ML_White),
-                R.id.action_home_to_panel,
-                null);
+                PanelAction.deletePerson,
+                bundle,
+                false);
     }
     //______________________________________________________________________________________________ actionDeletePerson
+
+
+    //______________________________________________________________________________________________ actionDeleteFromArchivePerson
+    private MD_PanelActionMenu actionDeleteFromArchivePerson(MD_Person person) {
+
+        return new MD_PanelActionMenu(
+                getResources().getString(R.string.deleteFromArchive),
+                getResources().getDrawable(R.drawable.ic_list_person),
+                getResources().getDrawable(R.drawable.dw_back_panel_menu_move),
+                getResources().getColor(R.color.ML_White),
+                R.id.action_home_to_panel,
+                null,
+                false);
+    }
+    //______________________________________________________________________________________________ actionDeleteFromArchivePerson
+
 
 
     //______________________________________________________________________________________________ actionMoveToPossible
@@ -575,7 +663,8 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
                 getResources().getDrawable(R.drawable.dw_back_panel_menu_move),
                 getResources().getColor(R.color.ML_White),
                 R.id.action_home_to_panel,
-                null);
+                null,
+                false);
     }
     //______________________________________________________________________________________________ actionMoveToPossible
 
@@ -589,7 +678,8 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
                 getResources().getDrawable(R.drawable.dw_back_panel_menu),
                 getResources().getColor(R.color.colorPrimary),
                 R.id.action_home_to_panel,
-                null);
+                null,
+                true);
     }
     //______________________________________________________________________________________________ actionCompleteInformation
 
@@ -603,7 +693,8 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
                 getResources().getDrawable(R.drawable.dw_back_panel_menu),
                 getResources().getColor(R.color.colorPrimary),
                 R.id.action_home_to_panel,
-                null);
+                null,
+                true);
     }
     //______________________________________________________________________________________________ actionCallsReminder
 
@@ -617,7 +708,8 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
                 getResources().getDrawable(R.drawable.dw_back_panel_menu),
                 getResources().getColor(R.color.colorPrimary),
                 R.id.action_home_to_panel,
-                null);
+                null,
+                true);
     }
     //______________________________________________________________________________________________ actionMeetingsReminder
 
@@ -631,7 +723,8 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
                 getResources().getDrawable(R.drawable.dw_back_panel_menu_move),
                 getResources().getColor(R.color.ML_White),
                 R.id.action_home_to_panel,
-                null);
+                null,
+                true);
     }
     //______________________________________________________________________________________________ actionMoveToCustomerCertain
 
@@ -645,7 +738,8 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
                 getResources().getDrawable(R.drawable.dw_back_panel_menu_move),
                 getResources().getColor(R.color.ML_White),
                 R.id.action_home_to_panel,
-                null);
+                null,
+                true);
     }
     //______________________________________________________________________________________________ actionMoveToCustomerCertain
 
@@ -659,7 +753,8 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
                 getResources().getDrawable(R.drawable.dw_back_panel_menu),
                 getResources().getColor(R.color.colorPrimary),
                 R.id.action_home_to_panel,
-                null);
+                null,
+                true);
     }
     //______________________________________________________________________________________________ actionDrafts
 
@@ -673,7 +768,8 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
                 getResources().getDrawable(R.drawable.dw_back_panel_menu),
                 getResources().getColor(R.color.colorPrimary),
                 R.id.action_home_to_panel,
-                null);
+                null,
+                true);
     }
     //______________________________________________________________________________________________ actionInsurances
 
@@ -725,9 +821,95 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
 
     //______________________________________________________________________________________________ itemClick
     @Override
-    public void itemClick(int action, Bundle bundle) {
+    public void itemClick(MD_PanelActionMenu md_panelActionMenu) {
 
+        dismissDialog();
+        closeLayoutAction();
+
+        if (md_panelActionMenu.isGoFragment())
+            goToFragmentWhenClickAction(md_panelActionMenu);
+        else
+            gotoFunctionWhenClickAction(md_panelActionMenu);
     }
     //______________________________________________________________________________________________ itemClick
+
+
+
+    //______________________________________________________________________________________________ goToFragmentWhenClickAction
+    private void goToFragmentWhenClickAction(MD_PanelActionMenu md_panelActionMenu) {
+
+    }
+    //______________________________________________________________________________________________ goToFragmentWhenClickAction
+
+
+
+    //______________________________________________________________________________________________ gotoFunctionWhenClickAction
+    private void gotoFunctionWhenClickAction(MD_PanelActionMenu md_panelActionMenu){
+
+        if (md_panelActionMenu.getAction() == PanelAction.deletePerson)
+            deletePerson(md_panelActionMenu);
+        else if (md_panelActionMenu.getAction() == PanelAction.deleteFromArchive)
+            deletePersonOfArchive(md_panelActionMenu);
+    }
+    //______________________________________________________________________________________________ gotoFunctionWhenClickAction
+
+
+
+    //______________________________________________________________________________________________ deletePerson
+    private void deletePerson(MD_PanelActionMenu md_panelActionMenu) {
+
+        dismissDialog();
+        dialog = createDialog(R.layout.dialog_delete_person);
+
+        ImageView imageViewIcon = dialog.findViewById(R.id.imageViewIcon);
+        configImageView(imageViewIcon,
+                getResources().getDrawable(R.drawable.ic_archive_user),
+                getResources().getColor(R.color.ML_Red));
+
+        TextView textViewTitle = dialog.findViewById(R.id.textViewTitle);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(getContext().getString(R.string.titleDialogDeletePerson));
+        stringBuilder.append(" ");
+        stringBuilder.append(md_panelActionMenu.getBundle().getString(getContext().getString(R.string.ML_FullName)));
+        stringBuilder.append(" ");
+        stringBuilder.append(getContext().getString(R.string.titleDialogAreYouShore));
+        textViewTitle.setText(stringBuilder.toString());
+
+        ML_Button buttonNo = dialog.findViewById(R.id.buttonNo);
+        buttonNo.setOnClickListener(v -> dialog.dismiss());
+
+        ML_Button buttonYes = dialog.findViewById(R.id.buttonYes);
+        buttonYes.setOnClickListener(v -> {
+            if (buttonYes.isClick())
+                vm_panel.cancelRequestByUser();
+            else {
+                buttonYes.startLayoutAnimation();
+                vm_panel.archivePerson(md_panelActionMenu.getBundle().getInt(getContext().getString(R.string.ML_PersonId)));
+            }
+        });
+
+        dialog.show();
+
+
+    }
+    //______________________________________________________________________________________________ deletePerson
+
+
+
+    //______________________________________________________________________________________________ deletePersonOfArchive
+    private void deletePersonOfArchive(MD_PanelActionMenu md_panelActionMenu) {
+
+    }
+    //______________________________________________________________________________________________ deletePersonOfArchive
+
+
+
+    //______________________________________________________________________________________________ dismissDialog
+    private void dismissDialog() {
+        if (dialog != null)
+            dialog.dismiss();
+        dialog = null;
+    }
+    //______________________________________________________________________________________________ dismissDialog
 
 }

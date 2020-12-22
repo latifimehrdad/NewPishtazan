@@ -55,6 +55,7 @@
                             android:src="@drawable/enter_code" />
 
                         <TextView
+                            fontPath="font/iransans_web_medium.ttf"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"

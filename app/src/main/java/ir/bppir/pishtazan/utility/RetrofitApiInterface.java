@@ -21,50 +21,66 @@ public interface RetrofitApiInterface {
 
 
     @GET(Version + "/hi")
-    Call<MD_Update> GET_UPDATE();
+    Call<MD_Update> getUpdate();
 
 
 
     @FormUrlEncoded
     @POST(Version + "/GenerateCode")
-    Call<MR_Primary> REQUEST_GENERATE_CODE_CALL
+    Call<MR_Primary> requestGenerateCodeCall
             (
-                    @Field("MobileNumber") String MobileNumber
+                    @Field("MobileNumber") String mobileNumber
             );
 
 
     @FormUrlEncoded
     @POST(Version + "/VerifyCode")
-    Call<MR_VerifyCode> REQUEST_VERIFY_CODE_CALL
+    Call<MR_VerifyCode> requestVerifyCodeCall
             (
-                    @Field("MobileNumber") String MobileNumber,
-                    @Field("TokenId") String TokenId,
-                    @Field("Code") String Code
+                    @Field("MobileNumber") String mobileNumber,
+                    @Field("TokenId") String tokenId,
+                    @Field("Code") String code
             );
 
 
     @GET(Version + "/GetAllCustomers")
     Call<MR_Person> getAllCustomers
             (
-                    @Query("UserInfoId") Integer UserInfoId,
-                    @Query("CustomerStatus") Byte CustomerStatus,
-                    @Query("IsDeleted") boolean IsDeleted,
-                    @Query("FullName") String FullName,
-                    @Query("SortByLevel") boolean SortByLevel
+                    @Query("UserInfoId") Integer userInfoId,
+                    @Query("CustomerStatus") Byte customerStatus,
+                    @Query("IsDeleted") boolean isDeleted,
+                    @Query("FullName") String fullName,
+                    @Query("SortByLevel") boolean sortByLevel
             );
 
 
     @GET(Version + "/GetAllColleagues")
     Call<MR_Person> getAllColleagues
             (
-                    @Query("UserInfoId") Integer UserInfoId,
-                    @Query("ColleagueStatus") Byte ColleagueStatus,
-                    @Query("IsDeleted") boolean IsDeleted,
-                    @Query("FullName") String FullName,
-                    @Query("SortByLevel") boolean SortByLevel
+                    @Query("UserInfoId") Integer userInfoId,
+                    @Query("ColleagueStatus") Byte colleagueStatus,
+                    @Query("IsDeleted") boolean isDeleted,
+                    @Query("FullName") String fullName,
+                    @Query("SortByLevel") boolean sortByLevel
             );
 
 
+    @FormUrlEncoded
+    @POST(Version + "/DeleteCustomer")
+    Call<MR_Primary> archiveCustomer
+            (
+                    @Field("Id") Integer id,
+                    @Field("UserInfoId") Integer userInfoId
+            );
+
+
+    @FormUrlEncoded
+    @POST(Version + "/DeleteColleague")
+    Call<MR_Primary> archiveColleague
+            (
+                    @Field("Id") Integer Id,
+                    @Field("UserInfoId") Integer UserInfoId
+            );
 
 
 }

@@ -32,7 +32,7 @@ public class VM_Verify extends VM_Primary {
         setPrimaryCall(PishtazanApp
                 .getApplication(getContext())
                 .getRetrofitApiInterface()
-                .REQUEST_GENERATE_CODE_CALL(nationalCode));
+                .requestGenerateCodeCall(nationalCode));
 
         getPrimaryCall().enqueue(new Callback<MR_Primary>() {
             @Override
@@ -61,7 +61,7 @@ public class VM_Verify extends VM_Primary {
 
         setPrimaryCall(PishtazanApp.getApplication(getContext())
                 .getRetrofitApiInterface()
-                .REQUEST_VERIFY_CODE_CALL(nationalCode, "null", code));
+                .requestVerifyCodeCall(nationalCode, "null", code));
 
         getPrimaryCall().enqueue(new Callback<MR_VerifyCode>() {
             @Override

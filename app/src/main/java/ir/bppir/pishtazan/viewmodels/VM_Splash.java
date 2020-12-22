@@ -9,7 +9,6 @@ import ir.bppir.pishtazan.R;
 import ir.bppir.pishtazan.moderls.MD_Update;
 import ir.bppir.pishtazan.utility.ObservableActions;
 import ir.bppir.pishtazan.views.application.PishtazanApp;
-import ir.mlcode.latifiarchitecturelibrary.utility.StaticValues;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,7 +31,7 @@ public class VM_Splash extends VM_Primary {
         setPrimaryCall(PishtazanApp
                 .getApplication(getContext())
                 .getRetrofitApiInterface()
-                .GET_UPDATE());
+                .getUpdate());
 
         if (getPrimaryCall() == null)
             return;

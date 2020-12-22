@@ -8,6 +8,7 @@ import java.util.List;
 
 import ir.bppir.pishtazan.moderls.MD_Person;
 import ir.bppir.pishtazan.moderls.MR_Person;
+import ir.bppir.pishtazan.moderls.MR_Primary;
 import ir.bppir.pishtazan.utility.ObservableActions;
 import ir.bppir.pishtazan.utility.PanelType;
 import ir.bppir.pishtazan.views.application.PishtazanApp;
@@ -15,6 +16,9 @@ import ir.mlcode.latifiarchitecturelibrary.utility.StaticValues;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static ir.bppir.pishtazan.views.fragment.Panel.panelType;
+import static ir.bppir.pishtazan.views.fragment.Panel.personType;
 
 public class VM_Panel extends VM_Primary {
 
@@ -31,18 +35,18 @@ public class VM_Panel extends VM_Primary {
 
 
     //______________________________________________________________________________________________ getPerson
-    public void getPerson(int panelType, Byte personType, boolean isDeleted) {
+    public void getPerson(boolean isDeleted, String name, boolean sort) {
 
         if (panelType == PanelType.customer)
-            getAllCustomers(personType, isDeleted);
+            getAllCustomers(isDeleted,name, sort);
         else
-            getAllColleagues(personType, isDeleted);
+            getAllColleagues(isDeleted,name, sort);
     }
     //______________________________________________________________________________________________ getPerson
 
 
     //______________________________________________________________________________________________ getAllCustomers
-    private void getAllCustomers(Byte personType, boolean isDeleted) {
+    private void getAllCustomers(boolean isDeleted, String name, boolean sort) {
 
         Integer userInfoId = getUserId();
         if (userInfoId == 0) {
@@ -52,7 +56,7 @@ public class VM_Panel extends VM_Primary {
         setPrimaryCall(PishtazanApp
                 .getApplication(getContext())
                 .getRetrofitApiInterface()
-                .getAllCustomers(userInfoId, personType, isDeleted,"",false));
+                .getAllCustomers(userInfoId, personType, isDeleted,name,sort));
 
         getPrimaryCall().enqueue(new Callback<MR_Person>() {
             @Override
@@ -84,7 +88,7 @@ public class VM_Panel extends VM_Primary {
 
 
     //______________________________________________________________________________________________ getAllColleagues
-    private void getAllColleagues(Byte PersonType, boolean isDeleted) {
+    private void getAllColleagues(boolean isDeleted, String name, boolean sort) {
 
         Integer userInfoId = getUserId();
         if (userInfoId == 0) {
@@ -94,7 +98,7 @@ public class VM_Panel extends VM_Primary {
         setPrimaryCall(PishtazanApp
                 .getApplication(getContext())
                 .getRetrofitApiInterface()
-                .getAllColleagues(userInfoId, PersonType, isDeleted,"",false));
+                .getAllColleagues(userInfoId, personType, isDeleted,name,sort));
 
         getPrimaryCall().enqueue(new Callback<MR_Person>() {
             @Override
@@ -122,6 +126,89 @@ public class VM_Panel extends VM_Primary {
 
     }
     //______________________________________________________________________________________________ getAllColleagues
+
+
+
+    //______________________________________________________________________________________________ archivePerson
+    public void archivePerson(Integer personId){
+        if (panelType.equals(PanelType.customer))
+            archiveCustomer(personId);
+        else if (panelType.equals(PanelType.colleagues))
+            archiveColleague(personId);
+    }
+    //______________________________________________________________________________________________ archivePerson
+
+
+
+    //______________________________________________________________________________________________ archiveCustomer
+    private void archiveCustomer(Integer personId){
+
+        Integer userId = getUserId();
+        if (userId == 0) {
+            return;
+        }
+
+        setPrimaryCall(PishtazanApp
+                .getApplication(getContext())
+                .getRetrofitApiInterface()
+                .archiveCustomer(personId, userId));
+
+        getPrimaryCall().enqueue(new Callback<MR_Primary>() {
+            @Override
+            public void onResponse(Call<MR_Primary> call, Response<MR_Primary> response) {
+                if (responseIsOk(response)) {
+                    setResponseMessage(response.body().getMessage());
+                    if (response.body().getStatue() == 1)
+                        getPublishSubject().onNext(ObservableActions.archivePerson);
+                    else
+                        getPublishSubject().onNext(StaticValues.ML_ResponseError);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MR_Primary> call, Throwable t) {
+                onFailureRequest();
+            }
+        });
+
+    }
+    //______________________________________________________________________________________________ archiveCustomer
+
+
+
+    //______________________________________________________________________________________________ archiveColleague
+    private void archiveColleague(Integer personId){
+
+        Integer userId = getUserId();
+        if (userId == 0) {
+            return;
+        }
+
+        setPrimaryCall(PishtazanApp
+                .getApplication(getContext())
+                .getRetrofitApiInterface()
+                .archiveColleague(personId, userId));
+
+        getPrimaryCall().enqueue(new Callback<MR_Primary>() {
+            @Override
+            public void onResponse(Call<MR_Primary> call, Response<MR_Primary> response) {
+                if (responseIsOk(response)) {
+                    setResponseMessage(response.body().getMessage());
+                    if (response.body().getStatue() == 1)
+                        getPublishSubject().onNext(ObservableActions.archivePerson);
+                    else
+                        getPublishSubject().onNext(StaticValues.ML_ResponseError);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MR_Primary> call, Throwable t) {
+                onFailureRequest();
+            }
+        });
+
+    }
+    //______________________________________________________________________________________________ archiveColleague
 
 
 

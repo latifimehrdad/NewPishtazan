@@ -27,9 +27,11 @@ public class AP_PanelActionMenu extends RecyclerView.Adapter<AP_PanelActionMenu.
 
 
 
+    //______________________________________________________________________________________________ menuActionClick
     public interface menuActionClick {
-        void itemClick(int action, Bundle bundle);
+        void itemClick(MD_PanelActionMenu md_panelActionMenu);
     }
+    //______________________________________________________________________________________________ menuActionClick
 
 
     //______________________________________________________________________________________________ AP_HomeActionMenu
@@ -89,7 +91,7 @@ public class AP_PanelActionMenu extends RecyclerView.Adapter<AP_PanelActionMenu.
         public void bind(MD_PanelActionMenu item, int position) {
             binding.setMenu(item);
             constraintLayout.setBackground(item.getBackground());
-            view.setOnClickListener(v -> actionClick.itemClick(item.getAction(), item.getBundle()));
+            view.setOnClickListener(v -> actionClick.itemClick(item));
             binding.executePendingBindings();
         }
     }

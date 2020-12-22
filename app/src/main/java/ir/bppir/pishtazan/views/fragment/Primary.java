@@ -1,5 +1,13 @@
 package ir.bppir.pishtazan.views.fragment;
 
+import android.app.Dialog;
+import android.graphics.drawable.Drawable;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.LayoutRes;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,9 +34,6 @@ public class Primary extends FR_Latifi {
         MainActivity.hideTitle();
     }
     //______________________________________________________________________________________________ onCreateView
-
-
-    
 
 
     //______________________________________________________________________________________________ setRecyclerLoading
@@ -62,6 +67,32 @@ public class Primary extends FR_Latifi {
             ap_loading = null;
     }
     //______________________________________________________________________________________________ stopLoadingRecycler
+
+
+    //______________________________________________________________________________________________ createDialog
+    public Dialog createDialog(@LayoutRes int layoutResID){
+
+        Dialog dialog;
+        dialog = new Dialog(getContext());
+        dialog.setCancelable(true);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(layoutResID);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = dialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        window.setAttributes(lp);
+        return dialog;
+    }
+    //______________________________________________________________________________________________ createDialog
+
+
+    //______________________________________________________________________________________________ configImageView
+    public void configImageView(ImageView imageView, Drawable icon, int tint){
+        imageView.setImageDrawable(icon);
+        imageView.setColorFilter(tint);
+    }
+    //______________________________________________________________________________________________ configImageView
 
 
 

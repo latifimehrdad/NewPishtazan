@@ -115,6 +115,7 @@
             android:text="@string/noItemForShow"
             android:textColor="@color/ML_Splash"
             android:textSize="@dimen/_12sdp"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

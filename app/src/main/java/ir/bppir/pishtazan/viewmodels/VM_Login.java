@@ -29,7 +29,7 @@ public class VM_Login extends VM_Primary {
 
         setPrimaryCall(PishtazanApp.getApplication(getContext())
                 .getRetrofitApiInterface()
-                .REQUEST_GENERATE_CODE_CALL(nationalCode));
+                .requestGenerateCodeCall(nationalCode));
 
         if (getPrimaryCall() == null)
             return;
