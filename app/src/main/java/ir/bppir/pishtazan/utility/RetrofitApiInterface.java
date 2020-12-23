@@ -43,6 +43,7 @@ public interface RetrofitApiInterface {
             );
 
 
+    //______________________________________________________________________________________________ Customer
     @GET(Version + "/GetAllCustomers")
     Call<MR_Person> getAllCustomers
             (
@@ -53,16 +54,6 @@ public interface RetrofitApiInterface {
                     @Query("SortByLevel") boolean sortByLevel
             );
 
-
-    @GET(Version + "/GetAllColleagues")
-    Call<MR_Person> getAllColleagues
-            (
-                    @Query("UserInfoId") Integer userInfoId,
-                    @Query("ColleagueStatus") Byte colleagueStatus,
-                    @Query("IsDeleted") boolean isDeleted,
-                    @Query("FullName") String fullName,
-                    @Query("SortByLevel") boolean sortByLevel
-            );
 
 
     @FormUrlEncoded
@@ -75,6 +66,36 @@ public interface RetrofitApiInterface {
 
 
     @FormUrlEncoded
+    @POST(Version + "/UnDeleteCustomer")
+    Call<MR_Primary> deleteCustomerFromArchive
+            (
+                    @Field("Id") Integer Id,
+                    @Field("UserInfoId") Integer UserInfoId
+            );
+
+
+    @FormUrlEncoded
+    @POST(Version + "/ConvertToPossibleCustomer")
+    Call<MR_Primary> moveToPossibleCustomer
+            (
+                    @Field("Id") Integer Id,
+                    @Field("UserInfoId") Integer UserInfoId
+            );
+
+
+    //______________________________________________________________________________________________ Colleagues
+    @GET(Version + "/GetAllColleagues")
+    Call<MR_Person> getAllColleagues
+            (
+                    @Query("UserInfoId") Integer userInfoId,
+                    @Query("ColleagueStatus") Byte colleagueStatus,
+                    @Query("IsDeleted") boolean isDeleted,
+                    @Query("FullName") String fullName,
+                    @Query("SortByLevel") boolean sortByLevel
+            );
+
+
+    @FormUrlEncoded
     @POST(Version + "/DeleteColleague")
     Call<MR_Primary> archiveColleague
             (
@@ -82,5 +103,21 @@ public interface RetrofitApiInterface {
                     @Field("UserInfoId") Integer UserInfoId
             );
 
+    @FormUrlEncoded
+    @POST(Version + "/UnDeleteColleague")
+    Call<MR_Primary> deleteColleagueFromArchive
+            (
+                    @Field("Id") Integer Id,
+                    @Field("UserInfoId") Integer UserInfoId
+            );
+
+
+    @FormUrlEncoded
+    @POST(Version + "/ConvertToPossibleColleague")
+    Call<MR_Primary> moveToPossibleColleague
+            (
+                    @Field("Id") Integer Id,
+                    @Field("UserInfoId") Integer UserInfoId
+            );
 
 }

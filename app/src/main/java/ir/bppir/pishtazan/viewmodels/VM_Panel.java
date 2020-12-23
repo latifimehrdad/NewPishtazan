@@ -212,6 +212,175 @@ public class VM_Panel extends VM_Primary {
 
 
 
+    //______________________________________________________________________________________________ deletePersonFromArchive
+    public void deletePersonFromArchive(Integer personId) {
+        if (panelType.equals(PanelType.customer))
+            deleteCustomerFromArchive(personId);
+        else if (panelType.equals(PanelType.colleagues))
+            deleteColleagueFromArchive(personId);
+    }
+    //______________________________________________________________________________________________ deletePersonFromArchive
+
+
+
+
+    //______________________________________________________________________________________________ deleteCustomerFromArchive
+    private void deleteCustomerFromArchive(Integer personId) {
+
+        Integer userId = getUserId();
+        if (userId == 0) {
+            return;
+        }
+
+        setPrimaryCall(PishtazanApp
+                .getApplication(getContext())
+                .getRetrofitApiInterface()
+                .deleteCustomerFromArchive(personId, userId));
+
+        getPrimaryCall().enqueue(new Callback<MR_Primary>() {
+            @Override
+            public void onResponse(Call<MR_Primary> call, Response<MR_Primary> response) {
+                if (responseIsOk(response)) {
+                    setResponseMessage(response.body().getMessage());
+                    if (response.body().getStatue() == 1)
+                        getPublishSubject().onNext(ObservableActions.deleteFromArchive);
+                    else
+                        getPublishSubject().onNext(StaticValues.ML_ResponseError);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MR_Primary> call, Throwable t) {
+                onFailureRequest();
+            }
+        });
+
+    }
+    //______________________________________________________________________________________________ deleteCustomerFromArchive
+
+
+
+
+    //______________________________________________________________________________________________ deleteColleagueFromArchive
+    private void deleteColleagueFromArchive(Integer personId) {
+
+        Integer userId = getUserId();
+        if (userId == 0) {
+            return;
+        }
+
+        setPrimaryCall(PishtazanApp
+                .getApplication(getContext())
+                .getRetrofitApiInterface()
+                .deleteColleagueFromArchive(personId, userId));
+
+        getPrimaryCall().enqueue(new Callback<MR_Primary>() {
+            @Override
+            public void onResponse(Call<MR_Primary> call, Response<MR_Primary> response) {
+                if (responseIsOk(response)) {
+                    setResponseMessage(response.body().getMessage());
+                    if (response.body().getStatue() == 1)
+                        getPublishSubject().onNext(ObservableActions.deleteFromArchive);
+                    else
+                        getPublishSubject().onNext(StaticValues.ML_ResponseError);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MR_Primary> call, Throwable t) {
+                onFailureRequest();
+            }
+        });
+
+    }
+    //______________________________________________________________________________________________ deleteColleagueFromArchive
+
+
+
+    //______________________________________________________________________________________________ deletePersonFromArchive
+    public void moveToPossible(Integer personId) {
+        if (panelType.equals(PanelType.customer))
+            moveToPossibleCustomer(personId);
+        else if (panelType.equals(PanelType.colleagues))
+            moveToPossibleColleague(personId);
+    }
+    //______________________________________________________________________________________________ deletePersonFromArchive
+
+
+
+    //______________________________________________________________________________________________ moveToPossibleCustomer
+    private void moveToPossibleCustomer(Integer personId) {
+
+        Integer userId = getUserId();
+        if (userId == 0) {
+            return;
+        }
+
+        setPrimaryCall(PishtazanApp
+                .getApplication(getContext())
+                .getRetrofitApiInterface()
+                .moveToPossibleCustomer(personId, userId));
+
+        getPrimaryCall().enqueue(new Callback<MR_Primary>() {
+            @Override
+            public void onResponse(Call<MR_Primary> call, Response<MR_Primary> response) {
+                if (responseIsOk(response)) {
+                    setResponseMessage(response.body().getMessage());
+                    if (response.body().getStatue() == 1)
+                        getPublishSubject().onNext(ObservableActions.moveToPossible);
+                    else
+                        getPublishSubject().onNext(StaticValues.ML_ResponseError);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MR_Primary> call, Throwable t) {
+                onFailureRequest();
+            }
+        });
+
+    }
+    //______________________________________________________________________________________________ moveToPossibleCustomer
+
+
+
+    //______________________________________________________________________________________________ moveToPossibleColleague
+    private void moveToPossibleColleague(Integer personId) {
+
+        Integer userId = getUserId();
+        if (userId == 0) {
+            return;
+        }
+
+        setPrimaryCall(PishtazanApp
+                .getApplication(getContext())
+                .getRetrofitApiInterface()
+                .moveToPossibleColleague(personId, userId));
+
+        getPrimaryCall().enqueue(new Callback<MR_Primary>() {
+            @Override
+            public void onResponse(Call<MR_Primary> call, Response<MR_Primary> response) {
+                if (responseIsOk(response)) {
+                    setResponseMessage(response.body().getMessage());
+                    if (response.body().getStatue() == 1)
+                        getPublishSubject().onNext(ObservableActions.moveToPossible);
+                    else
+                        getPublishSubject().onNext(StaticValues.ML_ResponseError);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MR_Primary> call, Throwable t) {
+                onFailureRequest();
+            }
+        });
+
+    }
+    //______________________________________________________________________________________________ moveToPossibleColleague
+
+
+
+
     //______________________________________________________________________________________________ getMd_personList
     public List<MD_Person> getMd_personList() {
         if (md_personList == null)

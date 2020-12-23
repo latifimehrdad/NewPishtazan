@@ -8,5 +8,7 @@ public class ObservableActions {
     public static Byte gotoHome = 4;
     public static Byte getPersonList = 5;
     public static Byte archivePerson = 6;
+    public static Byte deleteFromArchive = 7;
+    public static Byte moveToPossible = 8;
 
 }

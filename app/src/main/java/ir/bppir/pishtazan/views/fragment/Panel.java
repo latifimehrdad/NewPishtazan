@@ -45,6 +45,7 @@ import ir.bppir.pishtazan.views.adapterts.AP_PanelActionMenu;
 import ir.bppir.pishtazan.views.adapterts.AP_Person;
 import ir.mlcode.latifiarchitecturelibrary.customs.ML_Button;
 import ir.mlcode.latifiarchitecturelibrary.customs.ML_EditText;
+import ir.mlcode.latifiarchitecturelibrary.customs.ML_Toast;
 
 
 public class Panel extends Primary implements Primary.fragmentActions, AP_Person.itemActionClick,
@@ -55,8 +56,8 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     public static Byte personType;
     private Dialog dialog;
 
-    @BindView(R.id.constraintLayout)
-    ConstraintLayout constraintLayout;
+    @BindView(R.id.constraintLayoutPanel)
+    ConstraintLayout constraintLayoutPanel;
 
     @BindView(R.id.recyclerViewPanel)
     RecyclerView recyclerViewPanel;
@@ -145,10 +146,14 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
             return;
         }
 
-        if (action.equals(ObservableActions.archivePerson)) {
+        if (action.equals(ObservableActions.archivePerson) ||
+                action.equals(ObservableActions.deleteFromArchive) ||
+                action.equals(ObservableActions.moveToPossible)) {
             getPersonList();
             return;
         }
+
+
     }
     //______________________________________________________________________________________________ getActionFromObservable
 
@@ -204,7 +209,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
 
         recyclerViewPanel.setOnTouchListener(onTouchListenerSwipe());
 
-        constraintLayout.setOnTouchListener(onTouchListenerSwipe());
+        constraintLayoutPanel.setOnTouchListener(onTouchListenerSwipe());
 
         switchMaterialArchive.setOnClickListener(v -> getPersonList());
 
@@ -330,7 +335,6 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     //______________________________________________________________________________________________ showAddButton
 
 
-
     //______________________________________________________________________________________________ resetSearchPerson
     private void resetSearchPerson() {
         switchMaterialArchive.setChecked(false);
@@ -338,7 +342,6 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
         ml_EditTextName.setText(null);
     }
     //______________________________________________________________________________________________ resetSearchPerson
-
 
 
     //______________________________________________________________________________________________ hiddenAddButton
@@ -353,6 +356,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
 
     //______________________________________________________________________________________________ showSearchLayout
     private void showSearchLayout() {
+        ML_Toast.hide(constraintLayout);
         if (expandableLayoutSearch.isExpanded())
             expandableLayoutSearch.collapse();
         else
@@ -641,29 +645,36 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     //______________________________________________________________________________________________ actionDeleteFromArchivePerson
     private MD_PanelActionMenu actionDeleteFromArchivePerson(MD_Person person) {
 
+        Bundle bundle = new Bundle();
+        bundle.putString(getContext().getString(R.string.ML_FullName), person.getFullName());
+        bundle.putInt(getContext().getString(R.string.ML_PersonId), person.getId());
+
         return new MD_PanelActionMenu(
                 getResources().getString(R.string.deleteFromArchive),
                 getResources().getDrawable(R.drawable.ic_list_person),
                 getResources().getDrawable(R.drawable.dw_back_panel_menu_move),
                 getResources().getColor(R.color.ML_White),
-                R.id.action_home_to_panel,
-                null,
+                PanelAction.deleteFromArchive,
+                bundle,
                 false);
     }
     //______________________________________________________________________________________________ actionDeleteFromArchivePerson
 
 
-
     //______________________________________________________________________________________________ actionMoveToPossible
     private MD_PanelActionMenu actionMoveToPossible(MD_Person person) {
+
+        Bundle bundle = new Bundle();
+        bundle.putString(getContext().getString(R.string.ML_FullName), person.getFullName());
+        bundle.putInt(getContext().getString(R.string.ML_PersonId), person.getId());
 
         return new MD_PanelActionMenu(
                 getResources().getString(R.string.actionMoveToPossible),
                 getResources().getDrawable(R.drawable.ic_resource_switch),
                 getResources().getDrawable(R.drawable.dw_back_panel_menu_move),
                 getResources().getColor(R.color.ML_White),
-                R.id.action_home_to_panel,
-                null,
+                PanelAction.moveToPossible,
+                bundle,
                 false);
     }
     //______________________________________________________________________________________________ actionMoveToPossible
@@ -834,7 +845,6 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     //______________________________________________________________________________________________ itemClick
 
 
-
     //______________________________________________________________________________________________ goToFragmentWhenClickAction
     private void goToFragmentWhenClickAction(MD_PanelActionMenu md_panelActionMenu) {
 
@@ -842,17 +852,17 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     //______________________________________________________________________________________________ goToFragmentWhenClickAction
 
 
-
     //______________________________________________________________________________________________ gotoFunctionWhenClickAction
-    private void gotoFunctionWhenClickAction(MD_PanelActionMenu md_panelActionMenu){
+    private void gotoFunctionWhenClickAction(MD_PanelActionMenu md_panelActionMenu) {
 
         if (md_panelActionMenu.getAction() == PanelAction.deletePerson)
             deletePerson(md_panelActionMenu);
         else if (md_panelActionMenu.getAction() == PanelAction.deleteFromArchive)
             deletePersonOfArchive(md_panelActionMenu);
+        else if (md_panelActionMenu.getAction() == PanelAction.moveToPossible)
+            movePersonToPossible(md_panelActionMenu);
     }
     //______________________________________________________________________________________________ gotoFunctionWhenClickAction
-
 
 
     //______________________________________________________________________________________________ deletePerson
@@ -883,25 +893,89 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
             if (buttonYes.isClick())
                 vm_panel.cancelRequestByUser();
             else {
-                buttonYes.startLayoutAnimation();
+                buttonYes.startLoading();
                 vm_panel.archivePerson(md_panelActionMenu.getBundle().getInt(getContext().getString(R.string.ML_PersonId)));
             }
         });
 
         dialog.show();
 
-
     }
     //______________________________________________________________________________________________ deletePerson
 
 
-
     //______________________________________________________________________________________________ deletePersonOfArchive
     private void deletePersonOfArchive(MD_PanelActionMenu md_panelActionMenu) {
+        dismissDialog();
+        dialog = createDialog(R.layout.dialog_delete_person);
 
+        ImageView imageViewIcon = dialog.findViewById(R.id.imageViewIcon);
+        configImageView(imageViewIcon,
+                getResources().getDrawable(R.drawable.ic_archive_user),
+                getResources().getColor(R.color.ML_Red));
+
+        TextView textViewTitle = dialog.findViewById(R.id.textViewTitle);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(getContext().getString(R.string.titleDialogDeletePersonOFArchive));
+        stringBuilder.append(" ");
+        stringBuilder.append(md_panelActionMenu.getBundle().getString(getContext().getString(R.string.ML_FullName)));
+        stringBuilder.append(" ");
+        stringBuilder.append(getContext().getString(R.string.titleDialogAreYouShore));
+        textViewTitle.setText(stringBuilder.toString());
+
+        ML_Button buttonNo = dialog.findViewById(R.id.buttonNo);
+        buttonNo.setOnClickListener(v -> dialog.dismiss());
+
+        ML_Button buttonYes = dialog.findViewById(R.id.buttonYes);
+        buttonYes.setOnClickListener(v -> {
+            if (buttonYes.isClick())
+                vm_panel.cancelRequestByUser();
+            else {
+                buttonYes.startLoading();
+                vm_panel.deletePersonFromArchive(md_panelActionMenu.getBundle().getInt(getContext().getString(R.string.ML_PersonId)));
+            }
+        });
+
+        dialog.show();
     }
     //______________________________________________________________________________________________ deletePersonOfArchive
 
+
+    //______________________________________________________________________________________________ movePersonToPossible
+    private void movePersonToPossible(MD_PanelActionMenu md_panelActionMenu) {
+        dismissDialog();
+        dialog = createDialog(R.layout.dialog_delete_person);
+
+        ImageView imageViewIcon = dialog.findViewById(R.id.imageViewIcon);
+        configImageView(imageViewIcon,
+                getResources().getDrawable(R.drawable.ic_archive_user),
+                getResources().getColor(R.color.ML_Red));
+
+        TextView textViewTitle = dialog.findViewById(R.id.textViewTitle);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(getContext().getString(R.string.titleDialogMovePerson));
+        stringBuilder.append(" ");
+        stringBuilder.append(md_panelActionMenu.getBundle().getString(getContext().getString(R.string.ML_FullName)));
+        stringBuilder.append(" ");
+        stringBuilder.append(getContext().getString(R.string.titleDialogAreYouShore));
+        textViewTitle.setText(stringBuilder.toString());
+
+        ML_Button buttonNo = dialog.findViewById(R.id.buttonNo);
+        buttonNo.setOnClickListener(v -> dialog.dismiss());
+
+        ML_Button buttonYes = dialog.findViewById(R.id.buttonYes);
+        buttonYes.setOnClickListener(v -> {
+            if (buttonYes.isClick())
+                vm_panel.cancelRequestByUser();
+            else {
+                buttonYes.startLoading();
+                vm_panel.moveToPossible(md_panelActionMenu.getBundle().getInt(getContext().getString(R.string.ML_PersonId)));
+            }
+        });
+
+        dialog.show();
+    }
+    //______________________________________________________________________________________________ movePersonToPossible
 
 
     //______________________________________________________________________________________________ dismissDialog
