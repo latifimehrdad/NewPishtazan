@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
             name="addPerson"
@@ -11,6 +13,215 @@
         android:layout_height="match_parent"
         android:padding="@dimen/_5sdp">
 
+
+        <ir.mlcode.latifiarchitecturelibrary.customs.ML_Button
+            android:id="@+id/ml_ButtonContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:connectBack="@drawable/dw_back_bottom_normal"
+            app:gif_src="@drawable/loading3"
+            app:img_height="@dimen/_20sdp"
+            app:img_src="@drawable/ic_contact_list"
+            app:img_tint="@color/ML_White"
+            app:img_width="@dimen/_20sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:textColor="@color/ML_White"
+            app:textValue="@string/chooseFromContacts"
+            app:textValueSize="@dimen/_13sdp"
+            app:waitBack="@drawable/dw_back_bottom_connect"
+            app:waitText="@string/cancel"
+            app:fontFamily="@font/vazir_normal"/>
+
+
+        <ir.mlcode.latifiarchitecturelibrary.customs.ML_EditText
+            android:id="@+id/ml_EditTextName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            app:delimiterBack="@drawable/dw_delimiter"
+            app:delimiterWidth="@dimen/_2sdp"
+            app:delimiter_marginLeft="@dimen/_5sdp"
+            app:delimiter_marginRight="@dimen/_5sdp"
+            app:editHint="@string/fullName"
+            app:editSplitter="false"
+            app:editTextColor="@color/colorPrimary"
+            app:editable="true"
+            app:emptyBack="@drawable/dw_back_edit_empty"
+            app:image_height="@dimen/_25sdp"
+            app:image_src="@drawable/ic_full_name"
+            app:image_tint="@color/colorPrimary"
+            app:image_width="@dimen/_20sdp"
+            app:inputTypeEdit="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ml_ButtonContact"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            app:normalBack="@drawable/dw_back_edit"
+            app:textMaxLength="50"
+            app:textMaxLine="1"
+            app:textSize="@dimen/_12sdp"
+            app:validationType="text" />
+
+
+        <ir.mlcode.latifiarchitecturelibrary.customs.ML_EditText
+            android:id="@+id/ml_EditTextMobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            app:delimiterBack="@drawable/dw_delimiter"
+            app:delimiterWidth="@dimen/_2sdp"
+            app:delimiter_marginLeft="@dimen/_5sdp"
+            app:delimiter_marginRight="@dimen/_5sdp"
+            app:editHint="@string/mobileNumber"
+            app:editSplitter="false"
+            app:editTextColor="@color/colorPrimary"
+            app:editable="true"
+            app:emptyBack="@drawable/dw_back_edit_empty"
+            app:image_height="@dimen/_25sdp"
+            app:image_src="@drawable/ic_smartphone"
+            app:image_tint="@color/colorPrimary"
+            app:image_width="@dimen/_20sdp"
+            app:inputTypeEdit="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ml_EditTextName"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            app:normalBack="@drawable/dw_back_edit"
+            app:textMaxLength="11"
+            app:textMaxLine="1"
+            app:textSize="@dimen/_12sdp"
+            app:validationType="mobile" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/ml_EditTextMobile"
+            app:layout_constraintStart_toStartOf="@+id/ml_EditTextMobile"
+            app:layout_constraintTop_toBottomOf="@+id/ml_EditTextMobile"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:padding="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="@dimen/_5sdp"
+                android:background="@drawable/dw_back_recycler"
+                android:gravity="center"
+                android:alpha="0.7"
+                >
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:actualImageResource="@drawable/normal_icon"
+                    app:roundTopRight="true"
+                    app:roundTopLeft="true"
+                    app:roundBottomLeft="true"
+                    app:roundBottomRight="true"
+                    app:roundedCornerRadius="@dimen/_5sdp"
+                    app:roundingBorderPadding="@dimen/_3sdp"
+                    app:roundingBorderWidth="@dimen/_2sdp"
+                    app:roundingBorderColor="@color/mlWave"/>
+
+                <TextView
+                    fontPath="font/iransans_web_medium.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:text="@string/normal"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_12sdp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="@dimen/_5sdp"
+                android:background="@drawable/dw_back_item_report"
+                android:gravity="center"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:alpha="1.0"
+                >
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:actualImageResource="@drawable/peach_icon"
+                    app:roundTopRight="true"
+                    app:roundTopLeft="true"
+                    app:roundBottomLeft="true"
+                    app:roundBottomRight="true"
+                    app:roundedCornerRadius="@dimen/_5sdp"
+                    app:roundingBorderPadding="@dimen/_3sdp"
+                    app:roundingBorderWidth="@dimen/_2sdp"
+                    app:roundingBorderColor="@color/mlWave"/>
+
+                <TextView
+                    fontPath="font/iransans_web_medium.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/peach"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="@dimen/_5sdp"
+                android:background="@drawable/dw_back_recycler"
+                android:gravity="center"
+                android:alpha="0.7"
+                >
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:actualImageResource="@drawable/giant_icon"
+                    app:roundTopRight="true"
+                    app:roundTopLeft="true"
+                    app:roundBottomLeft="true"
+                    app:roundBottomRight="true"
+                    app:roundedCornerRadius="@dimen/_5sdp"
+                    app:roundingBorderPadding="@dimen/_3sdp"
+                    app:roundingBorderWidth="@dimen/_2sdp"
+                    app:roundingBorderColor="@color/mlWave"/>
+
+                <TextView
+                    fontPath="font/iransans_web_medium.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/giant"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

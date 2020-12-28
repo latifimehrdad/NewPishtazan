@@ -41,7 +41,11 @@
     <string name="sortByDegree">مرتب سازی بر اساس درجه</string>
     <string name="searchName">جستجوی نام</string>
     <string name="beDone">انجام شود</string>
-
+    <string name="chooseFromContacts">انتخاب از بین مخاطبین</string>
+    <string name="mobileNumber">تلفن همراه</string>
+    <string name="giant">غول</string>
+    <string name="peach">هلو</string>
+    <string name="normal">عادی</string>
 
 
     <string name="actionMoveToPossible">انتقال به بالفعل</string>

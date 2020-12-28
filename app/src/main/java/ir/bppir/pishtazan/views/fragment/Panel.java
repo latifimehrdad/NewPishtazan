@@ -217,6 +217,8 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
 
         ml_ButtonSearch.setOnClickListener(v -> getPersonList());
 
+        ml_ButtonNew.setOnClickListener(v -> goToAddPerson());
+
     }
     //______________________________________________________________________________________________ setOnClicksAndListener
 
@@ -985,5 +987,14 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
         dialog = null;
     }
     //______________________________________________________________________________________________ dismissDialog
+
+
+
+    //______________________________________________________________________________________________ goToAddPerson
+    private void goToAddPerson() {
+        ML_Toast.hide(constraintLayout);
+        getNavController().navigate(R.id.action_panel_to_addPerson);
+    }
+    //______________________________________________________________________________________________ goToAddPerson
 
 }
