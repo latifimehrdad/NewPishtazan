@@ -75,5 +75,11 @@ public class VM_Primary extends VM_Latifi {
     //______________________________________________________________________________________________ getUserId
 
 
+    //______________________________________________________________________________________________ getColleagueId
+    public int getColleagueId() {
+        return PishtazanApp.getApplication(getContext()).getColleagueId();
+    }
+    //______________________________________________________________________________________________ getColleagueId
+
 
 }

@@ -20,8 +20,10 @@
     <string name="reTryGetSMS">دریافت مجدد</string>
     <string name="colleague">همکار</string>
     <string name="colleagues">همکاران</string>
+    <string name="addColleague">اضافه کردن همکار</string>
     <string name="customer">مشتری</string>
     <string name="customers">مشتریان</string>
+    <string name="addCustomer">اضافه کردن مشتری</string>
     <string name="doubleExit">برای خروج 2 بار کلیک کنید</string>
     <string name="tutorial">آموزش</string>
     <string name="reports">گزارشات</string>
@@ -46,7 +48,13 @@
     <string name="giant">غول</string>
     <string name="peach">هلو</string>
     <string name="normal">عادی</string>
+    <string name="ok">تایید</string>
 
+
+    <string name="emptyMobileNumber">شماره تلفن همراه را کامل وارد نماید</string>
+    <string name="emptyFullName">نام و نام خانوادگی را کامل وارد نمایید</string>
+    <string name="emptyCustomerDegree">سطح مشتری را انتخاب نمایید</string>
+    <string name="emptyColleagueDegree">سطح همکار را انتخاب نمایید</string>
 
     <string name="actionMoveToPossible">انتقال به بالفعل</string>
     <string name="actionCompleteInformation">تکمیل اطلاعات</string>
@@ -74,6 +82,7 @@
     <string name="ML_FullName">ML_FullName</string>
     <string name="ML_PersonId">ML_PersonId</string>
     <string name="ML_Id">ML_Id</string>
+    <string name="ML_ColleagueId">ML_ColleagueId</string>
 
 
 
@@ -81,6 +90,7 @@
     <string name="ML_NationalCode">ML_NationalCode</string>
     <string name="ML_Verified">ML_Verified</string>
     <string name="ML_UpdateUrl">UpdateUrl</string>
+    <string name="ML_AddPerson">ML_AddPerson</string>
 
 
 </resources>

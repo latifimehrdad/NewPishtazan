@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -132,6 +133,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
         super.onStart();
         setPublishSubjectFromObservable(Panel.this, vm_panel);
         setTitle();
+        checkReturnFromTheAddPerson();
     }
     //______________________________________________________________________________________________ onCreateView
 
@@ -184,6 +186,18 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
 
     }
     //______________________________________________________________________________________________ init
+
+
+
+    //______________________________________________________________________________________________ checkReturnFromTheAddPerson
+    private void checkReturnFromTheAddPerson() {
+
+        String addPerson = getVariableFromNavigation(getResources().getString(R.string.ML_AddPerson));
+        if (addPerson != null) {
+            clickOnMaybe();
+        }
+    }
+    //______________________________________________________________________________________________ checkReturnFromTheAddPerson
 
 
     //______________________________________________________________________________________________ setOnClicksAndListener

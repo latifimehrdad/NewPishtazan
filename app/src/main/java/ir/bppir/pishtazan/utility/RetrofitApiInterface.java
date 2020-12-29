@@ -1,11 +1,15 @@
 package ir.bppir.pishtazan.utility;
+import java.util.Map;
+
 import io.reactivex.observers.DisposableObserver;
 import ir.bppir.pishtazan.moderls.MD_Update;
+import ir.bppir.pishtazan.moderls.MR_AddCustomer;
 import ir.bppir.pishtazan.moderls.MR_Person;
 import ir.bppir.pishtazan.moderls.MR_Primary;
 import ir.bppir.pishtazan.moderls.MR_VerifyCode;
 import retrofit2.Call;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -83,6 +87,15 @@ public interface RetrofitApiInterface {
             );
 
 
+    @FormUrlEncoded
+    @POST(Version + "/CreateCustomer")
+    Call<MR_AddCustomer> addCustomer
+            (
+                    @FieldMap Map<String, String> params
+
+            );
+
+
     //______________________________________________________________________________________________ Colleagues
     @GET(Version + "/GetAllColleagues")
     Call<MR_Person> getAllColleagues
@@ -118,6 +131,14 @@ public interface RetrofitApiInterface {
             (
                     @Field("Id") Integer Id,
                     @Field("UserInfoId") Integer UserInfoId
+            );
+
+
+    @FormUrlEncoded
+    @POST(Version + "/CreateColleague")
+    Call<MR_Primary> addColleague
+            (
+                    @FieldMap Map<String, String> params
             );
 
 }

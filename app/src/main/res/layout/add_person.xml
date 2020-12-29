@@ -64,7 +64,9 @@
             app:textMaxLength="50"
             app:textMaxLine="1"
             app:textSize="@dimen/_12sdp"
-            app:validationType="text" />
+            app:validationType="text" 
+            app:fontFamily="@font/vazir_normal"
+            app:text="@={addPerson.fullName}"/>
 
 
         <ir.mlcode.latifiarchitecturelibrary.customs.ML_EditText
@@ -96,43 +98,43 @@
             app:textMaxLength="11"
             app:textMaxLine="1"
             app:textSize="@dimen/_12sdp"
-            app:validationType="mobile" />
+            app:validationType="mobile" 
+            app:fontFamily="@font/vazir_normal"
+            app:text="@={addPerson.mobileNumber}"/>
 
         <LinearLayout
+            android:id="@+id/linearLayout3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="@+id/ml_EditTextMobile"
             app:layout_constraintStart_toStartOf="@+id/ml_EditTextMobile"
-            app:layout_constraintTop_toBottomOf="@+id/ml_EditTextMobile"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:padding="@dimen/_5sdp"
-            android:orientation="horizontal">
+            app:layout_constraintTop_toBottomOf="@+id/ml_EditTextMobile">
 
             <LinearLayout
+                android:id="@+id/linearLayoutNormal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:padding="@dimen/_5sdp"
                 android:background="@drawable/dw_back_recycler"
                 android:gravity="center"
-                android:alpha="0.7"
-                >
+                android:orientation="vertical"
+                android:padding="@dimen/_5sdp">
 
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
+                    app:actualImageResource="@drawable/normal_icon"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:actualImageResource="@drawable/normal_icon"
-                    app:roundTopRight="true"
-                    app:roundTopLeft="true"
                     app:roundBottomLeft="true"
                     app:roundBottomRight="true"
+                    app:roundTopLeft="true"
+                    app:roundTopRight="true"
                     app:roundedCornerRadius="@dimen/_5sdp"
-                    app:roundingBorderPadding="@dimen/_3sdp"
-                    app:roundingBorderWidth="@dimen/_2sdp"
-                    app:roundingBorderColor="@color/mlWave"/>
+                    app:roundingBorderColor="@color/mlWave"
+                    app:roundingBorderWidth="@dimen/_2sdp" />
 
                 <TextView
                     fontPath="font/iransans_web_medium.ttf"
@@ -146,83 +148,122 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linearLayoutPeach"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:padding="@dimen/_5sdp"
-                android:background="@drawable/dw_back_item_report"
-                android:gravity="center"
-                android:layout_marginRight="@dimen/_10sdp"
                 android:layout_marginLeft="@dimen/_10sdp"
-                android:alpha="1.0"
-                >
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:background="@drawable/dw_back_choose_degree"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/_5sdp">
 
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
+                    app:actualImageResource="@drawable/peach_icon"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:actualImageResource="@drawable/peach_icon"
-                    app:roundTopRight="true"
-                    app:roundTopLeft="true"
                     app:roundBottomLeft="true"
                     app:roundBottomRight="true"
+                    app:roundTopLeft="true"
+                    app:roundTopRight="true"
                     app:roundedCornerRadius="@dimen/_5sdp"
-                    app:roundingBorderPadding="@dimen/_3sdp"
-                    app:roundingBorderWidth="@dimen/_2sdp"
-                    app:roundingBorderColor="@color/mlWave"/>
+                    app:roundingBorderColor="@color/mlWave"
+                    app:roundingBorderWidth="@dimen/_2sdp" />
 
                 <TextView
                     fontPath="font/iransans_web_medium.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_2sdp"
-                    android:textSize="@dimen/_12sdp"
+                    android:text="@string/peach"
                     android:textColor="@color/colorPrimary"
-                    android:text="@string/peach"/>
+                    android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linearLayoutGiant"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:padding="@dimen/_5sdp"
                 android:background="@drawable/dw_back_recycler"
                 android:gravity="center"
-                android:alpha="0.7"
-                >
+                android:orientation="vertical"
+                android:padding="@dimen/_5sdp">
 
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
+                    app:actualImageResource="@drawable/giant_icon"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:actualImageResource="@drawable/giant_icon"
-                    app:roundTopRight="true"
-                    app:roundTopLeft="true"
                     app:roundBottomLeft="true"
                     app:roundBottomRight="true"
+                    app:roundTopLeft="true"
+                    app:roundTopRight="true"
                     app:roundedCornerRadius="@dimen/_5sdp"
-                    app:roundingBorderPadding="@dimen/_3sdp"
-                    app:roundingBorderWidth="@dimen/_2sdp"
-                    app:roundingBorderColor="@color/mlWave"/>
+                    app:roundingBorderColor="@color/mlWave"
+                    app:roundingBorderWidth="@dimen/_2sdp" />
 
                 <TextView
                     fontPath="font/iransans_web_medium.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_2sdp"
-                    android:textSize="@dimen/_12sdp"
+                    android:text="@string/giant"
                     android:textColor="@color/colorPrimary"
-                    android:text="@string/giant"/>
+                    android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
 
         </LinearLayout>
 
+        <ir.mlcode.latifiarchitecturelibrary.customs.ML_Button
+            android:id="@+id/ml_ButtonSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toStartOf="@+id/ml_ButtonCancel"
+            android:layout_marginRight="@dimen/_5sdp"
+            app:connectBack="@drawable/dw_back_bottom_normal"
+            app:img_width="@dimen/_18sdp"
+            app:img_height="@dimen/_18sdp"
+            app:img_tint="@color/ML_White"
+            app:img_src="@drawable/ic_check_mark"
+            app:textColor="@color/ML_White"
+            app:textValueSize="@dimen/_13sdp"
+            app:textValue="@string/ok"
+            app:waitBack="@drawable/dw_back_bottom_connect"
+            app:gif_src="@drawable/loading3"
+            app:waitText="@string/cancel"
+            app:fontFamily="@font/vazir_normal"
+            />
+
+        <ir.mlcode.latifiarchitecturelibrary.customs.ML_Button
+            android:id="@+id/ml_ButtonCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+            app:layout_constraintStart_toEndOf="@+id/ml_ButtonSave"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+            android:layout_marginLeft="@dimen/_5sdp"
+            app:connectBack="@drawable/dw_back_recycler"
+            app:img_width="@dimen/_18sdp"
+            app:img_height="@dimen/_18sdp"
+            app:img_tint="@color/ML_Splash"
+            app:img_src="@drawable/ic_error"
+            app:textColor="@color/ML_Splash"
+            app:textValueSize="@dimen/_13sdp"
+            app:textValue="@string/cancel"
+            app:fontFamily="@font/vazir_normal"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

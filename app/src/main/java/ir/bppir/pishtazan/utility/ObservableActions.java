@@ -10,5 +10,6 @@ public class ObservableActions {
     public static Byte archivePerson = 6;
     public static Byte deleteFromArchive = 7;
     public static Byte moveToPossible = 8;
+    public static Byte addPerson = 9;
 
 }

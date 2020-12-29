@@ -68,6 +68,7 @@ public class PishtazanApp extends APP_Latifi {
         token.putString(context.getString(R.string.ML_FullName), md_userInfo.getFullName());
         token.putString(context.getString(R.string.ML_NationalCode), md_userInfo.getNationalCode());
         token.putInt(context.getString(R.string.ML_Id), md_userInfo.getId());
+        token.putInt(context.getString(R.string.ML_ColleagueId), md_userInfo.getColleagueId());
         token.apply();
         return true;
     }
@@ -84,6 +85,7 @@ public class PishtazanApp extends APP_Latifi {
         token.putString(context.getString(R.string.ML_FullName), null);
         token.putString(context.getString(R.string.ML_NationalCode), null);
         token.putInt(context.getString(R.string.ML_Id), 0);
+        token.putInt(context.getString(R.string.ML_ColleagueId), 0);
         token.apply();
         return true;
     }
@@ -100,5 +102,17 @@ public class PishtazanApp extends APP_Latifi {
             return share.getInt(context.getResources().getString(R.string.ML_Id), 0);
     }
     //______________________________________________________________________________________________ getUserId
+
+
+
+    //______________________________________________________________________________________________ getColleagueId
+    public int getColleagueId() {
+        SharedPreferences share = context.getSharedPreferences(context.getString(R.string.ML_SharePreferences), 0);
+        if (share == null)
+            return 0;
+        else
+            return share.getInt(context.getResources().getString(R.string.ML_ColleagueId), 0);
+    }
+    //______________________________________________________________________________________________ getColleagueId
 
 }
