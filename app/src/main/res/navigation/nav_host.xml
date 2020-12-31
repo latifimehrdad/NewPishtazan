@@ -106,7 +106,7 @@
 
     <fragment
         android:id="@+id/addPerson"
-        android:name="ir.bppir.pishtazan.views.fragment.AppPerson"
+        android:name="ir.bppir.pishtazan.views.fragment.AddPerson"
         android:label="AddPerson"
         tools:layout="@layout/add_person"
         />

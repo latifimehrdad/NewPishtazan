@@ -1,10 +1,17 @@
 package ir.bppir.pishtazan.viewmodels;
 
 import android.app.Activity;
+import android.content.ContentResolver;
+import android.database.Cursor;
+import android.provider.ContactsContract;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import ir.bppir.pishtazan.R;
+import ir.bppir.pishtazan.moderls.MD_Contact;
 import ir.bppir.pishtazan.moderls.MR_AddCustomer;
 import ir.bppir.pishtazan.moderls.MR_Primary;
 import ir.bppir.pishtazan.utility.ObservableActions;
@@ -21,6 +28,8 @@ public class VM_AddPerson extends VM_Primary {
     private String fullName;
     private String mobileNumber;
     private Byte degree;
+    private List<MD_Contact> md_contacts;
+    private List<MD_Contact> md_contactsFilter;
 
 
     //______________________________________________________________________________________________ VM_AddPerson
@@ -38,7 +47,6 @@ public class VM_AddPerson extends VM_Primary {
             addCustomer();
     }
     //______________________________________________________________________________________________ addPerson
-
 
 
     //______________________________________________________________________________________________ addCustomer
@@ -124,6 +132,109 @@ public class VM_AddPerson extends VM_Primary {
 
     }
     //______________________________________________________________________________________________ addColleague
+
+
+    //______________________________________________________________________________________________ getContactList
+    public void getContactList() {
+
+        new Thread(() -> {
+            if (md_contacts == null) {
+                md_contacts = new ArrayList<>();
+                ContentResolver cr = getContext().getContentResolver();
+                Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
+                        null, null, null, null);
+                if ((cur != null ? cur.getCount() : 0) > 0) {
+                    while (cur.moveToNext()) {
+                        String id = cur.getString(
+                                cur.getColumnIndex(ContactsContract.Contacts._ID));
+                        String name = cur.getString(cur.getColumnIndex(
+                                ContactsContract.Contacts.DISPLAY_NAME));
+                        if (cur.getInt(cur.getColumnIndex(
+                                ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
+                            Cursor pCur = cr.query(
+                                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                                    null,
+                                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+                                    new String[]{id}, null);
+                            while (pCur.moveToNext()) {
+                                String phoneNo = pCur.getString(pCur.getColumnIndex(
+                                        ContactsContract.CommonDataKinds.Phone.NUMBER));
+                                phoneNo = phoneNo.replaceAll("-", "");
+                                String temp = phoneNo.substring(0, 3);
+                                if (temp.equals("+98")) {
+                                    phoneNo = "0" + phoneNo.substring(3);
+                                }
+                                if (getUtility().getValidations().mobileValidation(phoneNo))
+                                    md_contacts.add(new MD_Contact(name, phoneNo));
+                            }
+                            pCur.close();
+                        }
+                    }
+
+                }
+                if (cur != null) {
+                    cur.close();
+                }
+            }
+
+            if (md_contacts != null && md_contacts.size() > 0) {
+                setResponseMessage("");
+                getPublishSubject().onNext(ObservableActions.getContact);
+            } else {
+                setResponseMessage(getContext().getResources().getString(R.string.contactIsEmpty));
+                getPublishSubject().onNext(StaticValues.ML_ResponseError);
+            }
+
+        }).start();
+    }
+    //______________________________________________________________________________________________ getContactList
+
+
+    //______________________________________________________________________________________________ getContactWithFilter
+    public void getContactWithFilter(String text) {
+
+        if (text == null || text.length() == 0) {
+            setResponseMessage("");
+            getPublishSubject().onNext(ObservableActions.getContact);
+        } else {
+
+            text = getUtility()
+                    .persianToEnglish(text);
+
+            if (md_contactsFilter == null)
+                md_contactsFilter = new ArrayList<>();
+            else
+                md_contactsFilter.clear();
+
+            for (MD_Contact contact : md_contacts) {
+                String name = contact.getName();
+                String Phone = contact.getPhone();
+                if (name.toLowerCase().contains(text.toLowerCase()))
+                    md_contactsFilter.add(contact);
+                else if (Phone.toLowerCase().contains(text.toLowerCase()))
+                    md_contactsFilter.add(contact);
+            }
+            setResponseMessage("");
+            getPublishSubject().onNext(ObservableActions.getContactWithFilter);
+        }
+
+    }
+    //______________________________________________________________________________________________ getContactWithFilter
+
+
+    //______________________________________________________________________________________________ getMd_contactsFilter
+    public List<MD_Contact> getMd_contactsFilter() {
+        return md_contactsFilter;
+    }
+    //______________________________________________________________________________________________ getMd_contactsFilter
+
+
+
+    //______________________________________________________________________________________________ getMd_contacts
+    public List<MD_Contact> getMd_contacts() {
+        return md_contacts;
+    }
+    //______________________________________________________________________________________________ getMd_contacts
 
 
 

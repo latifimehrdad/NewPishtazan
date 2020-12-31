@@ -11,5 +11,7 @@ public class ObservableActions {
     public static Byte deleteFromArchive = 7;
     public static Byte moveToPossible = 8;
     public static Byte addPerson = 9;
+    public static Byte getContact = 10;
+    public static Byte getContactWithFilter = 11;
 
 }

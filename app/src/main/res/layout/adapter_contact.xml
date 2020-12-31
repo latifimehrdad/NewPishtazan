@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="contact"
+            type="ir.bppir.pishtazan.moderls.MD_Contact" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_5sdp"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:background="@drawable/dw_back_recycler">
+
+
+        <ImageView
+            android:id="@+id/simpleDraweeViewProfile"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/dw_back_choose_degree"
+            android:src="@drawable/ic_archive_user"
+            android:padding="@dimen/_10sdp"
+            android:tint="@color/colorPrimaryDark"
+            />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:padding="@dimen/_2sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/simpleDraweeViewProfile"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                fontPath="font/iransans_web_medium.ttf"
+                android:id="@+id/textViewName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:text="@{contact.name}"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/_10sdp"
+                app:layout_constraintWidth_percent="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewNameTitle"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:gravity="right|center_vertical"
+                android:text="@string/fullName"
+                android:textColor="@color/ML_Splash"
+                android:textSize="@dimen/_9sdp"
+                app:layout_constraintWidth_percent="0.4"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewName" />
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_2sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewName"
+                android:background="@color/ML_Dialog"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="vertical"/>
+
+            <TextView
+                fontPath="font/vazir_medium.ttf"
+                android:id="@+id/textViewNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/_10sdp"
+                app:layout_constraintWidth_percent="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout"
+                android:text="@{contact.phone}"/>
+
+            <TextView
+                android:id="@+id/textViewNumberTitle"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:gravity="right|center_vertical"
+                android:text="@string/mobileNumber"
+                android:textColor="@color/ML_Splash"
+                android:textSize="@dimen/_9sdp"
+                app:layout_constraintWidth_percent="0.4"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewNumber"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -31,7 +31,7 @@
             app:textValue="@string/chooseFromContacts"
             app:textValueSize="@dimen/_13sdp"
             app:waitBack="@drawable/dw_back_bottom_connect"
-            app:waitText="@string/cancel"
+            app:waitText="@string/pleaseWait"
             app:fontFamily="@font/vazir_normal"/>
 
 

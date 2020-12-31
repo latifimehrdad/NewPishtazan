@@ -56,6 +56,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     public static Byte panelType;
     public static Byte personType;
     private Dialog dialog;
+    private String addNewPersonMessage;
 
     @BindView(R.id.constraintLayoutPanel)
     ConstraintLayout constraintLayoutPanel;
@@ -144,6 +145,13 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
 
         dismissDialog();
         if (action.equals(ObservableActions.getPersonList)) {
+            if (addNewPersonMessage != null) {
+                showToast(addNewPersonMessage
+                        , getResources().getColor(R.color.mlWhite),
+                        getResources().getDrawable(R.drawable.svg_checked),
+                        getResources().getColor(R.color.mlWave4));
+            }
+            addNewPersonMessage = null;
             setAdapter();
             return;
         }
@@ -192,8 +200,8 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     //______________________________________________________________________________________________ checkReturnFromTheAddPerson
     private void checkReturnFromTheAddPerson() {
 
-        String addPerson = getVariableFromNavigation(getResources().getString(R.string.ML_AddPerson));
-        if (addPerson != null) {
+        addNewPersonMessage = getVariableFromNavigation(getResources().getString(R.string.ML_AddPerson));
+        if (addNewPersonMessage != null) {
             clickOnMaybe();
         }
     }

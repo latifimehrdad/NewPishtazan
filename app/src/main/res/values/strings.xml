@@ -49,6 +49,8 @@
     <string name="peach">هلو</string>
     <string name="normal">عادی</string>
     <string name="ok">تایید</string>
+    <string name="contactIsEmpty">لیست مخاطبین شما خالی است</string>
+    <string name="searchNameOrNumber">جستجوی نام یا شماره</string>
 
 
     <string name="emptyMobileNumber">شماره تلفن همراه را کامل وارد نماید</string>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_10sdp"
+    android:background="@color/mlDelimiter"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <ir.mlcode.latifiarchitecturelibrary.customs.ML_EditText
+        android:id="@+id/ml_EditTextSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_5sdp"
+        app:normalBack="@drawable/dw_back_edit"
+        app:textGravity="center"
+        app:image_height="@dimen/_18sdp"
+        app:image_width="@dimen/_18sdp"
+        app:image_tint="@color/colorPrimary"
+        app:image_src="@drawable/ic_contact_information"
+        app:delimiterBack="@drawable/dw_delimiter"
+        app:delimiterWidth="@dimen/_2sdp"
+        app:delimiter_marginLeft="@dimen/_5sdp"
+        app:delimiter_marginRight="@dimen/_5sdp"
+        app:textSize="@dimen/_12sdp"
+        app:editTextColor="@color/colorPrimary"
+        app:editHint="@string/searchNameOrNumber"
+        app:editable="true"
+        app:editSplitter="false"
+        app:inputTypeEdit="text"
+        app:textMaxLine="1"
+        app:textMaxLength="50"
+        app:validationType="text"
+        />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewContact"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        />
+
+    <ir.mlcode.latifiarchitecturelibrary.customs.ML_Button
+        android:id="@+id/ml_ButtonCancel"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:textSize="@dimen/_12sdp"
+        app:connectBack="@drawable/dw_back_recycler"
+        app:img_height="@dimen/_17sdp"
+        app:img_src="@drawable/ic_error"
+        app:img_tint="@color/mlToastBack"
+        app:img_width="@dimen/_17sdp"
+        app:textColor="@color/mlToastBack"
+        app:textValue="@string/cancel"
+        app:textValueSize="@dimen/_11sdp" />
+
+</LinearLayout>

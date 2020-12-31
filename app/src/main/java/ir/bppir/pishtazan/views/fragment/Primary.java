@@ -81,6 +81,7 @@ public class Primary extends FR_Latifi {
         Window window = dialog.getWindow();
         lp.copyFrom(window.getAttributes());
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setAttributes(lp);
         return dialog;
     }

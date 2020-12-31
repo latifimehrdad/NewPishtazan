@@ -1,5 +1,7 @@
 package ir.bppir.pishtazan.views.fragment;
 
+import android.Manifest;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,27 +11,46 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 import ir.bppir.pishtazan.R;
 import ir.bppir.pishtazan.databinding.AddPersonBinding;
-import ir.bppir.pishtazan.databinding.LoginBinding;
 import ir.bppir.pishtazan.utility.ObservableActions;
 import ir.bppir.pishtazan.utility.PanelType;
 import ir.bppir.pishtazan.utility.PersonLevel;
 import ir.bppir.pishtazan.viewmodels.VM_AddPerson;
-import ir.bppir.pishtazan.viewmodels.VM_Login;
 import ir.bppir.pishtazan.views.activity.MainActivity;
+import ir.bppir.pishtazan.views.adapterts.AP_Contact;
 import ir.mlcode.latifiarchitecturelibrary.customs.ML_Button;
 import ir.mlcode.latifiarchitecturelibrary.customs.ML_EditText;
 import ir.mlcode.latifiarchitecturelibrary.fragments.FR_Latifi;
+import ir.mlcode.latifiarchitecturelibrary.utility.StaticValues;
 
 import static ir.bppir.pishtazan.views.fragment.Panel.panelType;
 
-public class AppPerson extends Primary implements FR_Latifi.fragmentActions {
+public class AddPerson extends Primary implements FR_Latifi.fragmentActions,
+        AP_Contact.itemActionClick {
 
     private VM_AddPerson vm_addPerson;
+    private Dialog contactDialog;
+    private CompositeDisposable contactDisposable = new CompositeDisposable();
+
+
+    RecyclerView recyclerViewContact;
 
     @BindView(R.id.ml_ButtonContact)
     ML_Button ml_ButtonContact;
@@ -78,7 +99,7 @@ public class AppPerson extends Primary implements FR_Latifi.fragmentActions {
     @Override
     public void onStart() {
         super.onStart();
-        setPublishSubjectFromObservable(AppPerson.this, vm_addPerson);
+        setPublishSubjectFromObservable(AddPerson.this, vm_addPerson);
         setTitle();
     }
     //______________________________________________________________________________________________ onCreateView
@@ -89,10 +110,27 @@ public class AppPerson extends Primary implements FR_Latifi.fragmentActions {
     public void getActionFromObservable(Byte action) {
 
         ml_ButtonSave.stopLoading();
+        ml_ButtonContact.stopLoading();
 
         if (action.equals(ObservableActions.addPerson)) {
-            setVariableToNavigation(getResources().getString(R.string.ML_AddPerson), getResources().getString(R.string.ML_AddPerson));
+            setVariableToNavigation(getResources().getString(R.string.ML_AddPerson), vm_addPerson.getResponseMessage());
             removeCallBackAndBack();
+            return;
+        }
+
+        if (action.equals(StaticValues.ML_CheckPermission)) {
+            ml_ButtonContact.startLoading();
+            vm_addPerson.getContactList();
+            return;
+        }
+
+        if (action.equals(ObservableActions.getContact)) {
+            showContactDialog();
+            return;
+        }
+
+        if (action.equals(ObservableActions.getContactWithFilter)) {
+            setContactAdapter(true);
         }
     }
     //______________________________________________________________________________________________ getActionFromObservable
@@ -102,6 +140,7 @@ public class AppPerson extends Primary implements FR_Latifi.fragmentActions {
     @Override
     public void actionWhenFailureRequest() {
         ml_ButtonSave.stopLoading();
+        ml_ButtonContact.stopLoading();
     }
     //______________________________________________________________________________________________ actionWhenFailureRequest
 
@@ -135,7 +174,6 @@ public class AppPerson extends Primary implements FR_Latifi.fragmentActions {
     //______________________________________________________________________________________________ setTitle
 
 
-
     //______________________________________________________________________________________________ setOnClicks
     private void setOnClicks() {
 
@@ -144,6 +182,7 @@ public class AppPerson extends Primary implements FR_Latifi.fragmentActions {
         linearLayoutGiant.setOnClickListener(v -> chooseGiantDegree());
         ml_ButtonCancel.setOnClickListener(v -> removeCallBackAndBack());
         ml_ButtonSave.setOnClickListener(v -> addPerson());
+        ml_ButtonContact.setOnClickListener(v -> getContactList());
     }
     //______________________________________________________________________________________________ setOnClicks
 
@@ -229,6 +268,104 @@ public class AppPerson extends Primary implements FR_Latifi.fragmentActions {
         }
     }
     //______________________________________________________________________________________________ addPerson
+
+
+    //______________________________________________________________________________________________ getContactList
+    private void getContactList() {
+        if (!ml_ButtonContact.isClick()) {
+            List<String> list = new ArrayList<>();
+            list.add(Manifest.permission.READ_CONTACTS);
+            setPermission(list);
+        }
+    }
+    //______________________________________________________________________________________________ getContactList
+
+
+    //______________________________________________________________________________________________ showContactDialog
+    private void showContactDialog() {
+        dismissDialog();
+        contactDialog = createDialog(R.layout.dialog_contact);
+
+        ML_Button ml_ButtonCancel = contactDialog.findViewById(R.id.ml_ButtonCancel);
+        ml_ButtonCancel.setOnClickListener(v -> dismissDialog());
+
+        recyclerViewContact = contactDialog.findViewById(R.id.recyclerViewContact);
+
+        setContactAdapter(false);
+
+        ML_EditText ml_EditTextSearch = contactDialog.findViewById(R.id.ml_EditTextSearch);
+        contactDisposable.add(RxTextView.textChangeEvents(ml_EditTextSearch.getEditText())
+                .skipInitialValue()
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(searchContactsTextWatcher()));
+
+
+        contactDialog.show();
+
+    }
+    //______________________________________________________________________________________________ showContactDialog
+
+
+    //______________________________________________________________________________________________ searchContactsTextWatcher
+    private DisposableObserver<TextViewTextChangeEvent> searchContactsTextWatcher() {
+        return new DisposableObserver<TextViewTextChangeEvent>() {
+            @Override
+            public void onNext(TextViewTextChangeEvent textViewTextChangeEvent) {
+                hideKeyboard();
+                String text = textViewTextChangeEvent.text().toString();
+                vm_addPerson.getContactWithFilter(text);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+    }
+    //______________________________________________________________________________________________ searchContactsTextWatcher
+
+
+    //______________________________________________________________________________________________ dismissDialog
+    private void dismissDialog() {
+        if (contactDialog != null)
+            contactDialog.dismiss();
+        contactDialog = null;
+    }
+    //______________________________________________________________________________________________ dismissDialog
+
+
+    //______________________________________________________________________________________________ setContactAdapter
+    private void setContactAdapter(boolean filter) {
+        recyclerViewContact.setAdapter(null);
+        AP_Contact ap_contact;
+        if (filter)
+            ap_contact = new AP_Contact(vm_addPerson.getMd_contactsFilter(), AddPerson.this);
+        else
+            ap_contact = new AP_Contact(vm_addPerson.getMd_contacts(), AddPerson.this);
+
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        recyclerViewContact.setLayoutManager(manager);
+        recyclerViewContact.setAdapter(ap_contact);
+
+    }
+    //______________________________________________________________________________________________ setContactAdapter
+
+
+    //______________________________________________________________________________________________ actionClick
+    @Override
+    public void actionClick(Integer position) {
+
+        ml_EditTextName.setText(vm_addPerson.getMd_contactsFilter().get(position).getName());
+        ml_EditTextMobile.setText(vm_addPerson.getMd_contactsFilter().get(position).getPhone());
+        dismissDialog();
+    }
+    //______________________________________________________________________________________________ actionClick
 
 
 }
