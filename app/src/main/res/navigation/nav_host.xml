@@ -101,6 +101,14 @@
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left"/>
 
+        <action
+            android:id="@+id/action_panel_to_completeInformation"
+            app:destination="@id/completeInformation"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+
     </fragment>
 
 
@@ -110,5 +118,12 @@
         android:label="AddPerson"
         tools:layout="@layout/add_person"
         />
+
+    <fragment
+        android:id="@+id/completeInformation"
+        android:name="ir.bppir.pishtazan.views.fragment.CompleteInformation"
+        android:label="@string/completeInformation"
+        tools:layout="@layout/complete_information"/>
+
 
 </navigation>

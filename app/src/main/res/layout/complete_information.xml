@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="information"
+            type="ir.bppir.pishtazan.viewmodels.VM_CompleteInformation" />
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_5sdp">
+
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/simpleDraweeViewProfile"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:setProfileImage="@{information.image}"
+                fresco:failureImage="@drawable/logo_pishtazan"
+                fresco:failureImageScaleType="fitCenter"
+                fresco:placeholderImage="@drawable/logo_pishtazan"
+                fresco:placeholderImageScaleType="fitCenter" />
+
+
+            <ir.mlcode.latifiarchitecturelibrary.customs.ML_Button
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                app:connectBack="@drawable/dw_back_profile_image"
+                app:img_height="@dimen/_15sdp"
+                app:img_src="@drawable/ic_baseline_edit"
+                app:img_tint="@color/ML_White"
+                app:img_width="@dimen/_15sdp"
+                app:layout_constraintEnd_toEndOf="@+id/simpleDraweeViewProfile"
+                app:layout_constraintTop_toBottomOf="@+id/simpleDraweeViewProfile"
+                app:textColor="@color/ML_White"
+                app:textValue="@string/changeProfileImage"
+                app:textValueSize="@dimen/_12sdp"
+                app:fontFamily="@font/vazir_normal"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

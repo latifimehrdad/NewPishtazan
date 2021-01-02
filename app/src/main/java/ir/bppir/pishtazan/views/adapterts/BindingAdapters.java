@@ -41,6 +41,35 @@ public class BindingAdapters {
     //______________________________________________________________________________________________ setPersonImage
 
 
+
+    //______________________________________________________________________________________________ setPersonImage
+    @BindingAdapter(value = "setProfileImage")
+    public static void setProfileImage(SimpleDraweeView simpleDraweeView, String url) {
+
+        Context context = simpleDraweeView.getContext();
+        if (url == null || url.isEmpty())
+            simpleDraweeView.setActualImageResource(R.drawable.logo_pishtazan);
+        else {
+            PishtazanApp
+                    .getApplication(context)
+                    .getUtilityComponent()
+                    .getApplicationUtility()
+                    .setProgressBarForLoadImage(simpleDraweeView,
+                            context.getResources().getColor(R.color.colorPrimary),
+                            context.getResources().getColor(R.color.colorAccent), 5);
+            url = PishtazanApp.host + url;
+            simpleDraweeView.setImageURI(url);
+        }
+
+        RoundingParams roundingParams = RoundingParams.fromCornersRadius(5f);
+        roundingParams.setBorder(context.getResources().getColor(R.color.colorPrimary), 1);
+        roundingParams.setCornersRadii(15, 15, 0, 0);
+        simpleDraweeView.getHierarchy().setRoundingParams(roundingParams);
+    }
+    //______________________________________________________________________________________________ setPersonImage
+
+
+
     //______________________________________________________________________________________________ setPersonDegree
     @BindingAdapter(value = "setPersonDegree")
     public static void setPersonDegree(SimpleDraweeView simpleDraweeView, Integer degree) {

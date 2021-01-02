@@ -51,6 +51,7 @@
     <string name="ok">تایید</string>
     <string name="contactIsEmpty">لیست مخاطبین شما خالی است</string>
     <string name="searchNameOrNumber">جستجوی نام یا شماره</string>
+    <string name="changeProfileImage">تغییر تصویر</string>
 
 
     <string name="emptyMobileNumber">شماره تلفن همراه را کامل وارد نماید</string>

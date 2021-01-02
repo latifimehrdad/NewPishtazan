@@ -196,7 +196,6 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     //______________________________________________________________________________________________ init
 
 
-
     //______________________________________________________________________________________________ checkReturnFromTheAddPerson
     private void checkReturnFromTheAddPerson() {
 
@@ -707,13 +706,17 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
     //______________________________________________________________________________________________ actionCompleteInformation
     private MD_PanelActionMenu actionCompleteInformation(MD_Person person) {
 
+        Bundle bundle = new Bundle();
+        bundle.putString(getContext().getString(R.string.ML_FullName), person.getFullName());
+        bundle.putInt(getContext().getString(R.string.ML_PersonId), person.getId());
+
         return new MD_PanelActionMenu(
                 getResources().getString(R.string.actionCompleteInformation),
                 getResources().getDrawable(R.drawable.ic_contact_information),
                 getResources().getDrawable(R.drawable.dw_back_panel_menu),
                 getResources().getColor(R.color.colorPrimary),
-                R.id.action_home_to_panel,
-                null,
+                R.id.action_panel_to_completeInformation,
+                bundle,
                 true);
     }
     //______________________________________________________________________________________________ actionCompleteInformation
@@ -871,7 +874,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
 
     //______________________________________________________________________________________________ goToFragmentWhenClickAction
     private void goToFragmentWhenClickAction(MD_PanelActionMenu md_panelActionMenu) {
-
+        getNavController().navigate(md_panelActionMenu.getAction(),md_panelActionMenu.getBundle());
     }
     //______________________________________________________________________________________________ goToFragmentWhenClickAction
 
@@ -1009,7 +1012,6 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
         dialog = null;
     }
     //______________________________________________________________________________________________ dismissDialog
-
 
 
     //______________________________________________________________________________________________ goToAddPerson
