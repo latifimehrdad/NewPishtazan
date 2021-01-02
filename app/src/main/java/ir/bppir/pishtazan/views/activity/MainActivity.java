@@ -64,6 +64,7 @@ public class MainActivity extends Activity_Latifi {
         ButterKnife.bind(this);
         setListener();
         setProfile();
+        setProfile();
     }
     //______________________________________________________________________________________________ onCreate
 
