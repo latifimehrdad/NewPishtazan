@@ -1,7 +1,10 @@
 package ir.bppir.pishtazan.views.adapterts;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
 import androidx.databinding.BindingAdapter;
 
 import com.facebook.drawee.generic.RoundingParams;
@@ -42,7 +45,7 @@ public class BindingAdapters {
 
 
 
-    //______________________________________________________________________________________________ setPersonImage
+    //______________________________________________________________________________________________ setProfileImage
     @BindingAdapter(value = "setProfileImage")
     public static void setProfileImage(SimpleDraweeView simpleDraweeView, String url) {
 
@@ -62,11 +65,12 @@ public class BindingAdapters {
         }
 
         RoundingParams roundingParams = RoundingParams.fromCornersRadius(5f);
-        roundingParams.setBorder(context.getResources().getColor(R.color.colorPrimary), 1);
+        roundingParams.setBorder(context.getResources().getColor(R.color.colorPrimary), 4);
         roundingParams.setCornersRadii(15, 15, 0, 0);
         simpleDraweeView.getHierarchy().setRoundingParams(roundingParams);
     }
-    //______________________________________________________________________________________________ setPersonImage
+    //______________________________________________________________________________________________ setProfileImage
+
 
 
 

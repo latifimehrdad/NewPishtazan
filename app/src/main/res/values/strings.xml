@@ -52,6 +52,11 @@
     <string name="contactIsEmpty">لیست مخاطبین شما خالی است</string>
     <string name="searchNameOrNumber">جستجوی نام یا شماره</string>
     <string name="changeProfileImage">تغییر تصویر</string>
+    <string name="changeDate">تغییر تاریخ</string>
+    <string name="hintBirthDay">تاریخ تولد\n وارد نشده</string>
+    <string name="phoneNumber">تلفن ثابت</string>
+    <string name="chooseLocationOnMap">انتخاب آدرس روی نقشه</string>
+    <string name="address">آدرس</string>
 
 
     <string name="emptyMobileNumber">شماره تلفن همراه را کامل وارد نماید</string>
