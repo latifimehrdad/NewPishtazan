@@ -13,5 +13,6 @@ public class ObservableActions {
     public static Byte addPerson = 9;
     public static Byte getContact = 10;
     public static Byte getContactWithFilter = 11;
+    public static Byte getPersonInfo = 12;
 
 }

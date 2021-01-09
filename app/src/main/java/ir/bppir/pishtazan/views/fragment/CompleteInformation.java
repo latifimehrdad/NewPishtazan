@@ -9,17 +9,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.bppir.pishtazan.R;
 import ir.bppir.pishtazan.databinding.CompleteInformationBinding;
 import ir.bppir.pishtazan.viewmodels.VM_CompleteInformation;
 import ir.bppir.pishtazan.views.activity.MainActivity;
+import ir.mlcode.latifiarchitecturelibrary.customs.ML_Button;
 import ir.mlcode.latifiarchitecturelibrary.fragments.FR_Latifi;
 
 
 public class CompleteInformation extends Primary implements FR_Latifi.fragmentActions {
 
     private VM_CompleteInformation vm_completeInformation;
+    private Integer personId;
+
+    @BindView(R.id.ml_ButtonCancel)
+    ML_Button ml_ButtonCancel;
+
 
     //______________________________________________________________________________________________ onCreateView
     @Nullable
@@ -46,6 +53,7 @@ public class CompleteInformation extends Primary implements FR_Latifi.fragmentAc
         super.onStart();
         setPublishSubjectFromObservable(CompleteInformation.this, vm_completeInformation);
         setTitle();
+        vm_completeInformation.getPersonInfo(personId);
     }
     //______________________________________________________________________________________________ onCreateView
 
@@ -61,7 +69,7 @@ public class CompleteInformation extends Primary implements FR_Latifi.fragmentAc
     //______________________________________________________________________________________________ actionWhenFailureRequest
     @Override
     public void actionWhenFailureRequest() {
-
+        removeCallBackAndBack();
     }
     //______________________________________________________________________________________________ actionWhenFailureRequest
 
@@ -77,7 +85,8 @@ public class CompleteInformation extends Primary implements FR_Latifi.fragmentAc
     //______________________________________________________________________________________________ init
     @Override
     public void init() {
-
+        personId = getArguments().getInt(getResources().getString(R.string.ML_PersonId), 0);
+        ml_ButtonCancel.setOnClickListener(v -> removeCallBackAndBack());
     }
     //______________________________________________________________________________________________ init
 

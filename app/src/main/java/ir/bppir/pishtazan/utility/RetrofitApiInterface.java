@@ -4,6 +4,7 @@ import java.util.Map;
 import io.reactivex.observers.DisposableObserver;
 import ir.bppir.pishtazan.moderls.MD_Update;
 import ir.bppir.pishtazan.moderls.MR_AddCustomer;
+import ir.bppir.pishtazan.moderls.MR_GetAllPerson;
 import ir.bppir.pishtazan.moderls.MR_Person;
 import ir.bppir.pishtazan.moderls.MR_Primary;
 import ir.bppir.pishtazan.moderls.MR_VerifyCode;
@@ -95,6 +96,14 @@ public interface RetrofitApiInterface {
 
             );
 
+    @FormUrlEncoded
+    @POST(Version + "/GetCustomerById")
+    Call<MR_GetAllPerson> getCustomerInfo
+            (
+                    @Field("UserInfoId") Integer UserInfoId,
+                    @Field("Id") Integer Id
+            );
+
 
     //______________________________________________________________________________________________ Colleagues
     @GET(Version + "/GetAllColleagues")
@@ -140,5 +149,16 @@ public interface RetrofitApiInterface {
             (
                     @FieldMap Map<String, String> params
             );
+
+    @FormUrlEncoded
+    @POST(Version + "/GetColleagueById")
+    Call<MR_GetAllPerson> getColleagueInfo
+            (
+                    @Field("UserInfoId") Integer UserInfoId,
+                    @Field("Id") Integer Id
+            );
+
+
+
 
 }

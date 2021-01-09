@@ -13,6 +13,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import ir.bppir.pishtazan.R;
 import ir.bppir.pishtazan.utility.PersonLevel;
 import ir.bppir.pishtazan.views.application.PishtazanApp;
+import ir.mlcode.latifiarchitecturelibrary.customs.ML_EditText;
 
 public class BindingAdapters {
 
@@ -93,6 +94,22 @@ public class BindingAdapters {
         simpleDraweeView.getHierarchy().setRoundingParams(roundingParams);
     }
     //______________________________________________________________________________________________ setPersonDegree
+
+
+    //______________________________________________________________________________________________ setMLEditText
+    @BindingAdapter(value = "setMlEditText")
+    public static void setMLEditText(ML_EditText mlEditText, String value) {
+
+        String tag = mlEditText.getTag().toString();
+        Context context = mlEditText.getContext();
+        switch (tag) {
+            case "birthDay" :
+                String text = context.getResources().getString(R.string.birthDay) + System.getProperty("line.separator") + value;
+                mlEditText.setText(text);
+                break;
+        }
+    }
+    //______________________________________________________________________________________________ setMLEditText
 
 
 }

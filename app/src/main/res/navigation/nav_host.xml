@@ -9,6 +9,7 @@
     <argument android:name="@string/ML_AppName"/>
     <argument android:name="@string/ML_ApplicationId"/>
     <argument android:name="@string/ML_NationalCode"/>
+    <argument android:name="@string/ML_PersonId"/>
 
     <fragment
         android:id="@+id/splash"

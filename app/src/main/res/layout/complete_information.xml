@@ -14,7 +14,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:padding="@dimen/_5sdp">
 
 
@@ -25,7 +25,7 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:setProfileImage="@{information.image}"
+                app:setProfileImage="@{information.md_person.image}"
                 fresco:failureImage="@drawable/logo_pishtazan"
                 fresco:failureImageScaleType="fitCenter"
                 fresco:placeholderImage="@drawable/logo_pishtazan"
@@ -78,7 +78,8 @@
                 app:textMaxLine="2"
                 app:textSize="@dimen/_12sdp"
                 app:validationType="text"
-                app:fontFamily="@font/vazir_normal"/>
+                app:fontFamily="@font/vazir_normal"
+                app:text="@={information.md_person.fullName}"/>
 
 
             <ir.mlcode.latifiarchitecturelibrary.customs.ML_EditText
@@ -111,7 +112,8 @@
                 app:textMaxLine="1"
                 app:textSize="@dimen/_12sdp"
                 app:validationType="mobile"
-                app:fontFamily="@font/vazir_normal"/>
+                app:fontFamily="@font/vazir_normal"
+                app:text="@={information.md_person.mobileNumber}"/>
 
 
             <ir.mlcode.latifiarchitecturelibrary.customs.ML_EditText
@@ -125,9 +127,12 @@
                 app:textSize="@dimen/_12sdp"
                 app:textGravity="center"
                 app:textMaxLine="2"
+                app:editable="false"
                 app:editTextColor="@color/colorPrimary"
                 app:editHint="@string/hintBirthDay"
                 app:fontFamily="@font/vazir_normal"
+                app:setMlEditText="@{information.md_person.birthDateJ}"
+                android:tag="birthDay"
                 />
 
             <ir.mlcode.latifiarchitecturelibrary.customs.ML_Button
@@ -176,7 +181,8 @@
                 app:textMaxLine="1"
                 app:textSize="@dimen/_12sdp"
                 app:validationType="national"
-                app:fontFamily="@font/vazir_normal"/>
+                app:fontFamily="@font/vazir_normal"
+                app:text="@={information.md_person.nationalCode}"/>
 
 
             <ir.mlcode.latifiarchitecturelibrary.customs.ML_EditText
@@ -208,11 +214,12 @@
                 app:textMaxLine="1"
                 app:textSize="@dimen/_12sdp"
                 app:validationType="text"
-                app:fontFamily="@font/vazir_normal"/>
+                app:fontFamily="@font/vazir_normal"
+                app:text="@={information.md_person.phoneNumber}"/>
 
 
             <LinearLayout
-                android:id="@+id/LinearLayoutBirthDay"
+                android:id="@+id/LinearLayoutMap"
                 android:layout_width="@dimen/_90sdp"
                 android:layout_height="@dimen/_100sdp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -224,8 +231,9 @@
                     android:layout_width="@dimen/_90sdp"
                     android:layout_height="0dp"
                     android:layout_weight="1"
+                    android:padding="@dimen/_5sdp"
                     android:background="@drawable/dw_back_profile_birthday"
-                    android:src="@drawable/ic_add_button" />
+                    android:src="@drawable/ic_map" />
 
                 <ir.mlcode.latifiarchitecturelibrary.customs.ML_Button
                     android:layout_width="@dimen/_90sdp"
@@ -241,10 +249,11 @@
 
 
             <ir.mlcode.latifiarchitecturelibrary.customs.ML_EditText
+                android:id="@+id/ml_EditTextAddress"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:padding="@dimen/_5sdp"
                 android:layout_marginRight="@dimen/_10sdp"
+                android:padding="@dimen/_5sdp"
                 app:delimiterBack="@drawable/dw_delimiter"
                 app:delimiterWidth="@dimen/_2sdp"
                 app:delimiter_marginLeft="@dimen/_5sdp"
@@ -254,21 +263,228 @@
                 app:editTextColor="@color/colorPrimary"
                 app:editable="true"
                 app:emptyBack="@drawable/dw_back_edit_empty"
+                app:fontFamily="@font/vazir_normal"
                 app:image_height="@dimen/_18sdp"
                 app:image_src="@drawable/ic_home_address"
                 app:image_tint="@color/colorPrimary"
                 app:image_width="@dimen/_18sdp"
-                app:layout_constraintBottom_toBottomOf="@+id/LinearLayoutBirthDay"
-                app:layout_constraintEnd_toStartOf="@+id/LinearLayoutBirthDay"
+                app:layout_constraintBottom_toBottomOf="@+id/LinearLayoutMap"
+                app:layout_constraintEnd_toStartOf="@+id/LinearLayoutMap"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/LinearLayoutBirthDay"
+                app:layout_constraintTop_toTopOf="@+id/LinearLayoutMap"
                 app:normalBack="@drawable/dw_back_edit"
-                app:textMaxLength="200"
+                app:textGravity="right"
+                app:textMaxLength="250"
                 app:textMaxLine="5"
                 app:textSize="@dimen/_12sdp"
                 app:validationType="text"
-                app:textGravity="right"
-                app:fontFamily="@font/vazir_normal"/>
+                />
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@id/linearLayoutSendSms"
+                app:layout_constraintEnd_toEndOf="@+id/ml_EditTextAddress"
+                app:layout_constraintStart_toStartOf="@+id/ml_EditTextAddress"
+                app:layout_constraintTop_toTopOf="@+id/linearLayoutSendSms">
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutNormal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/dw_back_recycler"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_5sdp">
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        app:actualImageResource="@drawable/normal_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:roundBottomLeft="true"
+                        app:roundBottomRight="true"
+                        app:roundTopLeft="true"
+                        app:roundTopRight="true"
+                        app:roundedCornerRadius="@dimen/_5sdp"
+                        app:roundingBorderColor="@color/mlWave"
+                        app:roundingBorderWidth="@dimen/_2sdp" />
+
+                    <TextView
+                        fontPath="font/iransans_web_medium.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="@string/normal"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/_12sdp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutPeach"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/dw_back_choose_degree"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_5sdp">
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        app:actualImageResource="@drawable/peach_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:roundBottomLeft="true"
+                        app:roundBottomRight="true"
+                        app:roundTopLeft="true"
+                        app:roundTopRight="true"
+                        app:roundedCornerRadius="@dimen/_5sdp"
+                        app:roundingBorderColor="@color/mlWave"
+                        app:roundingBorderWidth="@dimen/_2sdp" />
+
+                    <TextView
+                        fontPath="font/iransans_web_medium.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="@string/peach"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/_12sdp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutGiant"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/dw_back_recycler"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_5sdp">
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        app:actualImageResource="@drawable/giant_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:roundBottomLeft="true"
+                        app:roundBottomRight="true"
+                        app:roundTopLeft="true"
+                        app:roundTopRight="true"
+                        app:roundedCornerRadius="@dimen/_5sdp"
+                        app:roundingBorderColor="@color/mlWave"
+                        app:roundingBorderWidth="@dimen/_2sdp" />
+
+                    <TextView
+                        fontPath="font/iransans_web_medium.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="@string/giant"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/_12sdp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayoutSendSms"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/dw_back_edit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/LinearLayoutMap">
+
+                <TextView
+                    fontPath="font/iransans_web_medium.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:lines="2"
+                    android:padding="@dimen/_2sdp"
+                    android:text="@string/sendSmsOnBirthday"
+                    android:textColor="@color/mlBlack"
+                    android:textSize="@dimen/_10sdp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/dw_back_profile_image"
+                    android:padding="@dimen/_2sdp"
+                    android:gravity="center">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:buttonTint="@color/colorAccent"
+                        android:checked="@{information.md_person.sendSMS}"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <ir.mlcode.latifiarchitecturelibrary.customs.ML_Button
+                android:id="@+id/ml_ButtonSave"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_5sdp"
+                app:connectBack="@drawable/dw_back_bottom_normal"
+                app:fontFamily="@font/vazir_normal"
+                app:gif_src="@drawable/loading3"
+                app:img_height="@dimen/_18sdp"
+                app:img_src="@drawable/ic_check_mark"
+                app:img_tint="@color/ML_White"
+                app:img_width="@dimen/_18sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                app:layout_constraintTop_toBottomOf="@id/linearLayoutSendSms"
+                app:layout_constraintEnd_toStartOf="@+id/ml_ButtonCancel"
+                app:layout_constraintStart_toStartOf="@id/linearLayout3"
+                app:textColor="@color/ML_White"
+                app:textValue="@string/ok"
+                app:textValueSize="@dimen/_13sdp"
+                app:waitBack="@drawable/dw_back_bottom_connect"
+                app:waitText="@string/cancel" />
+
+            <ir.mlcode.latifiarchitecturelibrary.customs.ML_Button
+                android:id="@+id/ml_ButtonCancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5sdp"
+                app:connectBack="@drawable/dw_back_recycler"
+                app:fontFamily="@font/vazir_normal"
+                app:img_height="@dimen/_18sdp"
+                app:img_src="@drawable/ic_error"
+                app:img_tint="@color/ML_Splash"
+                app:img_width="@dimen/_18sdp"
+                app:layout_constraintEnd_toEndOf="@+id/linearLayoutSendSms"
+                app:layout_constraintStart_toEndOf="@+id/ml_ButtonSave"
+                app:layout_constraintTop_toTopOf="@id/ml_ButtonSave"
+                app:textColor="@color/ML_Splash"
+                app:textValue="@string/cancel"
+                app:textValueSize="@dimen/_13sdp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
