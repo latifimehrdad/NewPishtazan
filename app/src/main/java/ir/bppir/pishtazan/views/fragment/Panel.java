@@ -8,7 +8,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -340,10 +338,10 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
         hiddenAddButton();
         resetSearchPerson();
 
-        ml_ButtonUser.setTextAndTintColor(getResources().getColor(R.color.colorAccent));
-        ml_ButtonMaybe.setTextAndTintColor(getResources().getColor(R.color.colorAccent));
-        ml_ButtonPossible.setTextAndTintColor(getResources().getColor(R.color.colorAccent));
-        ml_ButtonCertain.setTextAndTintColor(getResources().getColor(R.color.colorAccent));
+        ml_ButtonUser.setTextAndTintColor(getResources().getColor(R.color.dayColorAccent));
+        ml_ButtonMaybe.setTextAndTintColor(getResources().getColor(R.color.dayColorAccent));
+        ml_ButtonPossible.setTextAndTintColor(getResources().getColor(R.color.dayColorAccent));
+        ml_ButtonCertain.setTextAndTintColor(getResources().getColor(R.color.dayColorAccent));
     }
     //______________________________________________________________________________________________ resetBackButtonPersonType
 
@@ -714,7 +712,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
                 getResources().getString(R.string.actionCompleteInformation),
                 getResources().getDrawable(R.drawable.ic_contact_information),
                 getResources().getDrawable(R.drawable.dw_back_panel_menu),
-                getResources().getColor(R.color.colorPrimary),
+                getResources().getColor(R.color.dayColorPrimary),
                 R.id.action_panel_to_completeInformation,
                 bundle,
                 true);
@@ -729,7 +727,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
                 getResources().getString(R.string.actionCallsReminder),
                 getResources().getDrawable(R.drawable.ic_call_reminder),
                 getResources().getDrawable(R.drawable.dw_back_panel_menu),
-                getResources().getColor(R.color.colorPrimary),
+                getResources().getColor(R.color.dayColorPrimary),
                 R.id.action_home_to_panel,
                 null,
                 true);
@@ -744,7 +742,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
                 getResources().getString(R.string.actionMeetingsReminder),
                 getResources().getDrawable(R.drawable.ic_meeting_reminder),
                 getResources().getDrawable(R.drawable.dw_back_panel_menu),
-                getResources().getColor(R.color.colorPrimary),
+                getResources().getColor(R.color.dayColorPrimary),
                 R.id.action_home_to_panel,
                 null,
                 true);
@@ -789,7 +787,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
                 getResources().getString(R.string.actionDrafts),
                 getResources().getDrawable(R.drawable.ic_draft),
                 getResources().getDrawable(R.drawable.dw_back_panel_menu),
-                getResources().getColor(R.color.colorPrimary),
+                getResources().getColor(R.color.dayColorPrimary),
                 R.id.action_home_to_panel,
                 null,
                 true);
@@ -804,7 +802,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
                 getResources().getString(R.string.actionInsurances),
                 getResources().getDrawable(R.drawable.ic_family),
                 getResources().getDrawable(R.drawable.dw_back_panel_menu),
-                getResources().getColor(R.color.colorPrimary),
+                getResources().getColor(R.color.dayColorPrimary),
                 R.id.action_home_to_panel,
                 null,
                 true);

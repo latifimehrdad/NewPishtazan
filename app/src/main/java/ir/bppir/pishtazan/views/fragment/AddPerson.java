@@ -249,13 +249,13 @@ public class AddPerson extends Primary implements FR_Latifi.fragmentActions,
                 if (panelType.equals(PanelType.colleagues))
                     showMessageDialog(
                             getResources().getString(R.string.emptyColleagueDegree),
-                            getResources().getColor(R.color.mlDelimiter),
+                            getResources().getColor(R.color.dayDelimiterColor),
                             getResources().getDrawable(R.drawable.svg_warning),
                             getResources().getColor(R.color.ML_Harmony));
                 else
                     showMessageDialog(
                             getResources().getString(R.string.emptyCustomerDegree),
-                            getResources().getColor(R.color.mlDelimiter),
+                            getResources().getColor(R.color.dayDelimiterColor),
                             getResources().getDrawable(R.drawable.svg_warning),
                             getResources().getColor(R.color.ML_Harmony));
 

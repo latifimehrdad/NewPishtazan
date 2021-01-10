@@ -19,7 +19,7 @@
         app:connectBack="@drawable/dw_back_title"
         app:img_height="@dimen/_17sdp"
         app:img_src="@drawable/ic_two_arrows_down"
-        app:img_tint="@color/colorAccent"
+        app:img_tint="@color/dayColorAccent"
         app:img_width="@dimen/_17sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

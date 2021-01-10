@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/ML_White">
+        android:background="?pageBackgroundColor">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -37,13 +37,11 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_15sdp"
-                app:connectBack="@drawable/dw_back_edit_empty"
-                app:waitBack="@drawable/dw_back_edit"
-                app:img_height="@dimen/_20sdp"
+                app:connectBack="@drawable/dw_back_bottom_normal"
+                app:waitBack="@drawable/dw_back_bottom_connect"
+                app:img_height="@dimen/_18sdp"
                 app:img_src="@drawable/ic_refresh"
-                app:img_tint="@color/colorPrimary"
-                app:img_width="@dimen/_20sdp"
-                app:textColor="@color/colorPrimary"
+                app:img_width="@dimen/_18sdp"
                 app:textValue="@string/reTry"
                 app:textValueSize="@dimen/_11sdp"
                 app:waitText="@string/pleaseWaitingForConnectingToServer"

@@ -1,10 +1,7 @@
 package ir.bppir.pishtazan.views.adapterts;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.LayoutRes;
 import androidx.databinding.BindingAdapter;
 
 import com.facebook.drawee.generic.RoundingParams;
@@ -31,14 +28,14 @@ public class BindingAdapters {
                     .getUtilityComponent()
                     .getApplicationUtility()
                     .setProgressBarForLoadImage(simpleDraweeView,
-                            context.getResources().getColor(R.color.colorPrimary),
-                            context.getResources().getColor(R.color.colorAccent), 5);
+                            context.getResources().getColor(R.color.dayColorPrimary),
+                            context.getResources().getColor(R.color.dayColorAccent), 5);
             url = PishtazanApp.host + url;
             simpleDraweeView.setImageURI(url);
         }
 
         RoundingParams roundingParams = RoundingParams.fromCornersRadius(5f);
-        roundingParams.setBorder(context.getResources().getColor(R.color.colorPrimary), 1);
+        roundingParams.setBorder(context.getResources().getColor(R.color.dayColorPrimary), 1);
         roundingParams.setCornersRadii(15, 15, 15, 15);
         simpleDraweeView.getHierarchy().setRoundingParams(roundingParams);
     }
@@ -59,14 +56,14 @@ public class BindingAdapters {
                     .getUtilityComponent()
                     .getApplicationUtility()
                     .setProgressBarForLoadImage(simpleDraweeView,
-                            context.getResources().getColor(R.color.colorPrimary),
-                            context.getResources().getColor(R.color.colorAccent), 5);
+                            context.getResources().getColor(R.color.dayColorPrimary),
+                            context.getResources().getColor(R.color.dayColorAccent), 5);
             url = PishtazanApp.host + url;
             simpleDraweeView.setImageURI(url);
         }
 
         RoundingParams roundingParams = RoundingParams.fromCornersRadius(5f);
-        roundingParams.setBorder(context.getResources().getColor(R.color.colorPrimary), 4);
+        roundingParams.setBorder(context.getResources().getColor(R.color.dayColorPrimary), 4);
         roundingParams.setCornersRadii(15, 15, 0, 0);
         simpleDraweeView.getHierarchy().setRoundingParams(roundingParams);
     }
@@ -89,7 +86,7 @@ public class BindingAdapters {
             simpleDraweeView.setActualImageResource(R.drawable.giant_icon);
 
         RoundingParams roundingParams = RoundingParams.fromCornersRadius(5f);
-        roundingParams.setBorder(context.getResources().getColor(R.color.colorPrimary), 3);
+        roundingParams.setBorder(context.getResources().getColor(R.color.dayColorPrimary), 3);
         roundingParams.setCornersRadii(15, 0, 40, 0);
         simpleDraweeView.getHierarchy().setRoundingParams(roundingParams);
     }

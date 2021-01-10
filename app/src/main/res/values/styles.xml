@@ -1,10 +1,26 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimaryDark</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/dayColorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/dayColorPrimaryDark</item>
+        <item name="colorAccent">@color/dayColorAccent</item>
+
+        <item name="colorPrimaryVariant">@color/dayStatusBarColor</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="pageBackgroundColor">@color/dayBackgroundColor</item>
+        <item name="buttonBackgroundColor">@color/dayButtonBackgroundColor</item>
+        <item name="buttonClickBackgroundColor">@color/dayButtonClickBackgroundColor</item>
+        <item name="buttonStrokeColor">@color/dayButtonStrokeColor</item>
+        <item name="textColor">@color/dayButtonTextColor</item>
+        <item name="img_tint">@color/dayButtonImageTintColor</item>
+        <item name="android:textColor">@color/dayTextColor</item>
+        <item name="editBackgroundColor">@color/dayEditBackgroundColor</item>
+        <item name="image_tint">@color/dayEditImageTintColor</item>
+        <item name="editStrokeColor">@color/dayEditStrokeColor</item>
+        <item name="delimiterColor">@color/dayDelimiterColor</item>
+        <item name="editBackgroundEmptyColor">@color/dayEditBackgroundEmptyColor</item>
+
     </style>
 
 

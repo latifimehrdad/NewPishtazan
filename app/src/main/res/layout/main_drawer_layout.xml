@@ -54,7 +54,7 @@
         android:layout_marginRight="@dimen/_5sdp"
         android:layout_marginLeft="@dimen/_5sdp"
         android:textSize="@dimen/_9sdp"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/dayColorAccent"
         android:gravity="center"
         android:text="مهرداد لطیفی " />
 
@@ -94,7 +94,7 @@
             android:layout_marginRight="@dimen/_5sdp"
             android:layout_marginLeft="@dimen/_5sdp"
             android:textSize="@dimen/_9sdp"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/dayColorAccent"
             android:gravity="center"
             android:text="موجودی" />
 
@@ -114,7 +114,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/_9sdp"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/dayColorPrimaryDark"
             android:gravity="center"
             android:padding="@dimen/_3sdp"
             android:text="@string/chargeWallet"/>
@@ -122,7 +122,7 @@
         <ImageView
             android:layout_width="@dimen/_17sdp"
             android:layout_height="@dimen/_17sdp"
-            android:tint="@color/colorPrimaryDark"
+            android:tint="@color/dayColorPrimaryDark"
             android:src="@drawable/ic_wallet"
             android:layout_marginLeft="@dimen/_3sdp"/>
 
@@ -154,7 +154,7 @@
             android:textSize="@dimen/_10sdp"
             android:padding="@dimen/_2sdp"
             android:background="@drawable/dw_verify_edit"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/dayColorPrimary"
             android:text="مجموعه نمره \n 152"/>
 
         <TextView
@@ -167,7 +167,7 @@
             android:textSize="@dimen/_10sdp"
             android:padding="@dimen/_2sdp"
             android:background="@drawable/dw_verify_edit"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/dayColorPrimary"
             android:text="مجموعه امتیاز \n 152"/>
 
 

@@ -2,8 +2,8 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
-    <solid android:color="@color/ML_EditEmpty"/>
-    <corners android:radius="@dimen/_5sdp"/>
-    <stroke android:color="@color/colorPrimary" android:width="@dimen/_1sdp"/>
+    <solid android:color="?editBackgroundEmptyColor"/>
+    <corners android:radius="@dimen/_10sdp"/>
+    <stroke android:color="?editStrokeColor" android:width="@dimen/_1sdp"/>
 
 </shape>

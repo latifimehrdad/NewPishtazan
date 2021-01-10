@@ -22,7 +22,7 @@
         android:gravity="center"
         android:maxLines="3"
         android:minLines="1"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/dayColorPrimaryDark"
         android:textSize="@dimen/_12sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

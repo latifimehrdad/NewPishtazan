@@ -3,9 +3,7 @@ package ir.bppir.pishtazan.views.fragment;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -18,7 +16,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.bppir.pishtazan.R;
 import ir.bppir.pishtazan.databinding.HomeBinding;
-import ir.bppir.pishtazan.utility.ObservableActions;
 import ir.bppir.pishtazan.utility.PanelType;
 import ir.bppir.pishtazan.viewmodels.VM_Home;
 import ir.bppir.pishtazan.views.activity.MainActivity;
@@ -98,9 +95,9 @@ public class Home extends Primary implements Primary.fragmentActions {
             doubleExitApplication = true;
             showToast(
                     getResources().getString(R.string.doubleExit),
-                    getResources().getColor(R.color.colorAccent),
+                    getResources().getColor(R.color.dayColorAccent),
                     getResources().getDrawable(R.drawable.ic_exit),
-                    getResources().getColor(R.color.colorAccent));
+                    getResources().getColor(R.color.dayColorAccent));
             Handler handler = new Handler();
             handler.postDelayed(() -> {
                 doubleExitApplication = false;

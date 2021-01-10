@@ -128,7 +128,7 @@
                 android:right="10px"
                 android:bottom="10px">
                 <shape android:shape="rectangle">
-                    <solid android:color="@color/colorPrimaryDark"/>
+                    <solid android:color="@color/dayColorPrimaryDark"/>
                     <corners android:bottomLeftRadius="@dimen/_500sdp"
                         android:bottomRightRadius="@dimen/_500sdp"/>
                 </shape>
@@ -265,7 +265,7 @@
                 android:right="10px"
                 android:bottom="10px">
                 <shape android:shape="rectangle">
-                    <solid android:color="@color/colorPrimary"/>
+                    <solid android:color="@color/dayColorPrimary"/>
                     <corners android:bottomLeftRadius="@dimen/_500sdp"
                         android:bottomRightRadius="@dimen/_500sdp"/>
                 </shape>

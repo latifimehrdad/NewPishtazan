@@ -76,7 +76,7 @@
                 android:top="6px"
                 android:bottom="6px">
                 <shape android:shape="rectangle">
-                    <solid android:color="@color/colorPrimaryDark"/>
+                    <solid android:color="@color/dayColorPrimaryDark"/>
                     <corners android:radius="@dimen/_5sdp" />
                 </shape>
             </item>

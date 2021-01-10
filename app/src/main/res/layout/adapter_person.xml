@@ -43,7 +43,7 @@
             android:layout_margin="@dimen/_5sdp"
             android:gravity="right"
             android:text="@{item.fullName}"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/dayColorPrimaryDark"
             android:textSize="@dimen/_12sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/simpleDraweeViewProfile"

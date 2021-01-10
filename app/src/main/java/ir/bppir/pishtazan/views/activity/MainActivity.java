@@ -71,7 +71,7 @@ public class MainActivity extends Activity_Latifi {
     //______________________________________________________________________________________________ setProfile
     private void setProfile() {
 
-        vm_main.getUtility().setRoundImage(simpleDraweeViewProfile, getResources().getColor(R.color.colorPrimary), 3, 30, 30, 0, 0);
+        vm_main.getUtility().setRoundImage(simpleDraweeViewProfile, getResources().getColor(R.color.dayColorPrimary), 3, 30, 30, 0, 0);
     }
     //______________________________________________________________________________________________ setProfile
 

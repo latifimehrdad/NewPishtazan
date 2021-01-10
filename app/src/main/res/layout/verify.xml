@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/enterVerify"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/dayColorPrimary"
                 android:textSize="@dimen/_11sdp" />
 
 
@@ -185,7 +185,7 @@
                     android:gravity="center"
                     android:maxLines="2"
                     android:text="@string/elapsedTimeGetSMS"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/dayColorPrimary"
                     android:textSize="@dimen/_9sdp" />
 
 
@@ -216,7 +216,7 @@
                     android:gravity="center"
                     android:maxLines="2"
                     android:text="1:56"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/dayColorPrimary"
                     android:textSize="@dimen/_11sdp" />
 
             </RelativeLayout>

@@ -1,8 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#143B81</color>
-    <color name="colorPrimaryDark">#0E2655</color>
-    <color name="colorAccent">#feca04</color>
+
+    //________________________________________________ Day Theme
+    <color name="dayColorPrimary">#143B81</color>
+    <color name="dayColorPrimaryDark">#0E2655</color>
+    <color name="dayColorAccent">#feca04</color>
+
+    <color name="dayStatusBarColor">@color/dayColorPrimaryDark</color>
+    <color name="dayBackgroundColor">#ffffff</color>
+
+    <color name="dayButtonBackgroundColor">@color/dayColorPrimary</color>
+    <color name="dayButtonClickBackgroundColor">@color/dayColorPrimaryDark</color>
+    <color name="dayButtonStrokeColor">@color/dayColorAccent</color>
+    <color name="dayButtonTextColor">#ffffff</color>
+    <color name="dayButtonImageTintColor">#ffffff</color>
+    <color name="dayTextColor">@color/dayColorPrimary</color>
+
+    <color name="dayEditBackgroundColor">#ffffff</color>
+    <color name="dayEditImageTintColor">@color/dayColorPrimary</color>
+    <color name="dayEditStrokeColor">@color/dayColorPrimary</color>
+    <color name="dayDelimiterColor">#EBEBEB</color>
+    <color name="dayEditBackgroundEmptyColor">#FFF5CF</color>
+
+
+    //_______________________________________________ Night Theme
+    <color name="nightColorPrimary">#143B81</color>
+    <color name="nightColorPrimaryDark">#0E2655</color>
+    <color name="nightColorAccent">#feca04</color>
+
+    <color name="nightStatusBarColor">#313335</color>
+    <color name="nightBackgroundColor">#2B2B2B</color>
+
+    <color name="nightButtonBackgroundColor">#ffd500</color>
+    <color name="nightButtonClickBackgroundColor">#cc5803</color>
+    <color name="nightButtonStrokeColor">#f7b801</color>
+    <color name="nightButtonTextColor">#00296b</color>
+    <color name="nightButtonImageTintColor">#00296b</color>
+    <color name="nightTextColor">#F1F1F1</color>
+
+    <color name="nightEditBackgroundColor">#5D5F61</color>
+    <color name="nightEditImageTintColor">#fee440</color>
+    <color name="nightEditStrokeColor">@color/nightEditBackgroundColor</color>
+    <color name="nightDelimiterColor">#7E7C7C</color>
+    <color name="nightEditBackgroundEmptyColor">#3A3A29</color>
+
 
     <color name="ML_Splash">#616671</color>
     <color name="ML_Harmony">#DC8C02</color>
@@ -10,7 +51,7 @@
     <color name="ML_Dialog">#CDCDCD</color>
     <color name="ML_RedDark">#6A0000</color>
     <color name="ML_Red">#FF0F0F</color>
-    <color name="ML_EditEmpty">#FFF0BA</color>
+
     <color name="mlWave">#1A3AFF</color>
     <color name="mlWave2">#5BB1FB</color>
     <color name="mlWave3">#15DF89</color>
@@ -20,7 +61,7 @@
 
     <color name="ML_Trans">#00000000</color>
 
-    <color name="mlDelimiter">#EDEDED</color>
+
 
     <color name="ML_recyclerLoadingBack">#1A058AFF</color>
     <color name="ML_recyclerLoading">#80FFFFFF</color>

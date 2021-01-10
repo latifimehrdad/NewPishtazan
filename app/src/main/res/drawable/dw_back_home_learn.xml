@@ -243,7 +243,7 @@
                 android:top="10px"
                 android:bottom="10px">
                 <shape android:shape="oval">
-                    <solid android:color="@color/colorAccent"/>
+                    <solid android:color="@color/dayColorAccent"/>
                 </shape>
             </item>
 

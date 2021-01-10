@@ -46,12 +46,12 @@
             app:delimiter_marginRight="@dimen/_5sdp"
             app:editHint="@string/fullName"
             app:editSplitter="false"
-            app:editTextColor="@color/colorPrimary"
+            app:editTextColor="@color/dayColorPrimary"
             app:editable="true"
             app:emptyBack="@drawable/dw_back_edit_empty"
             app:image_height="@dimen/_25sdp"
             app:image_src="@drawable/ic_full_name"
-            app:image_tint="@color/colorPrimary"
+            app:image_tint="@color/dayColorPrimary"
             app:image_width="@dimen/_20sdp"
             app:inputTypeEdit="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
@@ -80,12 +80,12 @@
             app:delimiter_marginRight="@dimen/_5sdp"
             app:editHint="@string/mobileNumber"
             app:editSplitter="false"
-            app:editTextColor="@color/colorPrimary"
+            app:editTextColor="@color/dayColorPrimary"
             app:editable="true"
             app:emptyBack="@drawable/dw_back_edit_empty"
             app:image_height="@dimen/_25sdp"
             app:image_src="@drawable/ic_smartphone"
-            app:image_tint="@color/colorPrimary"
+            app:image_tint="@color/dayColorPrimary"
             app:image_width="@dimen/_20sdp"
             app:inputTypeEdit="number"
             app:layout_constraintEnd_toEndOf="parent"
@@ -142,7 +142,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_2sdp"
                     android:text="@string/normal"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/dayColorPrimary"
                     android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
@@ -179,7 +179,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_2sdp"
                     android:text="@string/peach"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/dayColorPrimary"
                     android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
@@ -214,7 +214,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_2sdp"
                     android:text="@string/giant"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/dayColorPrimary"
                     android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>

@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 <item android:state_pressed="true">
     <shape android:shape="rectangle">
-        <solid android:color="@color/mlDelimiter"/>
+        <solid android:color="@color/dayDelimiterColor"/>
         <stroke android:color="@color/ML_Red" android:width="@dimen/_1sdp"/>
         <corners android:radius="@dimen/_5sdp" />
     </shape>

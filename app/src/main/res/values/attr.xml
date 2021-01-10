@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+
+
+
     <declare-styleable name="ML_EditText">
 
         <attr name="image_width" format="dimension"  />
@@ -172,7 +175,6 @@
 
     </declare-styleable>
 
-
     <declare-styleable name="ML_Button">
 
         <attr name="padding" format="dimension" />
@@ -192,8 +194,6 @@
         <attr name="fontFamily"/>
 
     </declare-styleable>
-
-
 
     <declare-styleable name="ShimmerLayout">
         <attr name="shimmer_color" format="color|reference"/>
