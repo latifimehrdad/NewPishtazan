@@ -654,7 +654,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
         return new MD_PanelActionMenu(
                 getResources().getString(R.string.archive),
                 getResources().getDrawable(R.drawable.ic_archive_user),
-                getResources().getDrawable(R.drawable.dw_back_panel_menu_delete),
+                R.drawable.dw_back_panel_menu_delete,
                 getResources().getColor(R.color.ML_White),
                 PanelAction.deletePerson,
                 bundle,
@@ -673,7 +673,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
         return new MD_PanelActionMenu(
                 getResources().getString(R.string.deleteFromArchive),
                 getResources().getDrawable(R.drawable.ic_list_person),
-                getResources().getDrawable(R.drawable.dw_back_panel_menu_move),
+                R.drawable.dw_back_panel_menu_move,
                 getResources().getColor(R.color.ML_White),
                 PanelAction.deleteFromArchive,
                 bundle,
@@ -692,7 +692,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
         return new MD_PanelActionMenu(
                 getResources().getString(R.string.actionMoveToPossible),
                 getResources().getDrawable(R.drawable.ic_resource_switch),
-                getResources().getDrawable(R.drawable.dw_back_panel_menu_move),
+                R.drawable.dw_back_panel_menu_move,
                 getResources().getColor(R.color.ML_White),
                 PanelAction.moveToPossible,
                 bundle,
@@ -711,7 +711,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
         return new MD_PanelActionMenu(
                 getResources().getString(R.string.actionCompleteInformation),
                 getResources().getDrawable(R.drawable.ic_contact_information),
-                getResources().getDrawable(R.drawable.dw_back_panel_menu),
+                R.drawable.dw_back_panel_menu,
                 getResources().getColor(R.color.dayColorPrimary),
                 R.id.action_panel_to_completeInformation,
                 bundle,
@@ -726,7 +726,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
         return new MD_PanelActionMenu(
                 getResources().getString(R.string.actionCallsReminder),
                 getResources().getDrawable(R.drawable.ic_call_reminder),
-                getResources().getDrawable(R.drawable.dw_back_panel_menu),
+                R.drawable.dw_back_panel_menu,
                 getResources().getColor(R.color.dayColorPrimary),
                 R.id.action_home_to_panel,
                 null,
@@ -741,7 +741,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
         return new MD_PanelActionMenu(
                 getResources().getString(R.string.actionMeetingsReminder),
                 getResources().getDrawable(R.drawable.ic_meeting_reminder),
-                getResources().getDrawable(R.drawable.dw_back_panel_menu),
+                R.drawable.dw_back_panel_menu,
                 getResources().getColor(R.color.dayColorPrimary),
                 R.id.action_home_to_panel,
                 null,
@@ -756,7 +756,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
         return new MD_PanelActionMenu(
                 getResources().getString(R.string.actionMoveToCustomerCertain),
                 getResources().getDrawable(R.drawable.ic_resource_switch),
-                getResources().getDrawable(R.drawable.dw_back_panel_menu_move),
+                R.drawable.dw_back_panel_menu_move,
                 getResources().getColor(R.color.ML_White),
                 R.id.action_home_to_panel,
                 null,
@@ -771,7 +771,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
         return new MD_PanelActionMenu(
                 getResources().getString(R.string.actionMoveToColleagueCertain),
                 getResources().getDrawable(R.drawable.ic_resource_switch),
-                getResources().getDrawable(R.drawable.dw_back_panel_menu_move),
+                R.drawable.dw_back_panel_menu_move,
                 getResources().getColor(R.color.ML_White),
                 R.id.action_home_to_panel,
                 null,
@@ -786,7 +786,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
         return new MD_PanelActionMenu(
                 getResources().getString(R.string.actionDrafts),
                 getResources().getDrawable(R.drawable.ic_draft),
-                getResources().getDrawable(R.drawable.dw_back_panel_menu),
+                R.drawable.dw_back_panel_menu,
                 getResources().getColor(R.color.dayColorPrimary),
                 R.id.action_home_to_panel,
                 null,
@@ -801,7 +801,7 @@ public class Panel extends Primary implements Primary.fragmentActions, AP_Person
         return new MD_PanelActionMenu(
                 getResources().getString(R.string.actionInsurances),
                 getResources().getDrawable(R.drawable.ic_family),
-                getResources().getDrawable(R.drawable.dw_back_panel_menu),
+                R.drawable.dw_back_panel_menu,
                 getResources().getColor(R.color.dayColorPrimary),
                 R.id.action_home_to_panel,
                 null,

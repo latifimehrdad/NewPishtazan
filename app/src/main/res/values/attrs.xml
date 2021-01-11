@@ -12,5 +12,13 @@
     <attr name="editStrokeColor" format="color"/>
     <attr name="delimiterColor" format="color"/>
 
+    <attr name="homeButtonLayout" format="color"/>
+    <attr name="headerBackGroundColor" format="color"/>
+
+    <attr name="recyclerLoadingBack" format="color"/>
+    <attr name="recyclerLoading" format="color"/>
+
+    <attr name="recyclerItemColor" format="color"/>
+
 
 </resources>

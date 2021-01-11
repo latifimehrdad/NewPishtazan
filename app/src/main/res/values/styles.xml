@@ -20,6 +20,11 @@
         <item name="editStrokeColor">@color/dayEditStrokeColor</item>
         <item name="delimiterColor">@color/dayDelimiterColor</item>
         <item name="editBackgroundEmptyColor">@color/dayEditBackgroundEmptyColor</item>
+        <item name="homeButtonLayout">@color/dayColorPrimaryDark</item>
+        <item name="headerBackGroundColor">@color/dayButtonBackgroundColor</item>
+        <item name="recyclerLoadingBack">@color/dayRecyclerLoadingBack</item>
+        <item name="recyclerLoading">@color/dayRecyclerLoading</item>
+        <item name="recyclerItemColor">@color/ML_White</item>
 
     </style>
 

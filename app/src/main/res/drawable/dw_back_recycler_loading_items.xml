@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
-    <solid android:color="@color/ML_recyclerLoadingBack"/>
+    <solid android:color="?recyclerLoadingBack"/>
     <corners android:radius="@dimen/_5sdp"/>
 
 </shape>

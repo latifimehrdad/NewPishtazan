@@ -2,8 +2,8 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
-    <solid android:color="@color/mlWhite"/>
+    <solid android:color="?recyclerLoadingBack"/>
     <corners android:radius="@dimen/_7sdp"/>
-    <stroke android:color="@color/ML_recyclerLoadingBack" android:width="@dimen/_1sdp"/>
+    <stroke android:color="@color/dayRecyclerLoadingBack" android:width="@dimen/_1sdp"/>
 
 </shape>

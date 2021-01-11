@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layoutDirection="ltr"
     android:padding="@dimen/_15sdp">
 
     <ImageView
@@ -22,7 +23,6 @@
         android:gravity="center"
         android:maxLines="3"
         android:minLines="1"
-        android:textColor="@color/dayColorPrimaryDark"
         android:textSize="@dimen/_12sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,12 +39,10 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
         android:layout_marginTop="@dimen/_15sdp"
         app:connectBack="@drawable/dw_back_bottom_normal"
-        app:textColor="@color/ML_White"
         app:textValue="@string/beDone"
         app:textValueSize="@dimen/_11sdp"
         app:img_width="@dimen/_17sdp"
         app:img_height="@dimen/_17sdp"
-        app:img_tint="@color/ML_White"
         app:img_src="@drawable/ic_check_mark"
         app:gif_src="@drawable/loading3"
         app:waitBack="@drawable/dw_back_bottom_connect"
@@ -59,7 +57,7 @@
         android:textSize="@dimen/_12sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
-        app:connectBack="@drawable/dw_delimiter"
+        app:connectBack="@drawable/dw_back_button_cancel"
         app:textColor="@color/mlToastBack"
         app:textValue="@string/cancel"
         app:textValueSize="@dimen/_11sdp"

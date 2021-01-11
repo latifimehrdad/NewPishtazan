@@ -189,9 +189,9 @@ public class AddPerson extends Primary implements FR_Latifi.fragmentActions,
 
     //______________________________________________________________________________________________ resetBackDegrees
     private void resetBackDegrees() {
-        linearLayoutGiant.setBackground(getResources().getDrawable(R.drawable.dw_back_recycler));
-        linearLayoutPeach.setBackground(getResources().getDrawable(R.drawable.dw_back_recycler));
-        linearLayoutNormal.setBackground(getResources().getDrawable(R.drawable.dw_back_recycler));
+        linearLayoutGiant.setBackgroundResource(R.drawable.dw_back_recycler);
+        linearLayoutPeach.setBackgroundResource(R.drawable.dw_back_recycler);
+        linearLayoutNormal.setBackgroundResource(R.drawable.dw_back_recycler);
         vm_addPerson.setDegree(PersonLevel.none);
     }
     //______________________________________________________________________________________________ resetBackDegrees

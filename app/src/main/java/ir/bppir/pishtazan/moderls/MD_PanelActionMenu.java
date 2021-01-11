@@ -9,7 +9,7 @@ public class MD_PanelActionMenu {
 
     private Drawable icon;
 
-    private Drawable background;
+    private int background;
 
     private int tint;
 
@@ -20,7 +20,7 @@ public class MD_PanelActionMenu {
     private boolean goFragment;
 
 
-    public MD_PanelActionMenu(String title, Drawable icon, Drawable background, int tint, int action, Bundle bundle, boolean goFragment) {
+    public MD_PanelActionMenu(String title, Drawable icon, int background, int tint, int action, Bundle bundle, boolean goFragment) {
         this.title = title;
         this.icon = icon;
         this.background = background;
@@ -62,11 +62,11 @@ public class MD_PanelActionMenu {
         this.bundle = bundle;
     }
 
-    public Drawable getBackground() {
+    public int getBackground() {
         return background;
     }
 
-    public void setBackground(Drawable background) {
+    public void setBackground(int background) {
         this.background = background;
     }
 

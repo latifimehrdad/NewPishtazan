@@ -319,43 +319,43 @@ public class verify extends Primary implements Primary.fragmentActions {
     @SuppressLint("UseCompatLoadingForDrawables")
     private void editTextLoading(String code) {
         index = 1;
-        VerifyCode1.setBackground(getResources().getDrawable(R.drawable.dw_edit_loading));
+        VerifyCode1.setBackgroundResource(R.drawable.dw_edit_loading);
         timerLoading = new Handler();
         runnableLoading = () -> {
             switch (index) {
                 case 1:
-                    VerifyCode1.setBackground(getResources().getDrawable(R.drawable.dw_back_edit));
-                    VerifyCode2.setBackground(getResources().getDrawable(R.drawable.dw_edit_loading));
+                    VerifyCode1.setBackgroundResource(R.drawable.dw_back_edit);
+                    VerifyCode2.setBackgroundResource(R.drawable.dw_edit_loading);
                     index = 2;
                     break;
 
                 case 2:
-                    VerifyCode2.setBackground(getResources().getDrawable(R.drawable.dw_back_edit));
-                    VerifyCode3.setBackground(getResources().getDrawable(R.drawable.dw_edit_loading));
+                    VerifyCode2.setBackgroundResource(R.drawable.dw_back_edit);
+                    VerifyCode3.setBackgroundResource(R.drawable.dw_edit_loading);
                     index = 3;
                     break;
 
                 case 3:
-                    VerifyCode3.setBackground(getResources().getDrawable(R.drawable.dw_back_edit));
-                    VerifyCode4.setBackground(getResources().getDrawable(R.drawable.dw_edit_loading));
+                    VerifyCode3.setBackgroundResource(R.drawable.dw_back_edit);
+                    VerifyCode4.setBackgroundResource(R.drawable.dw_edit_loading);
                     index = 4;
                     break;
 
                 case 4:
-                    VerifyCode4.setBackground(getResources().getDrawable(R.drawable.dw_back_edit));
-                    VerifyCode5.setBackground(getResources().getDrawable(R.drawable.dw_edit_loading));
+                    VerifyCode4.setBackgroundResource(R.drawable.dw_back_edit);
+                    VerifyCode5.setBackgroundResource(R.drawable.dw_edit_loading);
                     index = 5;
                     break;
 
                 case 5:
-                    VerifyCode5.setBackground(getResources().getDrawable(R.drawable.dw_back_edit));
-                    VerifyCode6.setBackground(getResources().getDrawable(R.drawable.dw_edit_loading));
+                    VerifyCode5.setBackgroundResource(R.drawable.dw_back_edit);
+                    VerifyCode6.setBackgroundResource(R.drawable.dw_edit_loading);
                     index = 6;
                     break;
 
                 case 6:
-                    VerifyCode6.setBackground(getResources().getDrawable(R.drawable.dw_back_edit));
-                    VerifyCode1.setBackground(getResources().getDrawable(R.drawable.dw_edit_loading));
+                    VerifyCode6.setBackgroundResource(R.drawable.dw_back_edit);
+                    VerifyCode1.setBackgroundResource(R.drawable.dw_edit_loading);
                     index = 1;
                     break;
             }

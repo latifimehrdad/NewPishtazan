@@ -36,7 +36,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/enterVerify"
-                android:textColor="@color/dayColorPrimary"
                 android:textSize="@dimen/_11sdp" />
 
 
@@ -185,7 +184,6 @@
                     android:gravity="center"
                     android:maxLines="2"
                     android:text="@string/elapsedTimeGetSMS"
-                    android:textColor="@color/dayColorPrimary"
                     android:textSize="@dimen/_9sdp" />
 
 
@@ -200,9 +198,7 @@
                     app:gif_src="@drawable/loading3"
                     app:img_height="@dimen/_20sdp"
                     app:img_src="@drawable/ic_mobile_message"
-                    app:img_tint="@color/mlWhite"
                     app:img_width="@dimen/_20sdp"
-                    app:textColor="@color/mlWhite"
                     app:textValue="@string/reTryGetSMS"
                     app:textValueSize="@dimen/_11sdp"
                     app:waitBack="@drawable/dw_back_bottom_connect"
@@ -216,7 +212,6 @@
                     android:gravity="center"
                     android:maxLines="2"
                     android:text="1:56"
-                    android:textColor="@color/dayColorPrimary"
                     android:textSize="@dimen/_11sdp" />
 
             </RelativeLayout>

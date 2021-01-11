@@ -1,20 +1,21 @@
 package ir.bppir.pishtazan.views.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.LayoutRes;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.jetbrains.annotations.NotNull;
-
 import ir.bppir.pishtazan.R;
-import ir.bppir.pishtazan.utility.PersonType;
 import ir.bppir.pishtazan.utility.loadings.RecyclerViewSkeletonScreen;
 import ir.bppir.pishtazan.utility.loadings.Skeleton;
 import ir.bppir.pishtazan.views.activity.MainActivity;
@@ -37,7 +38,11 @@ public class Primary extends FR_Latifi {
 
 
     //______________________________________________________________________________________________ setRecyclerLoading
+    @SuppressLint("ResourceType")
     public void setRecyclerLoading(RecyclerView recyclerLoading, int layout) {
+
+        TypedArray a = getContext().getTheme().obtainStyledAttributes(R.style.AppTheme, new int[] {R.attr.recyclerLoading});
+        int color = a.getResourceId(0, 0);
 
         ap_loading = new AP_Loading();
         recyclerLoading.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
@@ -46,13 +51,15 @@ public class Primary extends FR_Latifi {
                 .load(layout)
                 .shimmer(true)      // whether show shimmer animation.                      default is true
                 .count(3)          // the recycler view item count.                        default is 10
-                .color(R.color.ML_recyclerLoading)       // the shimmer color.                                   default is #a2878787
+                .color(color)       // the shimmer color.                                   default is #a2878787
                 .angle(20)          // the shimmer angle.                                   default is 20;
                 .duration(1200)     // the shimmer animation duration.                      default is 1000;
                 .frozen(false)
                 .show();
     }
     //______________________________________________________________________________________________ setRecyclerLoading
+
+
 
 
     //______________________________________________________________________________________________ stopLoadingRecycler

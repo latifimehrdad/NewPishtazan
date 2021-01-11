@@ -43,7 +43,6 @@
             android:layout_margin="@dimen/_5sdp"
             android:gravity="right"
             android:text="@{item.fullName}"
-            android:textColor="@color/dayColorPrimaryDark"
             android:textSize="@dimen/_12sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/simpleDraweeViewProfile"
@@ -55,20 +54,20 @@
             android:id="@+id/ml_ButtonAction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
             android:layout_marginLeft="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_5sdp"
             app:connectBack="@drawable/dw_back_bottom_normal"
             app:img_height="@dimen/_15sdp"
             app:img_src="@drawable/ic_menu_action"
-            app:img_tint="@color/ML_White"
             app:img_width="@dimen/_15sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/simpleDraweeViewDegree"
-            app:textColor="@color/ML_White"
             app:textValue="@string/actions"
-            app:textValueSize="@dimen/_11sdp" />
+            app:textValueSize="@dimen/_11sdp"
+            app:fontFamily="@font/vazir_normal"/>
 
 
         <com.facebook.drawee.view.SimpleDraweeView

@@ -90,7 +90,7 @@ public class AP_PanelActionMenu extends RecyclerView.Adapter<AP_PanelActionMenu.
 
         public void bind(MD_PanelActionMenu item, int position) {
             binding.setMenu(item);
-            constraintLayout.setBackground(item.getBackground());
+            constraintLayout.setBackgroundResource(item.getBackground());
             view.setOnClickListener(v -> actionClick.itemClick(item));
             binding.executePendingBindings();
         }

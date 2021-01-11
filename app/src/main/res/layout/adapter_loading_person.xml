@@ -47,13 +47,12 @@
         app:connectBack="@drawable/dw_back_recycler_loading_items"
         app:img_height="@dimen/_15sdp"
         app:img_src="@drawable/ic_menu_action"
-        app:img_tint="@color/ML_White"
+        app:img_tint="?delimiterColor"
         app:img_width="@dimen/_15sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/simpleDraweeViewDegree"
-        app:textColor="@color/ML_White"
-        app:textValue="@string/actions"
+        app:textColor="?delimiterColor"
         app:textValueSize="@dimen/_11sdp" />
 
     <ImageView

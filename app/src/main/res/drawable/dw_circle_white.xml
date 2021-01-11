@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
 
-    <solid android:color="@color/dayColorPrimaryDark"/>
-    <stroke android:color="@color/ML_White" android:width="@dimen/_3sdp"/>
+    <solid android:color="?buttonClickBackgroundColor"/>
+    <stroke android:color="?pageBackgroundColor" android:width="@dimen/_3sdp"/>
 
 </shape>

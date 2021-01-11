@@ -55,7 +55,7 @@ public class RecyclerViewSkeletonScreen implements SkeletonScreen {
 
         public Builder(RecyclerView recyclerView) {
             this.mRecyclerView = recyclerView;
-            this.mShimmerColor = ContextCompat.getColor(recyclerView.getContext(), R.color.ML_recyclerLoading);
+            this.mShimmerColor = ContextCompat.getColor(recyclerView.getContext(), R.color.dayRecyclerLoading);
         }
 
         /**

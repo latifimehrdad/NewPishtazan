@@ -62,16 +62,15 @@
             <TextView
                 android:id="@+id/textViewNameTitle"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:gravity="right|center_vertical"
                 android:text="@string/fullName"
                 android:textColor="@color/ML_Splash"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_10sdp"
                 app:layout_constraintWidth_percent="0.4"
-                app:layout_constraintBottom_toBottomOf="@+id/textViewName"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textViewName" />
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <LinearLayout
@@ -80,7 +79,7 @@
                 android:layout_height="@dimen/_2sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textViewName"
+                app:layout_constraintTop_toBottomOf="@id/textViewNameTitle"
                 android:background="@color/ML_Dialog"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:orientation="vertical"/>
@@ -92,26 +91,26 @@
                 android:layout_height="wrap_content"
                 android:gravity="left|center_vertical"
                 android:textColor="@color/dayColorPrimaryDark"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_9sdp"
                 app:layout_constraintWidth_percent="0.6"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="@dimen/_5sdp"
                 app:layout_constraintTop_toBottomOf="@id/linearLayout"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:text="@{contact.phone}"/>
 
             <TextView
                 android:id="@+id/textViewNumberTitle"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_height="wrap_content"
                 android:gravity="right|center_vertical"
                 android:text="@string/mobileNumber"
                 android:textColor="@color/ML_Splash"
                 android:textSize="@dimen/_9sdp"
-                app:layout_constraintWidth_percent="0.4"
-                app:layout_constraintBottom_toBottomOf="@+id/textViewNumber"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                app:layout_constraintWidth_percent="0.4" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <solid android:color="@color/ML_Dialog"/>
+            <solid android:color="?delimiterColor"/>
             <stroke android:color="@color/dayColorAccent" android:width="@dimen/_1sdp"/>
             <corners android:radius="@dimen/_5sdp" />
             <padding android:bottom="@dimen/_5sdp" android:left="@dimen/_5sdp"
@@ -11,7 +11,7 @@
     </item>
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/mlWhite"/>
+            <solid android:color="?recyclerItemColor"/>
             <corners android:radius="@dimen/_5sdp" />
             <stroke android:color="@color/dayColorAccent" android:width="@dimen/_1sdp"/>
             <padding android:bottom="@dimen/_5sdp" android:left="@dimen/_5sdp"

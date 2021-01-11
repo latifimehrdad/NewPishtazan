@@ -98,7 +98,7 @@ public class ViewSkeletonScreen implements SkeletonScreen {
 
         public Builder(View view) {
             this.mView = view;
-            this.mShimmerColor = ContextCompat.getColor(mView.getContext(), R.color.ML_recyclerLoading);
+            this.mShimmerColor = ContextCompat.getColor(mView.getContext(), R.color.dayRecyclerLoading);
         }
 
         /**

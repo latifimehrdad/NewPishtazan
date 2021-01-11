@@ -21,6 +21,8 @@
     <color name="dayEditStrokeColor">@color/dayColorPrimary</color>
     <color name="dayDelimiterColor">#EBEBEB</color>
     <color name="dayEditBackgroundEmptyColor">#FFF5CF</color>
+    <color name="dayRecyclerLoadingBack">#1A9BC5FA</color>
+    <color name="dayRecyclerLoading">#80888888</color>
 
 
     //_______________________________________________ Night Theme
@@ -28,8 +30,9 @@
     <color name="nightColorPrimaryDark">#0E2655</color>
     <color name="nightColorAccent">#feca04</color>
 
-    <color name="nightStatusBarColor">#313335</color>
-    <color name="nightBackgroundColor">#2B2B2B</color>
+    <color name="nightStatusBarColor">#181818</color>
+    <color name="nightHeaderColor">#232323</color>
+    <color name="nightBackgroundColor">#313335</color>
 
     <color name="nightButtonBackgroundColor">#ffd500</color>
     <color name="nightButtonClickBackgroundColor">#cc5803</color>
@@ -43,6 +46,9 @@
     <color name="nightEditStrokeColor">@color/nightEditBackgroundColor</color>
     <color name="nightDelimiterColor">#7E7C7C</color>
     <color name="nightEditBackgroundEmptyColor">#3A3A29</color>
+    <color name="nightRecyclerLoadingBack">#1AAAAAAA</color>
+    <color name="nightRecyclerLoading">#80FFFFFF</color>
+    <color name="nightRecyclerItemBackgroundColor">#CCCCCC</color>
 
 
     <color name="ML_Splash">#616671</color>
@@ -61,10 +67,6 @@
 
     <color name="ML_Trans">#00000000</color>
 
-
-
-    <color name="ML_recyclerLoadingBack">#1A058AFF</color>
-    <color name="ML_recyclerLoading">#80FFFFFF</color>
 
 
 </resources>

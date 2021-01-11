@@ -76,7 +76,7 @@ public class ShimmerLayout extends FrameLayout {
         try {
             shimmerAngle = a.getInteger(R.styleable.ShimmerLayout_shimmer_angle, DEFAULT_ANGLE);
             shimmerAnimationDuration = a.getInteger(R.styleable.ShimmerLayout_shimmer_animation_duration, DEFAULT_ANIMATION_DURATION);
-            shimmerColor = a.getColor(R.styleable.ShimmerLayout_shimmer_color, getColor(R.color.ML_recyclerLoading));
+            shimmerColor = a.getColor(R.styleable.ShimmerLayout_shimmer_color, getColor(R.color.dayRecyclerLoading));
             autoStart = a.getBoolean(R.styleable.ShimmerLayout_shimmer_auto_start, false);
             maskWidth = a.getFloat(R.styleable.ShimmerLayout_shimmer_mask_width, 0.5F);
             gradientCenterColorWidth = a.getFloat(R.styleable.ShimmerLayout_shimmer_gradient_center_color_width, 0.1F);

@@ -21,6 +21,11 @@
         <item name="editStrokeColor">@color/nightEditStrokeColor</item>
         <item name="delimiterColor">@color/nightDelimiterColor</item>
         <item name="editBackgroundEmptyColor">@color/nightEditBackgroundEmptyColor</item>
+        <item name="homeButtonLayout">@color/nightEditBackgroundColor</item>
+        <item name="headerBackGroundColor">@color/nightHeaderColor</item>
+        <item name="recyclerLoadingBack">@color/nightRecyclerLoadingBack</item>
+        <item name="recyclerLoading">@color/nightRecyclerLoading</item>
+        <item name="recyclerItemColor">@color/nightRecyclerItemBackgroundColor</item>
 
     </style>
 
